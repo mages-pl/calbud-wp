@@ -1,0 +1,14 @@
+<svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 62 62" width="62" height="62">
+	<title>arrow-check-svg</title>
+	<style>
+		.s0 { fill: none } 
+		.s1 { fill: none;stroke: #ec6500;stroke-width: 2 } 
+	</style>
+	<g id="Group_4">
+		<g id="Ellipse_1">
+			<path id="Layer" class="s0" d="m31 0c17.1 0 31 13.9 31 31 0 17.1-13.9 31-31 31-17.1 0-31-13.9-31-31 0-17.1 13.9-31 31-31z"/>
+			<path id="Layer" class="s1" d="m31 1c16.6 0 30 13.4 30 30 0 16.6-13.4 30-30 30-16.6 0-30-13.4-30-30 0-16.6 13.4-30 30-30z"/>
+		</g>
+		<path id="Path_3" fill-rule="evenodd" class="s1" d="m35.2 20.8l-10.7 10.7 10.7 10.7"/>
+	</g>
+</svg>
