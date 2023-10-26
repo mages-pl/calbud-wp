@@ -267,6 +267,10 @@ function build_acf_forms() {
 					),
 					'choices' => array(
 						'Mieszkanie' => 'Mieszkanie',
+						'Apartament' => 'Apartament',
+						'Lokal usługowy' => 'Lokal usługowy',
+						'Miejsce postojowe' => 'Miejsce postojowe',
+						'Komórka lokatorska' => 'Komórka lokatorska',
 						'Osiedle' => 'Osiedle',
 						'Budynek' => 'Budynek',
 						'Antresola' => 'Antresola',
@@ -841,6 +845,7 @@ function imgmap_frontend_search($atts) {
     $output_search .= '<div class="row panel">';
     $output_search .= '<div class="col-md-4">';
     $output_search .= '<label>Inwestycja</label><select name="inwestycja" onchange="ajaxImagemapperSearch(this)">'; 
+	$output_search .= "<option value=''>Wszystkie</option>";
     $output_search .= @$options;
     $output_search .= '</select>'; 
     //$output .= print_r(array_keys(unserialize(get_post(64)->post_content)['choices']));
@@ -937,13 +942,18 @@ function imgmap_frontend_table($atts, $filters, $type) {
     } else {
         // $output .= '<button type="button" class="inwestycja more more-reverse" style="margin: 50px auto;display: block;border: 0px;"><em>'.trim($inwestycja).'</em></button>';
     }
-
+	// Inwestycje pasujące do kryteriów
+		$output .= showInvestitionsFromAttributes($_POST);
+	//
     if (($mode != 'hidden') || (count($_POST) == 0)){
 	if($type != 'ajax')	{
         $output .= '<h2 class="title-section">Tabela mieszkań</h2>';
 	}
         $output .= '<table id="tabela_mieszkania" class="dataTable no-footer">';
         $output .= '<thead><tr>';
+		$output .= '<th>';
+        $output .= 'Inwestycja';
+        $output .= '</th>';
         $output .= '<th>';
         $output .= 'Nr';
         $output .= '</th>';
@@ -981,35 +991,63 @@ function imgmap_frontend_table($atts, $filters, $type) {
 //    );
         //echo "FF".$inwestycja;
     
-        $args = array(
-        'category'         => 0,
-        'numberposts'      => -1,
-        'orderby'          => 'date',
-        'order'            => 'DESC',
-        'include'          => array(),
-        'exclude'          => array(),
-        'post_type'        => 'imagemap_area',
-       // 'suppress_filters' => true,
-        'meta_query' => array(
-           'relation' => 'AND',
-           array(
-             'key' => 'Typ',
-             'value' => 'Mieszkanie',
-             'compare' => '=',
-           ),
-           array(
-             'key' => 'Inwestycja',
-             'value' => $inwestycja,
-             'compare' => '=',
-           ),
-           array(
-             'key' => 'Status',
-             'value' => 'Sprzedane',
-             'compare' => '!=',
-           ),
-           $addons_filters
-            
-    ));
+		if(!empty($inwestycja)) { 
+			$args = array(
+				'category'         => 0,
+				'numberposts'      => -1,
+				'orderby'          => 'date',
+				'order'            => 'DESC',
+				'include'          => array(),
+				'exclude'          => array(),
+				'post_type'        => 'imagemap_area',
+			   // 'suppress_filters' => true,
+				'meta_query' => array(
+				   'relation' => 'AND',
+				   array(
+					 'key' => 'Typ',
+					 'value' => 'Mieszkanie',
+					 'compare' => '=',
+				   ),
+				   array(
+					 'key' => 'Inwestycja',
+					 'value' => $inwestycja,
+					 'compare' => '=',
+				   ),
+				   array(
+					 'key' => 'Status',
+					 'value' => 'Sprzedane',
+					 'compare' => '!=',
+				   ),
+				   $addons_filters
+					
+			));
+		} else { 
+			$args = array(
+				'category'         => 0,
+				'numberposts'      => -1,
+				'orderby'          => 'date',
+				'order'            => 'DESC',
+				'include'          => array(),
+				'exclude'          => array(),
+				'post_type'        => 'imagemap_area',
+			   // 'suppress_filters' => true,
+				'meta_query' => array(
+				   'relation' => 'AND',
+				   array(
+					 'key' => 'Typ',
+					 'value' => 'Mieszkanie',
+					 'compare' => '=',
+				   ),
+				   array(
+					 'key' => 'Status',
+					 'value' => 'Sprzedane',
+					 'compare' => '!=',
+				   ),
+				   $addons_filters
+					
+			));
+		}
+       
  
         $output .= '<tbody>';
         $getPosts = get_posts($args);
@@ -1017,6 +1055,10 @@ function imgmap_frontend_table($atts, $filters, $type) {
 
         foreach ($getPosts as $post) {
             $output .= '<tr>';
+			$output .= '<td>';
+            $output .= ''.get_field("inwestycja", $post->ID);
+            $output .= '</td>';
+
             $output .= '<td>';
             $output .= ''.get_field("numerlokalu", $post->ID);
             $output .= '</td>';
@@ -1039,7 +1081,62 @@ function imgmap_frontend_table($atts, $filters, $type) {
         
             $output .= '<td>';
             if (!empty(@number_format((float)get_field("cena", $post->ID), 2, '.', ' '))) {
+				if((int)get_field("cena", $post->ID) == '0') {
+					//$output .= 'Zapytaj o cenę';
+					$output .=  '	<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#Modal'.$post->ID.'" style="padding: 0;background: transparent;color: inherit;border: 0;font-size: inherit;">
+  Zapytaj o cenę
+</button>';
+
+$output .= '<!-- Modal -->
+<div class="modal fade" id="Modal'.$post->ID.'" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-left col-md-8" id="exampleModalLabel">Uprzejmie prosimy o wypełnienie ponizszego formularza, abyśmy mogli skontaktować się z z Państwem i przedstawić ofertę, dotyczącą wybranego lokalu</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+	  <form method="POST" class="sendQuestionForm">
+	  <div class="row text-left">
+	  <div class="col-md-6">
+			<label>Imię i nazwisko *</label>		
+			<input type="text" required name="imie_nazwisko" class="form-control">
+			<label>Telefon *</label>		
+			<input type="text" required name="telefon" class="form-control"/>
+			<label>E-mail *</label>		
+			<input type="email" required name="email" class="form-control"/>
+			<input type="hidden" name="lokal" value="'.get_field("numerlokalu", $post->ID).'"/>
+			<input type="hidden" name="inwestycja" value="'.get_field("inwestycja", $post->ID).'"/>
+	  </div>
+			<div class="col-md-6">
+					<textarea name="tresc" class="form-control" required style="min-height:300px">Proszę o kontakt w sprawie '.get_field("numerlokalu", $post->ID).' lokalu w inwestycji '.get_field("inwestycja", $post->ID).'</textarea>
+			</div>
+			<div class="col-md-12">
+					<label><input type="checkbox" name="rule1" value="1" required>
+					Administratorem Państwa danych osobowych jest Przedsiębiorstwo Budowalne "Calbud" Sp. z o.o z siedzibą w Szczecinie. Wysyłając wiadomość zgadzasz się z naszą Polityką Prywatności
+					</label>
+
+					<label><input type="checkbox" name="rule2" value="1" required>
+					Wyrazam zgodę Administratorowi Przedsiębiorstwo Budowlane "Calbud" sp. z o.o w Szczecinie oraz spółkom powiązanym z grupy kapitałowej Administratora na przesłanie informacji handlowych związanych ze sprzedazą lokali za pomocą środków komunikacji elektronicznej i/lub telefonu oraz wyrazam tym podmiotom zgodę na przetwarzanie moich danych osobowych w postaci emaila, teleofnu oraz innych udostępnionych danych dla realizacji tego celu.
+					</label>
+					<label><input type="checkbox" required>
+					Wyrazam zgodę Administratorowi Przedsiębiorstwo Budowlane "Calbud" sp. z o.o w Szczecinie oraz spółkom powiązanym z grupy kapitałowej Administratora na marketing dotyczący lokali oferowanych przez Administratora i podmioty powiązane za pomocą środków komunikacji elektornicznej i/lub telefonu oraz wyrazam tym podmiotom zogdę na przetwarzanie moich danych osobowych w postaci emaila, telefonu oraz innych udostępnionych danych dla realizacji tego celu.
+					</label>
+					<button name="send_question" onclick="ajaxSendQuestion(this)" class="btn btn-primary d-block m-auto">Wyślij zapytanie</button>
+					<p>* pozycje obowiązkowe</p>
+			</div>
+			</form>
+	  </div>
+      </div>
+       
+    </div>
+  </div>
+</div>';
+				} else {
                 $output .= @number_format((float)get_field("cena", $post->ID), 2, '.', ' ').' zł';
+				}
             }
             $output .= '</td>';
             $output .= '<td>';
@@ -1070,6 +1167,11 @@ function imgmap_frontend_table($atts, $filters, $type) {
 	} else {
 		return $output;
 	}
+}
+
+function showInvestitionsFromAttributes($atts) {
+	$output = ($atts); 
+	return '##'.print_r($output).'AAAA';
 }
 add_shortcode( 'imagemap', 'imgmap_frontend_image_shortcode' );
 add_shortcode( 'tablemap', 'imgmap_frontend_table' );
@@ -1664,4 +1766,9 @@ function imgmap_hex_to_rgba($hex, $opacity = false) {
 		return 'rgb('.$red.', '.$green.', '.$blue.')';
 }
 
+function ajax_send_question($atts) { 
+	echo "A";
+	print_r($atts);
+	exit();
+}
 ?>

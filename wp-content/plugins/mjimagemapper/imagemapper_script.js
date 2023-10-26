@@ -70,6 +70,8 @@ jQuery(function ($) {
   */
 	$('.imgmap-frontend-image map area').click(function () {
 
+		var propertyTypes = ["Mieszkanie", "Miejsce postojowe", "Lokal usłguowy", "Apartament", "Komórka lokatorska"];
+
 		if ($(this).attr('data-object') != 'Mieszkanie') {
 			$('.block-group').css('display', 'none');
 			var getSelector = $(this).attr('href');
@@ -462,4 +464,23 @@ function ajaxImagemapperSearch(obj) {
 	});
 	});
 
+}
+function ajaxSendQuestion(obj) { 
+	console.log("send question...");
+	console.log(obj);
+
+
+	jQuery(function ($) {
+		$.ajax({
+			url: $("#filter_site_url").val()+"/wp-content/plugins/mjimagemapper/ajaxSendQuestion.php",
+			method: "POST",
+			data : $(".sendQuestionForm").serialize(),
+			beforeSend: function() {
+				
+			},
+			success: function(data) {
+				console.log(data);
+			}
+		});
+		});
 }
