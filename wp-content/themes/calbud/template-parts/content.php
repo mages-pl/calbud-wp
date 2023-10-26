@@ -128,10 +128,10 @@
 				<div class="col-md-12 text-center">
 					<div class="tab-content" id="pills-tabContent">
 						<div class="tab-pane fade show active" id="pills-01" role="tabpanel" aria-labelledby="pills-01-tab">
-					  
 							<p class="info-text"><?php the_field('tekst_info_mapa'); ?></p>
-							
-							<?php echo do_shortcode("[allimagemap name='<?php the_field('nazwa_mapy_obrazkow'); ?>']"); ?>
+							<?php #"A:".the_field('nazwa_mapy_obrazkow'); ?>
+							<?php $inwestycja = "Sand Dunes"; ?>
+							<?php echo do_shortcode("[allimagemap name='".$inwestycja."']"); ?>
 							
 							
 					  
@@ -478,11 +478,9 @@
 						<?php } ?>
 						
 					</div>
-					
 					<div class="invest-single-content">
 						<?php echo the_content(); ?>
 					</div>
-					
 				</div>	
 			</div>	
 		</div>	

@@ -77,11 +77,12 @@
 
                 </div>
 				
-				<? /*
+<!-- 		 
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-nav" aria-controls="" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
-                </button>
-				*/?>
+                </button> -->
+				 
+                
 				
                 <?php /*
                 wp_nav_menu(array(
@@ -95,7 +96,8 @@
                 'fallback_cb'     => 'wp_bootstrap_navwalker::fallback',
                 'walker'          => new wp_bootstrap_navwalker()
                 ));
-                */?>
+                */
+                ?>
 				
 				
                 <?php
