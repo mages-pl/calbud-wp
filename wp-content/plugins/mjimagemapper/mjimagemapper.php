@@ -699,8 +699,23 @@ function media_imgmap_media_upload_tab_inside() {
 /**
  * Zwróć wyszukiwarkę inwestycji 
  */
-function all_search_frontend_shortcode() { 
-	return imgmap_frontend_search($atts);
+function all_search_frontend_shortcode($atts) { 
+	$nazwaInwestycji = "Sand Dunes";
+	$getPosts = get_posts('post_type=post&orderby=id&order=desc&numberposts=-1');
+
+	$output .= $atts. ' ';
+
+	$wybraneInwestycje = ['Sand Dunes', 'Kamienica Nova 2'];
+	foreach ($getPosts as $key => $post) {
+		if(in_array($post->post_title, $wybraneInwestycje)) {
+		$output .= ' ID '.$post->ID. ' title '.$post->post_title . ' IMG '.get_the_post_thumbnail( $post->ID );
+		$output .= '<br/><br/>';
+		}
+	}
+	//return imgmap_frontend_search($atts);
+	// $output .= print_r($getPosts);
+	$output .=   do_shortcode( '[tablemap id="'.$nazwaInwestycji.'"]' );
+	return $output;
 }
 /**
  * Zwraca wszystkie mapy za pomoca jednego shortcoda
@@ -749,12 +764,9 @@ function all_search_frontend_shortcode() {
 		$output .= '</div>';
 	}
 	$output .=   do_shortcode( '[tablemap id="'.$nazwaInwestycji.'"]' );
-	//[tablemap id="Szczecin - Osiedle Spiska"]
 	$output .= '</div>';
 	return $output;
-	//return print_r($getPosts);
-	// exit();
-	 //return "TEST : ".$atts['name'];
+
  }
   
 /* Displays the image map in a frontend page. */
@@ -1100,6 +1112,7 @@ $output .= '<!-- Modal -->
       <div class="modal-body">
 	  <form method="POST" class="sendQuestionForm">
 	  <div class="row text-left">
+	  <div class="formFlashMessage"></div>
 	  <div class="col-md-6">
 			<label>Imię i nazwisko *</label>		
 			<input type="text" required name="imie_nazwisko" class="form-control">
@@ -1124,7 +1137,7 @@ $output .= '<!-- Modal -->
 					<label><input type="checkbox" required>
 					Wyrazam zgodę Administratorowi Przedsiębiorstwo Budowlane "Calbud" sp. z o.o w Szczecinie oraz spółkom powiązanym z grupy kapitałowej Administratora na marketing dotyczący lokali oferowanych przez Administratora i podmioty powiązane za pomocą środków komunikacji elektornicznej i/lub telefonu oraz wyrazam tym podmiotom zogdę na przetwarzanie moich danych osobowych w postaci emaila, telefonu oraz innych udostępnionych danych dla realizacji tego celu.
 					</label>
-					<button name="send_question" onclick="ajaxSendQuestion(this)" class="btn btn-primary d-block m-auto">Wyślij zapytanie</button>
+					<button name="send_question" type="button" onclick="ajaxSendQuestion(this)" class="btn btn-primary d-block m-auto">Wyślij zapytanie</button>
 					<p>* pozycje obowiązkowe</p>
 			</div>
 			</form>
@@ -1386,6 +1399,58 @@ function imgmap_imagemap_settings() {
 				
 			</tr>
 			
+			<hr/>
+
+			<tr class="admin_mjimagemapper_smtp" style="border-top:1px solid #000;">
+				<th style="display:block;">
+				 
+					<a>
+						Hosta SMTP
+					</a>
+					</th>
+				<td>
+					<input type="text" name="mjimagemapper_smtp_host"  
+					value="<?php echo get_option('mjimagemapper_smtp_host'); ?>" class="form-control"/>
+				</td>
+				
+			</tr>
+			<tr>
+			<th>
+				 
+				 <a>
+					 Uzytkownik SMTP
+				 </a>
+				 </th>
+			 <td>
+				 <input type="text" name="mjimagemapper_smtp_user"  
+				 value="<?php echo get_option('mjimagemapper_smtp_user'); ?>" class="form-control"/>
+			 </td>
+			 
+			</tr>
+<tr>
+			<th>
+				 
+					<a>
+						Hasło SMTP
+					</a>
+					</th>
+				<td>
+					<input type="password" name="mjimagemapper_smtp_password"  
+					value="<?php echo get_option('mjimagemapper_smtp_password'); ?>" class="form-control"/>
+				</td>
+</tr>
+<tr>
+				<th>
+				 
+				 <a>
+					 Port SMTP
+				 </a>
+				 </th>
+			 <td>
+				 <input type="text" name="mjimagemapper_smtp_port"  
+				 value="<?php echo get_option('mjimagemapper_smtp_port'); ?>" class="form-control"/>
+			 </td>
+			 </tr>
 		</table>
 		
 		<?php submit_button(); ?>
@@ -1402,6 +1467,13 @@ function imgmap_save_settings() {
 	update_option('phone_contact_imagemapping', $_POST['phone_contact_imagemapping']);
 
 	update_option('imgmap-alt-dialog', $_POST['imgmap-settings-alt-dialog'] == 'yes');
+
+	update_option('mjimagemapper_smtp_host', $_POST['mjimagemapper_smtp_host']);
+	update_option('mjimagemapper_smtp_user', $_POST['mjimagemapper_smtp_user']);
+	update_option('mjimagemapper_smtp_password', $_POST['mjimagemapper_smtp_password']);
+	update_option('mjimagemapper_smtp_port', $_POST['mjimagemapper_smtp_port']);
+
+
 	/*
 	update_option('imgmap-include-jquery', $_POST['imgmap-settings-include-jquery']);
 	update_option('imgmap-include-jquery-ui', $_POST['imgmap-settings-include-jquery-ui']);
@@ -1766,9 +1838,5 @@ function imgmap_hex_to_rgba($hex, $opacity = false) {
 		return 'rgb('.$red.', '.$green.', '.$blue.')';
 }
 
-function ajax_send_question($atts) { 
-	echo "A";
-	print_r($atts);
-	exit();
-}
+
 ?>

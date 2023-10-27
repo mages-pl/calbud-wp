@@ -469,18 +469,39 @@ function ajaxSendQuestion(obj) {
 	console.log("send question...");
 	console.log(obj);
 
+	document.querySelector(".formFlashMessage").classList.remove("error");
+	document.querySelector(".formFlashMessage").classList.remove("success");
+	document.querySelector(".formFlashMessage").innerHTML = "Wysyłam zapytanie";
 
-	jQuery(function ($) {
-		$.ajax({
-			url: $("#filter_site_url").val()+"/wp-content/plugins/mjimagemapper/ajaxSendQuestion.php",
-			method: "POST",
-			data : $(".sendQuestionForm").serialize(),
-			beforeSend: function() {
-				
-			},
-			success: function(data) {
-				console.log(data);
-			}
-		});
-		});
+	var xhttp = new XMLHttpRequest();
+	xhttp.open("POST", document.getElementById("filter_site_url").value+"/wp-content/plugins/mjimagemapper/ajaxSendQuestion.php");
+	
+	//var params = new FormData(document.querySelector(".sendQuestionForm"));
+
+	xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+	
+	xhttp.onreadystatechange = function() {
+	
+		if((xhttp.readyState == 4 && xhttp.status == 200) && (xhttp.responseText == '1')) {
+			document.querySelector(".formFlashMessage").classList.remove("error");
+			document.querySelector(".formFlashMessage").classList.remove("success");
+
+			document.querySelector(".formFlashMessage").classList.add("success");
+			document.querySelector(".formFlashMessage").innerHTML = "Wiadomość wysłana pomyślnie";
+
+			document.querySelector(".sendQuestionForm").reset();
+		}  else { 
+			
+			document.querySelector(".formFlashMessage").classList.remove("error");
+			document.querySelector(".formFlashMessage").classList.remove("success");
+
+			document.querySelector(".formFlashMessage").classList.add("error");
+			document.querySelector(".formFlashMessage").innerHTML = "Błąd wysyłania wiadomości";
+		}
+	}
+	
+		var params = "imie_nazwisko="+document.querySelector(".sendQuestionForm input[name='imie_nazwisko']").value+"&telefon="+document.querySelector(".sendQuestionForm input[name='telefon']").value+"&email="+document.querySelector(".sendQuestionForm input[name='email']").value+"&tresc="+document.querySelector(".sendQuestionForm textarea[name='tresc']").value+"&rule1="+Number(document.querySelector(".sendQuestionForm input[name='rule1']").checked)+"&rule2="+Number(document.querySelector(".sendQuestionForm input[name='rule2']").checked)+"&lokal="+document.querySelector(".sendQuestionForm input[name='lokal']").value+"&inwestycja="+document.querySelector(".sendQuestionForm input[name='inwestycja']").value;
+
+		xhttp.send(params);
+
 }

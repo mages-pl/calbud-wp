@@ -628,3 +628,31 @@ Ajax loading animations
  background-size: 800px 104px;
  position: relative;
 }
+tr.admin_mjimagemapper_smtp:before {
+  content: "Konfiguracja SMTP Zapytaj o lokal";
+  position: absolute;
+  background: #2271b1;
+  padding: 5px;
+  color: #fff;
+  top: 0;
+  transform: translateY(-50%);
+}
+.admin_mjimagemapper_smtp {
+  position: relative;
+}
+.formFlashMessage {
+  display: block;
+  width: 100%;
+
+  padding: 5px;
+  margin: 15px;
+  border: 2px solid transparent;
+}
+.formFlashMessage.success { 
+  color: green;
+  border: 2px solid green;
+}
+.formFlashMessage.error { 
+  color: red;
+  border: 2px solid red;
+}
