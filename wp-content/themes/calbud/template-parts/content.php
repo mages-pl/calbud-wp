@@ -129,9 +129,17 @@
 					<div class="tab-content" id="pills-tabContent">
 						<div class="tab-pane fade show active" id="pills-01" role="tabpanel" aria-labelledby="pills-01-tab">
 							<p class="info-text"><?php the_field('tekst_info_mapa'); ?></p>
-							<?php #"A:".the_field('nazwa_mapy_obrazkow'); ?>
-							<?php $inwestycja = "Sand Dunes"; ?>
-							<?php echo do_shortcode("[allimagemap name='".$inwestycja."']"); ?>
+							
+							<?php 
+							// Widok pojedynczej inwestycji
+							$inwestycja = trim($post->post_title); 
+							
+							?>
+							<?php 
+							
+							echo do_shortcode("[allimagemap name='".$inwestycja."' view='single']"); 
+							
+							?>
 							
 							
 					  
@@ -139,8 +147,6 @@
 						<div class="tab-pane fade" id="pills-02" role="tabpanel" aria-labelledby="pills-02-tab">
 						
 							<p class="info-text02"><?php the_field('tekst_info_wyszukiwarka'); ?></p>
-							
-							
 							
 						
 						</div>

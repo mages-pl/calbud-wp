@@ -695,28 +695,7 @@ function media_imgmap_media_upload_tab_inside() {
 	</p>
 	<?php
 }
-
-/**
- * Zwróć wyszukiwarkę inwestycji 
- */
-function all_search_frontend_shortcode($atts) { 
-	$nazwaInwestycji = "Sand Dunes";
-	$getPosts = get_posts('post_type=post&orderby=id&order=desc&numberposts=-1');
-
-	$output .= $atts. ' ';
-
-	$wybraneInwestycje = ['Sand Dunes', 'Kamienica Nova 2'];
-	foreach ($getPosts as $key => $post) {
-		if(in_array($post->post_title, $wybraneInwestycje)) {
-		$output .= ' ID '.$post->ID. ' title '.$post->post_title . ' IMG '.get_the_post_thumbnail( $post->ID );
-		$output .= '<br/><br/>';
-		}
-	}
-	//return imgmap_frontend_search($atts);
-	// $output .= print_r($getPosts);
-	$output .=   do_shortcode( '[tablemap id="'.$nazwaInwestycji.'"]' );
-	return $output;
-}
+ 
 /**
  * Zwraca wszystkie mapy za pomoca jednego shortcoda
  */
@@ -763,7 +742,7 @@ function all_search_frontend_shortcode($atts) {
 		$output .= '</div>';
 		$output .= '</div>';
 	}
-	$output .=   do_shortcode( '[tablemap id="'.$nazwaInwestycji.'"]' );
+	$output .=   do_shortcode( '[tablemap id="'.$nazwaInwestycji.'" view="single"]' );
 	$output .= '</div>';
 	return $output;
 
@@ -827,10 +806,8 @@ function imgmap_frontend_image_shortcode( $atts ) {
 }
 function imgmap_frontend_search($atts) {
 	
-    $output_search = '';
-    
+    $output_search = '';  
     $options = '';
-    //array_keys
 
 	//1239
 	// Jesli jest wybeane pole z ACF trzymające informacje o inwestycjach.
@@ -841,23 +818,28 @@ function imgmap_frontend_search($atts) {
 	}
 	if($post_acf_id != null) { 
 		foreach((@unserialize(@get_post($post_acf_id)->post_content)['choices']) as $key => $choice) {
-			if($choice == @$_POST['inwestycja']) {
+			if(
+				($key == trim(@$_POST['inwestycja'])) ||
+				($key == trim(@$atts['id']))
+			) {
 				$options .= '<option selected="selected" value="'.$key.'">'.$choice.'</option>';
 			} else {
-				$options .=	 '<option  value="'.$key.'">'.$choice.'</option>';
+				$options .=	 '<option  value="'.$key.'">'.$choice. '</option>';
 			}
 		}
 	} else { 
 	}
-    //$output .= print_r((unserialize(get_post(64)->post_content)['choices']));
-    //$output .= print_r(array_keys(unserialize(get_post(64)->post_content)['choices']));
+ 
     $output_search .= '<h2 class="title-section">Wyszukaj</h2>'; 
     $output_search .= '<form class="image_search_form" method="POST">'; 
 	$output_search .= '<input type="hidden" id="filter_site_url" value="'.get_site_url().'"/>';
+	$output_search .= "<input type='hidden' name='view' id='view' value='".@$atts['view']."'/>";
     $output_search .= '<div class="row panel">';
     $output_search .= '<div class="col-md-4">';
     $output_search .= '<label>Inwestycja</label><select name="inwestycja" onchange="ajaxImagemapperSearch(this)">'; 
-	$output_search .= "<option value=''>Wszystkie</option>";
+	#if($atts['view'] != 'single') {
+		$output_search .= "<option value=''>Wszystkie</option>";
+	#}
     $output_search .= @$options;
     $output_search .= '</select>'; 
     //$output .= print_r(array_keys(unserialize(get_post(64)->post_content)['choices']));
@@ -877,11 +859,10 @@ function imgmap_frontend_search($atts) {
     $output_search .= '</div>';
     $output_search .= '</div>';
     $output_search .= '</select>'; 
-    $output_search .= '<button type="button" name="imagemapper_search" style="border:0px;border-radius:0px;" class="more btn btn-primary gold-button small-margin-top"><em>Wyszukaj</em></button>'; 
+    $output_search .= '<button type="button" name="imagemapper_search" style="border:0px;border-radius:0px;" class="more btn btn-primary gold-button small-margin-top  m-auto d-table"><em>Wyszukaj</em></button>'; 
     $output_search .= '</form>'; 
     
     if(isset($_POST['imagemapper_search'])) {
-//        $getPosts = get_post($args);
         $atts=array();
         $atts['id'] = @$_POST['inwestycja'];
         return $output_search.imgmap_frontend_table($atts, $_POST, 'search');
@@ -890,7 +871,8 @@ function imgmap_frontend_search($atts) {
 }
 function imgmap_frontend_table($atts, $filters, $type) {
 	
-	
+	$listaInwestycji = [];
+
     if($atts) {
         $inwestycja = $atts['id'];
     }
@@ -899,7 +881,7 @@ function imgmap_frontend_table($atts, $filters, $type) {
 		//print_r($filters);
 		
         foreach($filters as $key => $filter) {
-            if(($key != 'imagemapper_search') && ($key != 'inwestycja')) {
+            if(($key != 'imagemapper_search') && ($key != 'inwestycja') && ($key != 'view')) {
                 if($filter != '') {
                 if(($key == 'cena') || ($key == 'powierzchnia')) {
                      $add_option = array(
@@ -945,22 +927,114 @@ function imgmap_frontend_table($atts, $filters, $type) {
 	$output = '';
 	$mode='';
     if (!$filters) {
-		$output .= imgmap_frontend_search($atts);
+		$output .= ''.imgmap_frontend_search($atts);
 		$mode = 'hidden';
     }
 	
-    if(is_home()) {
-        // $output .= '<a href="'.get_permalink(get_the_ID()).'" class="inwestycja more more-reverse" style="margin: 50px auto;display: block;border: 0px;"><em>'.trim($inwestycja).'</em></a>';
-    } else {
-        // $output .= '<button type="button" class="inwestycja more more-reverse" style="margin: 50px auto;display: block;border: 0px;"><em>'.trim($inwestycja).'</em></button>';
-    }
-	// Inwestycje pasujące do kryteriów
-		$output .= showInvestitionsFromAttributes($_POST);
-	//
-    if (($mode != 'hidden') || (count($_POST) == 0)){
-	if($type != 'ajax')	{
-        $output .= '<h2 class="title-section">Tabela mieszkań</h2>';
+	if(!empty($inwestycja)) { 
+		$args = array(
+			'category'         => 0,
+			'numberposts'      => -1,
+			'orderby'          => 'date',
+			'order'            => 'DESC',
+			'include'          => array(),
+			'exclude'          => array(),
+			'post_type'        => 'imagemap_area',
+		   // 'suppress_filters' => true,
+			'meta_query' => array(
+			   'relation' => 'AND',
+			   array(
+				 'key' => 'Typ',
+				 'value' => 'Mieszkanie',
+				 'compare' => '=',
+			   ),
+			   array(
+				 'key' => 'Inwestycja',
+				 'value' => $inwestycja,
+				 'compare' => '=',
+			   ),
+			   array(
+				 'key' => 'Status',
+				 'value' => 'Sprzedane',
+				 'compare' => '!=',
+			   ),
+			   $addons_filters
+				
+		));
+	} else { 
+		$args = array(
+			'category'         => 0,
+			'numberposts'      => -1,
+			'orderby'          => 'date',
+			'order'            => 'DESC',
+			'include'          => array(),
+			'exclude'          => array(),
+			'post_type'        => 'imagemap_area',
+		   // 'suppress_filters' => true,
+			'meta_query' => array(
+			   'relation' => 'AND',
+			   array(
+				 'key' => 'Typ',
+				 'value' => 'Mieszkanie',
+				 'compare' => '=',
+			   ),
+			   array(
+				 'key' => 'Status',
+				 'value' => 'Sprzedane',
+				 'compare' => '!=',
+			   ),
+			   $addons_filters
+				
+		));
 	}
+
+	$getPosts = get_posts($args);
+
+	foreach($getPosts as $post) { 
+		//Jesli dana inwestycja nie jest w tablicy dodaj ja
+		if(!in_array(get_field('inwestycja', $post->ID), $listaInwestycji)) { 
+			$listaInwestycji[] = get_field("inwestycja", $post->ID);
+		}
+	}
+
+	$outputInwestycje .= '<div class="row">';
+	foreach($listaInwestycji as $inwest) { 
+		
+		$outputInwestycje .= '<div class="col-md-3">';
+		$getPostByTitle = get_post_by_title($inwest);
+		$outputInwestycje .= '<div class="thumbnail-inwestycje" style="background-image:url('.get_the_post_thumbnail_url($getPostByTitle->ID).');">';
+		
+		//'. $getPostByTitle->ID.' 
+		$outputInwestycje .= '</div>';
+		$outputInwestycje .= '<a href="'.get_permalink($getPostByTitle->ID).'">'.$inwest .'</a> <br/>';
+		$outputInwestycje .= '<p>'.get_field('lokalizacja', $getPostByTitle->ID).'</p>';
+		$outputInwestycje .= '</div>';
+		
+	}
+	$outputInwestycje .= '</div>';
+
+	if($filters) {
+		//Jesli wywołujemy shortcode w widku innym niz pojedynczej inwestycji pokaz miniatury innych inwestycji
+		if(@$atts['view'] != 'single') {
+			$output .= $outputInwestycje;
+		}
+		$output .= '<h2 class="title-section">Tabela mieszkań</h2>';
+	} else {
+		$output .= '<div id="firstAjaxSearchResult">';
+		//Jesli wywołujemy shortcode w widku innym niz pojedynczej inwestycji pokaz miniatury innych inwestycji
+		if(@$atts['view'] != 'single') {
+			$output .= $outputInwestycje;
+		}
+		
+		$output .= '<h2 class="title-section">Tabela mieszkań</h2>';
+		$output .= '</div>';
+	}
+	
+
+    if (($mode != 'hidden') || (count($_POST) == 0)){
+		if($type != 'ajax')	{
+
+		}
         $output .= '<table id="tabela_mieszkania" class="dataTable no-footer">';
         $output .= '<thead><tr>';
 		$output .= '<th>';
@@ -987,83 +1061,9 @@ function imgmap_frontend_table($atts, $filters, $type) {
         $output .= '<th>';
         $output .= 'Rzut';
         $output .= '</th>';
-        $output .= '</tr></thead>';
-            
-//    $args = array(
-//        'category'         => 0,
-//        'numberposts' => -1,
-//        'orderby'          => 'date',
-//        'order'            => 'DESC',
-//        'include'          => array(),
-//        'exclude'          => array(),
-//        'meta_key'         => '',
-//        'meta_value'       => 'Mieszkanie',
-//        'post_type'        => 'imagemap_area',
-//        'suppress_filters' => true,
-//    );
-        //echo "FF".$inwestycja;
-    
-		if(!empty($inwestycja)) { 
-			$args = array(
-				'category'         => 0,
-				'numberposts'      => -1,
-				'orderby'          => 'date',
-				'order'            => 'DESC',
-				'include'          => array(),
-				'exclude'          => array(),
-				'post_type'        => 'imagemap_area',
-			   // 'suppress_filters' => true,
-				'meta_query' => array(
-				   'relation' => 'AND',
-				   array(
-					 'key' => 'Typ',
-					 'value' => 'Mieszkanie',
-					 'compare' => '=',
-				   ),
-				   array(
-					 'key' => 'Inwestycja',
-					 'value' => $inwestycja,
-					 'compare' => '=',
-				   ),
-				   array(
-					 'key' => 'Status',
-					 'value' => 'Sprzedane',
-					 'compare' => '!=',
-				   ),
-				   $addons_filters
-					
-			));
-		} else { 
-			$args = array(
-				'category'         => 0,
-				'numberposts'      => -1,
-				'orderby'          => 'date',
-				'order'            => 'DESC',
-				'include'          => array(),
-				'exclude'          => array(),
-				'post_type'        => 'imagemap_area',
-			   // 'suppress_filters' => true,
-				'meta_query' => array(
-				   'relation' => 'AND',
-				   array(
-					 'key' => 'Typ',
-					 'value' => 'Mieszkanie',
-					 'compare' => '=',
-				   ),
-				   array(
-					 'key' => 'Status',
-					 'value' => 'Sprzedane',
-					 'compare' => '!=',
-				   ),
-				   $addons_filters
-					
-			));
-		}
-       
+        $output .= '</tr></thead>';      
  
         $output .= '<tbody>';
-        $getPosts = get_posts($args);
-  
 
         foreach ($getPosts as $post) {
             $output .= '<tr>';
@@ -1169,6 +1169,7 @@ $output .= '<!-- Modal -->
     
 	//}
 
+	#$output .= print_r($args);
 	if(count($getPosts) == 0)  {
 		$output .= '<div class="alert alert-info">Nic nie znalezino</div>';
 	}
@@ -1182,10 +1183,6 @@ $output .= '<!-- Modal -->
 	}
 }
 
-function showInvestitionsFromAttributes($atts) {
-	$output = ($atts); 
-	return '##'.print_r($output).'AAAA';
-}
 add_shortcode( 'imagemap', 'imgmap_frontend_image_shortcode' );
 add_shortcode( 'tablemap', 'imgmap_frontend_table' );
 add_shortcode( 'searchmap', 'imgmap_frontend_search' );
@@ -1838,5 +1835,13 @@ function imgmap_hex_to_rgba($hex, $opacity = false) {
 		return 'rgb('.$red.', '.$green.', '.$blue.')';
 }
 
+function get_post_by_title($page_title, $output = OBJECT) {
+    global $wpdb;
+        $post = $wpdb->get_var( $wpdb->prepare( "SELECT ID FROM $wpdb->posts WHERE post_title = %s AND post_type='post'", $page_title ));
+        if ( $post )
+            return get_post($post, $output);
+
+    return null;
+}
 
 ?>

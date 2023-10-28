@@ -447,7 +447,7 @@ jQuery(function ($) {
 
 function ajaxImagemapperSearch(obj) { 
 	console.log("search...");
-	console.log(obj);
+
 	jQuery(function ($) {
 	$.ajax({
 		url: $("#filter_site_url").val()+"/wp-content/plugins/mjimagemapper/ajaxSearch.php",
@@ -458,6 +458,7 @@ function ajaxImagemapperSearch(obj) {
 		},
 		success: function(data) {
 			console.log(data);
+			$("#firstAjaxSearchResult").remove();
 			$("#tabela_mieszkania_wrapper").html(data);
 			 $("#tabela_mieszkania_wrapper").css("opacity",1);
 		}
