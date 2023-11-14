@@ -18,7 +18,10 @@
 	
 	<?php if (is_page('kontakt') || is_page('kontakt-deweloper') || is_page('kontakt-generalny-wykonawca')){ ?>
 	
+	
 		<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2376.991001152164!2d14.567407177076598!3d53.43286916824568!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47aa090b4c6ee395%3A0x46b629f5a9faa47d!2sCalbud%20Sp.%20z%20o.o.!5e0!3m2!1spl!2spl!4v1694619646669!5m2!1spl!2spl" width="100%" height="730" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+	
+		<iframe src="https://snazzymaps.com/embed/540680" width="100%" height="730px" style="border:none;"></iframe>
 
 	<?php } ?>
 	
@@ -91,27 +94,24 @@
 				</div>
 				<div class="col-sm-6 col-lg-3 links">
 				
-					<h6>Grupa CALBUD</h6>
+					<h6>CALBUD</h6>
 					
-						<a href="#">Informacje o firmie</a>
-						<a href="#">Kodeks postępowania</a>
-						<a href="#">Nagrody i wyróżnienia</a>
-						<a href="#">Wspierane inicjatywy</a>
-						<a href="#">Materiały do pobrania</a>
-						<a href="#">Usługi budowlane</a>
-					
+						<a href="/o-firmie/">Nasza historia</a>
+						<a href="/zarzad/">Zarząd</a>
+						<a href="/nagrody/">Nagrody</a>
+						<a href="/referencje/">Referencje</a>
+						<a href="/wspierane-inicjatywy/">Wspierane inicjatywy</a>
+						<a href="/rodo/">RODO</a>
 				
 				</div>
 				<div class="col-sm-6 col-lg-3 links">
 				
 					<h6>Oferta</h6>
-					
-						<a href="#">Kamienica Nova 3</a>
-						<a href="#">Cisowe Wzgórze</a>
-						<a href="#">Posejdon</a>
-						<a href="#">Realizacje</a>
-						<a href="#">Mieszkania pod klucz</a>
-						<a href="#">Lokale użytkowe</a>
+
+						<a href="/sand-dunes/">Sand Dunes</a>
+						<a href="/deweloper/">Deweloper</a>
+						<a href="/generalny-wykonawca/">Generalny Wykonawca</a>
+						<a href="/kariera/">Kariera w Calbud</a>
 				
 				</div>
 

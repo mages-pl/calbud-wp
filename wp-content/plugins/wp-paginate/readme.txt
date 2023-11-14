@@ -2,8 +2,8 @@
 Contributors: maxfoundry, emartin24, AlanP57
 Tags: paginate, pagination, navigation, page, wp-paginate, comments, rtl, seo, usability
 Requires at least: 2.6.0 (2.7.0 for comments pagination)
-Tested up to: 6.1
-Stable tag: 2.2.0
+Tested up to: 6.4
+Stable tag: 2.2.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -161,6 +161,9 @@ Example (also applies to `wp_paginate_comments()`):
 When calling `wp_paginate_comments()`, WP-Paginate adds an extra class to the `ol` element, `wp-paginate-comments`.
 
 == Changelog ==
+= 2.2.1 =
+* Tested with Wordpress 6.4
+
 = 2.2.0 =
 * Tested with Wordpress 6.1
 

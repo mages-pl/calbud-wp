@@ -233,12 +233,14 @@ table.dataTable{width:100%;margin:0 auto;clear:both;border-collapse:separate;bor
     padding: 8px 20px;
     font-size: 12px;
 }
+/*
 #tabela_mieszkania thead {
     background: #859389;
     color: #fff;
     font-family: tahoma;
     font-weight: 200;
 }
+*/
 .dataTables_paginate {
         margin: auto;
     display: block;
@@ -588,6 +590,7 @@ area[data-title]:hover::after {
   /* table#tabela_mieszkania tr td, table#tabela_mieszkania tr th {
     width:25%;
   } */
+  /*
   table#tabela_mieszkania tr td, table#tabela_mieszkania tr th {
     width: 100% !important;
     display: block;
@@ -596,6 +599,7 @@ area[data-title]:hover::after {
     padding-right: 0;
     border: 0px;
 }
+*/
   /* table#tabela_mieszkania tr td:nth-child(3), table#tabela_mieszkania tr th:nth-child(3), table#tabela_mieszkania tr td:nth-child(4), table#tabela_mieszkania tr th:nth-child(4), table#tabela_mieszkania tr td:nth-child(3), table#tabela_mieszkania tr th:nth-child(3), table#tabela_mieszkania tr td:nth-child(6), table#tabela_mieszkania tr th:nth-child(6) {
     display: none;
 } */

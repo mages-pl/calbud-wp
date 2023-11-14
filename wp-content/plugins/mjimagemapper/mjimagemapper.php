@@ -1002,10 +1002,10 @@ function imgmap_frontend_table($atts, $filters, $type) {
 		
 		$outputInwestycje .= '<div class="col-md-3">';
 		$getPostByTitle = get_post_by_title($inwest);
-		$outputInwestycje .= '<div class="thumbnail-inwestycje" style="background-image:url('.get_the_post_thumbnail_url($getPostByTitle->ID).');">';
+		$outputInwestycje .= '<a href="'.get_permalink($getPostByTitle->ID).'"><div class="thumbnail-inwestycje" style="background-image:url('.get_the_post_thumbnail_url($getPostByTitle->ID).');">';
 		
 		//'. $getPostByTitle->ID.' 
-		$outputInwestycje .= '</div>';
+		$outputInwestycje .= '</div></a>';
 		$outputInwestycje .= '<a href="'.get_permalink($getPostByTitle->ID).'">'.$inwest .'</a> <br/>';
 		$outputInwestycje .= '<p>'.get_field('lokalizacja', $getPostByTitle->ID).'</p>';
 		$outputInwestycje .= '</div>';
@@ -1035,7 +1035,8 @@ function imgmap_frontend_table($atts, $filters, $type) {
 		if($type != 'ajax')	{
 
 		}
-        $output .= '<table id="tabela_mieszkania" class="dataTable no-footer">';
+		$output .= '<div class="table-responsive">';
+        $output .= '<table id="tabela_mieszkania" class="dataTable no-footer table">';
         $output .= '<thead><tr>';
 		$output .= '<th>';
         $output .= 'Inwestycja';
@@ -1104,15 +1105,17 @@ $output .= '<!-- Modal -->
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title text-left col-md-8" id="exampleModalLabel">Uprzejmie prosimy o wypełnienie ponizszego formularza, abyśmy mogli skontaktować się z z Państwem i przedstawić ofertę, dotyczącą wybranego lokalu</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
+	    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			<span aria-hidden="true">&times;</span>
         </button>
-      </div>
+		</div>
       <div class="modal-body">
 	  <form method="POST" class="sendQuestionForm">
 	  <div class="row text-left">
 	  <div class="formFlashMessage"></div>
+	  <div class="col-md-12">
+	    <p class="modal-title col-md-12" id="exampleModalLabel">Uprzejmie prosimy o wypełnienie poniższego formularza, abyśmy mogli skontaktować się z Państwem i przedstawić ofertę, dotyczącą wybranego lokalu.</p>
+	  </div>
 	  <div class="col-md-6">
 			<label>Imię i nazwisko *</label>		
 			<input type="text" required name="imie_nazwisko" class="form-control">
@@ -1124,18 +1127,19 @@ $output .= '<!-- Modal -->
 			<input type="hidden" name="inwestycja" value="'.get_field("inwestycja", $post->ID).'"/>
 	  </div>
 			<div class="col-md-6">
-					<textarea name="tresc" class="form-control" required style="min-height:300px">Proszę o kontakt w sprawie '.get_field("numerlokalu", $post->ID).' lokalu w inwestycji '.get_field("inwestycja", $post->ID).'</textarea>
+				<label>Wiadomość</label>
+				<textarea name="tresc" class="form-control" required style="min-height:300px">Proszę o kontakt w sprawie '.get_field("numerlokalu", $post->ID).' lokalu w inwestycji '.get_field("inwestycja", $post->ID).'</textarea>
 			</div>
-			<div class="col-md-12">
+			<div class="col-md-12 accept">
 					<label><input type="checkbox" name="rule1" value="1" required>
 					Administratorem Państwa danych osobowych jest Przedsiębiorstwo Budowalne "Calbud" Sp. z o.o z siedzibą w Szczecinie. Wysyłając wiadomość zgadzasz się z naszą Polityką Prywatności
 					</label>
 
 					<label><input type="checkbox" name="rule2" value="1" required>
-					Wyrazam zgodę Administratorowi Przedsiębiorstwo Budowlane "Calbud" sp. z o.o w Szczecinie oraz spółkom powiązanym z grupy kapitałowej Administratora na przesłanie informacji handlowych związanych ze sprzedazą lokali za pomocą środków komunikacji elektronicznej i/lub telefonu oraz wyrazam tym podmiotom zgodę na przetwarzanie moich danych osobowych w postaci emaila, teleofnu oraz innych udostępnionych danych dla realizacji tego celu.
+					Wyrażam zgodę Administratorowi Przedsiębiorstwo Budowlane "Calbud" sp. z o.o w Szczecinie oraz spółkom powiązanym z grupy kapitałowej Administratora na przesłanie informacji handlowych związanych ze sprzedazą lokali za pomocą środków komunikacji elektronicznej i/lub telefonu oraz wyrazam tym podmiotom zgodę na przetwarzanie moich danych osobowych w postaci emaila, teleofnu oraz innych udostępnionych danych dla realizacji tego celu.
 					</label>
 					<label><input type="checkbox" required>
-					Wyrazam zgodę Administratorowi Przedsiębiorstwo Budowlane "Calbud" sp. z o.o w Szczecinie oraz spółkom powiązanym z grupy kapitałowej Administratora na marketing dotyczący lokali oferowanych przez Administratora i podmioty powiązane za pomocą środków komunikacji elektornicznej i/lub telefonu oraz wyrazam tym podmiotom zogdę na przetwarzanie moich danych osobowych w postaci emaila, telefonu oraz innych udostępnionych danych dla realizacji tego celu.
+					Wyrażam zgodę Administratorowi Przedsiębiorstwo Budowlane "Calbud" sp. z o.o w Szczecinie oraz spółkom powiązanym z grupy kapitałowej Administratora na marketing dotyczący lokali oferowanych przez Administratora i podmioty powiązane za pomocą środków komunikacji elektornicznej i/lub telefonu oraz wyrazam tym podmiotom zogdę na przetwarzanie moich danych osobowych w postaci emaila, telefonu oraz innych udostępnionych danych dla realizacji tego celu.
 					</label>
 					<button name="send_question" type="button" onclick="ajaxSendQuestion(this)" class="btn btn-primary d-block m-auto">Wyślij zapytanie</button>
 					<p>* pozycje obowiązkowe</p>
@@ -1162,6 +1166,7 @@ $output .= '<!-- Modal -->
         }
         $output .= '</tbody>';
         $output .= '</table>';
+		$output .= '</div>';
     }
 	//echo "FILTER:".print_r($_POST);
 	
