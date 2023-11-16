@@ -57,10 +57,12 @@ jQuery(function ($) {
   */
 	$('.imgmap-frontend-image map area').ready(function () {
 		setTimeout(function () {
-			$('.invest-search').css('opacity','1');
+			$('.interactive_view').css('opacity','1');
+			// $('.invest-search').css('opacity','1');
 			$('.block-group').css('display', 'none');
-			$('.block-group:nth-child(1), .block-group:last-child ').css('display', 'block');
-			$('.block-group:nth-child(1), .block-group:last-child ').css('opacity', '1');
+			$('.block-group:nth-child(1)').css('display', 'block');
+			//, .block-group:last-child
+			$('.block-group:nth-child(1)').css('opacity', '1'); //, .block-group:last-child 
 		}, 3000);
 	});
 });
@@ -78,27 +80,35 @@ jQuery(function ($) {
 
 			$(getSelector).parent().parent().css('display', 'block');
 			$(getSelector).parent().parent().css('opacity', '1');
-
+			
 			$('html,body').animate({
 				scrollTop: $($(getSelector).parent().parent()).offset().top
 			}, 'slow');
 		}
+			// Jesli pierwszy segment jest niewidoczny pokaz button powrot	
+			if($(".interactive_view .block-group:nth-child(1)").is(':visible')) {
+				$(".blockBackToFirst").css("display","none");
+			} else { 
+				$(".blockBackToFirst").css("display","block");
+			}
 	});
  
-/**
+	/**
 	 * Kiedy klikniemy powrót wracamy na pierwszy segment wyboru nieruchomosci
 	 */
 	
 	$('.inwestycja, .backToFirst').click(function () {
-		// $('html,body').animate({
-		// 	scrollTop: $(".entry-content").offset().top
-		// }, 'slow');
 
 		$('.block-group').css('display', 'none');
 
-		$('.block-group:nth-child(1), .block-group:last-child ').css('display', 'block');
+		$('.block-group:nth-child(1) ').css('display', 'block'); // .block-group:last-child
 		return false;
 	});
+
+	// $('.backToFirst').click(function () {
+	// 	//Po powrocie ukryj button 
+	// 	$('.backToFirst').css('display','none');
+	// });
 
 	$('img[usemap]').each(function () {
 		var areas = [];
@@ -207,74 +217,7 @@ jQuery(function ($) {
 			} 
 		}
 	});
-		/*
-		var map = this;
-		$(this).mapster({
-			clickNavigate: true,
-			showToolTip: true,
-			toolTipContainer: $('<div class="imagemapper-tooltip"></div>'),
-			toolTipClose: ['area-click'],
-			mapKey: 'data-mapkey',
-			onClick: AreaClicked,
-			//onMouseover: function(m) {
-			//    alert("G");
-			//				if(!m.options.toolTip.length)
-			//					$(map).mapster('tooltip', false);
-			//					
-			//				clearTimeout($(map).data('mapster-highlight-timeout'));
-			//				$(map).mapster('highlight', false);
-			//				$(map).mapster('highlight', m.key);
-			//},
-			singleSelect: true,
-			render_select: {
-				fillOpacity: 0
-			},
-			areas: areas
-		});
-
-		// If pulse option is set, initialize it.
-		if (imgmap.pulseOption && imgmap.pulseOption != 'never') {
-			$(this).load(function (e) {
-
-				//Prevent pulse from happening when mouse moves on the image map from tooltip or area. (Prevent mouseenter from "inner" elements)
-				if ($(e.fromElement).hasClass('imagemapper-tooltip') || $(e.fromElement).is('area'))
-					return;
-
-				//If this is set true, the pulse has been done already and Wordpress doesn't want to do it again.
-				if (!$(this).attr('data-first-mouseenter')) {
-
-					//Mark image map as "pulsed" if the first_time pulse option is set.
-					if (imgmap.pulseOption == 'first_time')
-						$(this).attr('data-first-mouseenter', true);
-
-					//Prevent duplicate highlights
-					//$(this).mapster('highlight', false);
-					//Highlight all areas
-					for (var area in areas) {
-						$(this).mapster('highlight', areas[area].key);
-					}
-
-					var map = this;
-
-					// Stop highlighting after a short delay
-					// Also fade highlighted areas out rather than hide them instantly
-										// clearTimeout($(this).data('mapster-highlight-timeout'));
-										// $(this).data('mapster-highlight-timeout', setTimeout(function() { 
-										// 	$(map).closest('.imgmap-frontend-image').find('canvas').each(function() { 
-										// 		$(this).stop().animate({ opacity: 0 }, 300, function() { $(map).mapster('highlight', true); });
-										// 	});						
-										// }, 500));
-				}
-			});
-		}
-		//Zamknij tooltipy kieedy klikniemy poza nim
-		$('body').click(function (e) {
-			if (!$(e.target).is('.imagemapper-tooltip') && !$(e.target).closest('.imagemapper-tooltip').length && $(e.target).attr('data-type') != 'tooltip')
-				$(map).mapster('tooltip', false);
-		});
-	});
- 
-	 */
+		 
 
 	/**
 	 * Okienko modalne
@@ -448,6 +391,7 @@ jQuery(function ($) {
 function ajaxImagemapperSearch(obj) { 
 	console.log("search...");
 
+	console.log($(".image_search_form").serialize());
 	jQuery(function ($) {
 	$.ajax({
 		url: $("#filter_site_url").val()+"/wp-content/plugins/mjimagemapper/ajaxSearch.php",
@@ -504,5 +448,87 @@ function ajaxSendQuestion(obj) {
 		var params = "imie_nazwisko="+document.querySelector(".sendQuestionForm input[name='imie_nazwisko']").value+"&telefon="+document.querySelector(".sendQuestionForm input[name='telefon']").value+"&email="+document.querySelector(".sendQuestionForm input[name='email']").value+"&tresc="+document.querySelector(".sendQuestionForm textarea[name='tresc']").value+"&rule1="+Number(document.querySelector(".sendQuestionForm input[name='rule1']").checked)+"&rule2="+Number(document.querySelector(".sendQuestionForm input[name='rule2']").checked)+"&lokal="+document.querySelector(".sendQuestionForm input[name='lokal']").value+"&inwestycja="+document.querySelector(".sendQuestionForm input[name='inwestycja']").value;
 
 		xhttp.send(params);
+
+}
+var x=0;
+function toggleCheckboxList(obj) {
+
+	obj.setAttribute('data-height', obj.style.height);
+	obj.classList.toggle("full-height-box");
+}
+function setCheckboxOption(obj) {
+	
+	var getTargetInput = obj.getAttribute('data-input');
+	// alert("A"+obj.value+" "+getTargetInput);
+	
+	//document.querySelector('input[name="'+getTargetInput+'"]').value=obj.value;
+
+	var CheckboxItems = [];
+	var keyCheckBox=0;
+	document.querySelectorAll('input[data-input="'+getTargetInput+'"]').forEach(function getCheckboxValues(item, key) { 
+		//Jesli jest zaznaczony
+		if(item.checked == true) {
+			CheckboxItems.push(item.value);
+			//CheckboxItems[keyCheckBox] = item.value;
+			keyCheckBox++;
+		}
+		
+	});
+	console.log(CheckboxItems);
+
+	var formattedItems = CheckboxItems.join(",");
+	document.querySelector('input[name="'+getTargetInput+'"]').value = formattedItems;
+
+	ajaxImagemapperSearch(obj);
+
+}
+
+function switchDisplayMode(display) {
+	if(display == 'interactive_view') { 
+		// Wyswietlanie interaktywnego widoku
+		document.querySelector('.interactive_view').style.display='block';
+		document.querySelector('.table_view').style.display='none';
+	} else { 
+		// Wyswietlanie tabeli
+		document.querySelector('.interactive_view').style.display='none';
+		document.querySelector('.table_view').style.display='block';
+	}
+}
+
+function setLokalizacja(obj) {
+	
+	var getAllButtons = document.querySelectorAll(".developer-city .nav-link");
+	getAllButtons.forEach(function(item) {
+		item.classList.remove("active");
+	});
+
+	obj.classList.add("active");
+
+	// Ustaw odpowiednie inwestycje które pokrywają się z miejscowością 
+
+	//document.querySelector("select[name='inwestycja[]'")[2].selected = true;
+
+	var getAllInwestycje = document.querySelectorAll("select[name='inwestycja[]'] option");
+
+	var getSelectedInwestycje = obj.getAttribute('data-inwestycje');
+	if(getSelectedInwestycje != '') {
+	 getSelectedInwestycje.split(";");
+
+	getAllInwestycje.forEach(function(item) { 
+		// Jesli dana opcja z inwestycji odpowiada wartosci skojarzonej z buttonem od miasta zaznacz ja 
+		if(getSelectedInwestycje.includes(item.value)) { 
+			item.selected = true;
+		} else { 
+			item.selected = false;
+		}
+	});
+	} else { 
+		getAllInwestycje.forEach(function(item) { 
+			// odznacz wszystkie opcje kiedy kliknelismy "wszystkie miasta"
+			item.selected = false;
+		});
+	}
+	document.getElementById('lokalizacja').value = obj.value;
+	ajaxImagemapperSearch(obj);
 
 }

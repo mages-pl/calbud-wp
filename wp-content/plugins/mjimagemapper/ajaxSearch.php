@@ -1,6 +1,7 @@
 <?php
 require_once("../../../wp-load.php");
 
+//print_r($_POST['inwestycja']);
 
 $atts = [
     'id'=>$_POST['inwestycja'],
