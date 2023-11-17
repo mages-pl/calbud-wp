@@ -389,6 +389,9 @@ jQuery(function ($) {
 
 
 function ajaxImagemapperSearch(obj) { 
+
+	jQuery(function($) {
+
 	console.log("search...");
 
 	console.log($(".image_search_form").serialize());
@@ -408,6 +411,8 @@ function ajaxImagemapperSearch(obj) {
 		}
 	});
 	});
+
+});
 
 }
 function ajaxSendQuestion(obj) { 
@@ -532,3 +537,25 @@ function setLokalizacja(obj) {
 	ajaxImagemapperSearch(obj);
 
 }
+
+
+jQuery(function($) {
+
+	$( "#slide" ).slider({  
+orientation: "horizontal",                 
+range:true,  
+	   min: 0,  
+	   max: $("#powierzchnia_content").attr('data-max'),  
+	   values: [ 0, parseFloat($("#powierzchnia_content").attr('data-max')) ],  
+	   slide: function( event, ui ) {
+		$( "input[name=metraz]" ).val( ui.values[ 0 ] );  
+		$( "input[name=metraz_do]" ).val(   ui.values[ 1 ] ); 
+		ajaxImagemapperSearch(''); 
+
+		$( "#powierzchnia_content" ).val( "" + ui.values[ 0 ] +  
+ " - " + ui.values[ 1 ] +"m2" ); 
+	   }  
+   });  
+$( "#powierzchnia_content" ).val( "" + $( "#slide" ).slider( "values", 0 ) +  
+ " - " + $( "#slide" ).slider( "values", 1 ) +"m2");  
+ }); 

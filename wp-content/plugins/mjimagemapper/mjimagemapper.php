@@ -432,20 +432,25 @@ function imgmap_create_post_type() {
 	/* Import ImageMapster and jQuery UI */
         
 	wp_register_script('imgmap_imagemapster', plugins_url() . '/mjimagemapper/script/jquery.imagemapster.min.js?v='.time());
-	//wp_register_style('jquery_ui', 'http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css');
+	// wp_register_style('jquery_ui', 'http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css');
 	wp_register_style('imgmap_style', plugins_url().'/mjimagemapper/imgmap_style.css?v='.time());
-        wp_register_style('imgmap_style', plugins_url().'/mjimagemapper/datatables.css?v='.time());
 
-		wp_register_style('imgmap_style', 'https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css');
+        wp_register_style('imgmap_style_datatable', plugins_url().'/mjimagemapper/datatables.css?v='.time());
+
+		wp_register_style('imgmap_style_jquery-ui', plugins_url().'/mjimagemapper/jquery-ui.css?v='.time());
+
+		// wp_register_style('imgmap_style', 'https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css');
 		
-		wp_register_script('imgmap_imagemapster', 'https://code.jquery.com/ui/1.10.4/jquery-ui.js');
+		// wp_register_script('imgmap_imagemapster', 'https://code.jquery.com/ui/1.10.4/jquery-ui.js');
 
 		// <script src="https://code.jquery.com/jquery-1.10.2.js"></script>  
 		// <script src="https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>  
 		
 
 	/* Enqueue jQuery UI, jQuery and ImageMapster */
-	wp_enqueue_style(array( 'imgmap_style' ));
+	wp_enqueue_style(array( 'imgmap_style', 'imgmap_style_jquery-ui' ));
+	// wp_enqueue_style(array(  ));
+	
 	
 	
 	if(get_option('imgmap-include-jquery', NULL) === NULL)
@@ -973,7 +978,7 @@ function imgmap_frontend_search($atts) {
 	$output_search .= '<div class="col-md-4">';
 
 	$output_search .= ' 
-	<div class="d-none d-sm-block" style="background:transparent;">
+	<div class="d-none d-lg-block" style="background:transparent;">
 		<label for="price">Powierzchnia</label>  
 		<input type="text" data-min="'.$min_powierzchnia.'" data-max="'.$max_powierzchnia.'" id="powierzchnia_content" onchange="ajaxImagemapperSearch(this)" style="border:0px;">  
 		<div id="slide" ></div>
@@ -981,7 +986,7 @@ function imgmap_frontend_search($atts) {
 		';
 		
 	$output_search .= '
-	<div class="d-block d-sm-none">
+	<div class="d-block d-lg-none">
 	<label>Metraż od </label><input type="number" onchange="ajaxImagemapperSearch(this)" value="'.@$_POST['metraz'].'" class="form-control" name="metraz">'; 
 
     $output_search .= '<label>Metraż do </label><input type="number"  onchange="ajaxImagemapperSearch(this)" value="'.@$_POST['metraz_do'].'"  class="form-control" name="metraz_do">'; 
@@ -1025,7 +1030,7 @@ function imgmap_frontend_search($atts) {
     $output_search .= '</div>';
     $output_search .= '</div>';
     $output_search .= '</select>'; 
-    $output_search .= '<button type="button" name="imagemapper_search" style="border:0px;border-radius:0px;" class="more btn btn-primary gold-button small-margin-top  m-auto d-table"><em>Wyszukaj</em></button>'; 
+    $output_search .= '<button type="button" onclick="ajaxImagemapperSearch(this)" name="imagemapper_search" style="border:0px;border-radius:0px;" class="more btn btn-primary gold-button small-margin-top  m-auto d-table"><em>Wyszukaj</em></button>'; 
     $output_search .= '</form>'; 
     
     if(isset($_POST['imagemapper_search'])) {
@@ -1122,6 +1127,7 @@ function imgmap_frontend_table($atts, $filters, $type) {
 			'include'          => array(),
 			'exclude'          => array(),
 			'post_type'        => 'imagemap_area',
+			'post_status'        => 'publish',
 		   // 'suppress_filters' => true,
 			'meta_query' => array(
 			   'relation' => 'AND',
@@ -1153,6 +1159,7 @@ function imgmap_frontend_table($atts, $filters, $type) {
 			'exclude'          => array(),
 			'post_type'        => 'imagemap_area',
 		   // 'suppress_filters' => true,
+		   'post_status'        => 'publish',
 			'meta_query' => array(
 			   'relation' => 'AND',
 			   array(
@@ -1181,9 +1188,9 @@ function imgmap_frontend_table($atts, $filters, $type) {
 
 	$outputInwestycje .= '<div class="row">';
 	foreach($listaInwestycji as $inwest) { 
-		
-		$outputInwestycje .= '<div class="col-md-3">';
 		$getPostByTitle = get_post_by_title($inwest);
+		if($getPostByTitle->post_status == 'publish') {
+		$outputInwestycje .= '<div class="col-md-3">';
 		$outputInwestycje .= '<a href="'.get_permalink($getPostByTitle->ID).'"><div class="thumbnail-inwestycje" style="background-image:url('.get_the_post_thumbnail_url($getPostByTitle->ID).');">';
 		
 		//'. $getPostByTitle->ID.' 
@@ -1191,7 +1198,7 @@ function imgmap_frontend_table($atts, $filters, $type) {
 		$outputInwestycje .= '<a href="'.get_permalink($getPostByTitle->ID).'">'.$inwest .'</a> <br/>';
 		$outputInwestycje .= '<p>'.get_field('lokalizacja', $getPostByTitle->ID).'</p>';
 		$outputInwestycje .= '</div>';
-		
+		}
 	}
 	$outputInwestycje .= '</div>';
 
@@ -1249,6 +1256,9 @@ function imgmap_frontend_table($atts, $filters, $type) {
         $output .= '<tbody>';
 
         foreach ($getPosts as $post) {
+
+			$getPostByTitle = get_post_by_title(get_field("inwestycja", $post->ID));
+			if($getPostByTitle->post_status == 'publish') {
             $output .= '<tr>';
 			$output .= '<td>';
             $output .= ''.get_field("inwestycja", $post->ID);
@@ -1346,6 +1356,7 @@ $output .= '<!-- Modal -->
             $output .= '</td>';
             $output .= '</tr>';
         }
+	}
         $output .= '</tbody>';
         $output .= '</table>';
 		$output .= '</div>';
@@ -1381,9 +1392,11 @@ add_shortcode( 'search_mjwpimagemapper', 'all_search_frontend_shortcode' );
 function imgmap_frontend_city_list() {
 	$city_list = [];
 	 
+	$categoryInvestitionCity = get_option('mjimagemapper_category_city');
 	$args = array( 
-		'category' => '10',
-		'post_type' => 'post'
+		'category' => get_option('mjimagemapper_category_city'),//'10',
+		'post_type' => 'post',
+		'post_status' => 'publish' // ?
 		);
 		
 		$posts = get_posts( $args );
@@ -1640,6 +1653,19 @@ function imgmap_imagemap_settings() {
 				</td>
 				
 			</tr>
+
+			<tr>
+				<th>
+				 
+					<a>Podaj ID kategorii wpisów które uwzględniane będą w liście aktualnych realizacji
+					</a>
+					</th>
+				<td>
+					<input type="text" name="mjimagemapper_category_city"  
+					value="<?php echo get_option('mjimagemapper_category_city'); ?>" class="form-control"/>
+				</td>
+				
+			</tr>
 			
 			<hr/>
 
@@ -1715,6 +1741,8 @@ function imgmap_save_settings() {
 	update_option('mjimagemapper_smtp_password', $_POST['mjimagemapper_smtp_password']);
 	update_option('mjimagemapper_smtp_port', $_POST['mjimagemapper_smtp_port']);
 
+	update_option('mjimagemapper_category_city', $_POST['mjimagemapper_category_city']);
+	
 
 	/*
 	update_option('imgmap-include-jquery', $_POST['imgmap-settings-include-jquery']);

@@ -686,6 +686,10 @@ a.ui-slider-handle.ui-state-default.ui-corner-all {
 div#slide {
   top:10px;
   height: 2px;
+  background: #eee !important;
+}
+.ui-slider .ui-slider-range {
+  margin-top: 0px !important;
 }
 .image_search_form
 {
@@ -776,4 +780,28 @@ div#slide {
 }
 .full-height-box {
 height: auto;
+}
+
+span.ui-slider-handle.ui-corner-all.ui-state-default {
+  border-radius: 50%;
+  background: #ec6502;
+  top: -10px;
+}
+
+
+.ui-widget-header {
+    cursor: default !important;
+    border: 0px !important;
+    background: #000 !important;
+    margin: -5px !important;
+}
+a.inwestycja.more.more-reverse.btn.btn-primary {
+  color: #fff;
+}
+.ui-widget-content {
+  background: transparent !important;
+  border: 0px !important;
+}
+.ui-dialog {
+  background: #fff !important;
 }

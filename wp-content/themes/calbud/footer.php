@@ -166,13 +166,13 @@ $('#submit').on('click', function() {
 	<?php } ?>
 
  
-	<link href="https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" rel="stylesheet"> 
+	<!-- <link href="https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" rel="stylesheet">  -->
 	
-      <script src="https://code.jquery.com/jquery-1.10.2.js"></script>  
+      <!-- <script src="https://code.jquery.com/jquery-1.10.2.js"></script>   -->
 	 
-      <script src="https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script> 
+      <!-- <script src="https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>  -->
    
-	<script>  
+	<!-- <script>  
          $(function() {  
             $( "#slide" ).slider({  
 orientation: "horizontal",                 
@@ -192,7 +192,7 @@ range:true,
         $( "#powierzchnia_content" ).val( "" + $( "#slide" ).slider( "values", 0 ) +  
     	 " - " + $( "#slide" ).slider( "values", 1 ) +"m2");  
          });  
-      </script> 
+      </script>  -->
 	
 	
 
