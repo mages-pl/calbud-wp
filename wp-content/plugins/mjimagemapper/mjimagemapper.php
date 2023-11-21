@@ -1439,12 +1439,14 @@ function imgmap_frontend_city_list() {
 			//$output .= print_r(implode(";",$inwestycjaCity[$city]));
 			$inwestycja_attr = implode(";",$inwestycjaCity[$city]);
 
-			$output .= '<li>';
-			//$output .= print_r($inwestycja_attr[$city]);
-			$output .= '<button class="nav-link" data-inwestycje="'.$inwestycja_attr.'" onclick="setLokalizacja(this)"  value="">'; //name="lokalizacja"
-			$output .= $city;
-			$output .= '</button>';
-			$output .= '</li>';
+			if(!empty($city)) {
+				$output .= '<li>';
+				//$output .= print_r($inwestycja_attr[$city]);
+				$output .= '<button class="nav-link" data-inwestycje="'.$inwestycja_attr.'" onclick="setLokalizacja(this)"  value="">'; //name="lokalizacja"
+				$output .= $city;
+				$output .= '</button>';
+				$output .= '</li>';
+			}
 		}
 		$output .= '</ul>';
 	return $output;

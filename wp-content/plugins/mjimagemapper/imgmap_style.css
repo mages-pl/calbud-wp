@@ -668,7 +668,7 @@ tr.admin_mjimagemapper_smtp:before {
   background-repeat: no-repeat;
   background-position: center;
   width: 100%;
-  height: 200px;
+  height:230px;
 }
 .no-input {
       border: 0;
@@ -804,4 +804,12 @@ a.inwestycja.more.more-reverse.btn.btn-primary {
 }
 .ui-dialog {
   background: #fff !important;
+}
+#firstAjaxSearchResult a {
+  color: #212529;
+  font-weight: bold;
+}
+div#tabela_mieszkania_wrapper a {
+  color: #000;
+  font-weight: bold;
 }
