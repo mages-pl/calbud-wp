@@ -738,13 +738,14 @@ function media_imgmap_media_upload_tab_inside() {
 	$output .= '<div class="mjmapperarea mt-5">';
 	$output .= '<p class="blockBackToFirst"><span class="backToFirst">Powrót</span></p>';
 
-	$output .=  '<button class="more btn btn-primary gold-button small-margin-top  m-auto d-inline-block" onclick=\'switchDisplayMode("interactive_view")\'>Widok interaktywny</button>';
-
-	$output .=  '<button class="more btn btn-primary gold-button small-margin-top  ml-5 d-inline-block" onclick=\'switchDisplayMode("table_view")\'>Tabela mieszkań</button>';
+	$output .=  '<button class="more gold-button small-margin-top  m-auto d-inline-block" onclick=\'switchDisplayMode("interactive_view")\'>Widok interaktywny</button>';
+	$output .=  '<button class="more gold-button small-margin-top  ml-5 d-inline-block" onclick=\'switchDisplayMode("table_view")\'>Tabela mieszkań</button>';
 
 	$output .= '<div class="invest-search extendfull">';
+
 	// Widok interaktywny
 	$output .= '<div class="interactive_view">';
+
 	foreach($getPosts as $key => $itemMap) { 
 		$output .= '<div class="block-group">';
 		$output .= '<h2 class="title-section">'.$itemMap->post_title.'</h2>';
@@ -942,7 +943,11 @@ function imgmap_frontend_search($atts) {
 	$min_powierzchnia = @min($powierzchnie_list);
 	$max_powierzchnia = @max($powierzchnie_list);
 
-    $output_search .= '<h2 class="title-section mt-5">Wyszukaj</h2>'; 
+	$output_search .= '<div class="row-full only-dev">'; 
+	$output_search .= '<div class="container">'; 
+	$output_search .= '<div class="row">'; 
+	$output_search .= '<div class="col-md-12">';
+    //$output_search .= '<h2 class="title-section mt-5">Wyszukaj</h2>'; 
     $output_search .= '<form class="image_search_form" method="POST">'; 
 	$output_search .= '<input type="hidden" id="filter_site_url" value="'.get_site_url().'"/>';
 	$output_search .= "<input type='hidden' name='view' id='view' value='".@$atts['view']."'/>";
@@ -1030,8 +1035,12 @@ function imgmap_frontend_search($atts) {
     $output_search .= '</div>';
     $output_search .= '</div>';
     $output_search .= '</select>'; 
-    $output_search .= '<button type="button" onclick="ajaxImagemapperSearch(this)" name="imagemapper_search" style="border:0px;border-radius:0px;" class="more btn btn-primary gold-button small-margin-top  m-auto d-table"><em>Wyszukaj</em></button>'; 
+    $output_search .= '<button type="button" onclick="ajaxImagemapperSearch(this)" name="imagemapper_search" style="border:0px;border-radius:0px;" class="more gold-button small-margin-top  m-auto d-table"><em>Wyszukaj</em></button>'; 
     $output_search .= '</form>'; 
+	$output_search .= '</div>'; 
+	$output_search .= '</div>'; 
+	$output_search .= '</div>'; 
+	$output_search .= '</div>'; 
     
     if(isset($_POST['imagemapper_search'])) {
         $atts=array();
@@ -1186,20 +1195,24 @@ function imgmap_frontend_table($atts, $filters, $type) {
 		}
 	}
 
+	$outputInwestycje .= '<div class="only-dev-real row-full">';
+	$outputInwestycje .= '<div class="container">';
 	$outputInwestycje .= '<div class="row">';
 	foreach($listaInwestycji as $inwest) { 
 		$getPostByTitle = get_post_by_title($inwest);
 		if($getPostByTitle->post_status == 'publish') {
-		$outputInwestycje .= '<div class="col-md-3">';
+		$outputInwestycje .= '<div class="col-md-6 col-lg-3">';
 		$outputInwestycje .= '<a href="'.get_permalink($getPostByTitle->ID).'"><div class="thumbnail-inwestycje" style="background-image:url('.get_the_post_thumbnail_url($getPostByTitle->ID).');">';
 		
 		//'. $getPostByTitle->ID.' 
 		$outputInwestycje .= '</div></a>';
-		$outputInwestycje .= '<a href="'.get_permalink($getPostByTitle->ID).'">'.$inwest .'</a> <br/>';
+		$outputInwestycje .= '<a class="mj-invest-title" href="'.get_permalink($getPostByTitle->ID).'">'.$inwest .'</a>';
 		$outputInwestycje .= '<p>'.get_field('lokalizacja', $getPostByTitle->ID).'</p>';
 		$outputInwestycje .= '</div>';
 		}
 	}
+	$outputInwestycje .= '</div>';
+	$outputInwestycje .= '</div>';
 	$outputInwestycje .= '</div>';
 
 	if($filters) {
@@ -1243,7 +1256,7 @@ function imgmap_frontend_table($atts, $filters, $type) {
         $output .= 'Pokoje';
         $output .= '</th>';
         $output .= '<th>';
-        $output .= 'Powierzchnia';
+        $output .= 'Metraż (m<sup>2</sup>)';
         $output .= '</th>';
         $output .= '<th>';
         $output .= 'Cena';
@@ -1333,7 +1346,7 @@ $output .= '<!-- Modal -->
 					<label><input type="checkbox" required>
 					Wyrażam zgodę Administratorowi Przedsiębiorstwo Budowlane "Calbud" sp. z o.o w Szczecinie oraz spółkom powiązanym z grupy kapitałowej Administratora na marketing dotyczący lokali oferowanych przez Administratora i podmioty powiązane za pomocą środków komunikacji elektornicznej i/lub telefonu oraz wyrazam tym podmiotom zogdę na przetwarzanie moich danych osobowych w postaci emaila, telefonu oraz innych udostępnionych danych dla realizacji tego celu.
 					</label>
-					<button name="send_question" type="button" onclick="ajaxSendQuestion(this)" class="btn btn-primary d-block m-auto">Wyślij zapytanie</button>
+					<button name="send_question" type="button" onclick="ajaxSendQuestion(this)" class="orange">Wyślij zapytanie</button>
 					<p>* pozycje obowiązkowe</p>
 			</div>
 			</form>
@@ -1369,7 +1382,7 @@ $output .= '<!-- Modal -->
 
 	#$output .= print_r($args);
 	if(count($getPosts) == 0)  {
-		$output .= '<div class="alert alert-info">Nic nie znalezino</div>';
+		$output .= '<div class="alert alert-info">Nic nie znaleziono</div>';
 	}
 	// echo "FILTER:".$type;
 	if($type == 'search') {
@@ -1439,14 +1452,12 @@ function imgmap_frontend_city_list() {
 			//$output .= print_r(implode(";",$inwestycjaCity[$city]));
 			$inwestycja_attr = implode(";",$inwestycjaCity[$city]);
 
-			if(!empty($city)) {
-				$output .= '<li>';
-				//$output .= print_r($inwestycja_attr[$city]);
-				$output .= '<button class="nav-link" data-inwestycje="'.$inwestycja_attr.'" onclick="setLokalizacja(this)"  value="">'; //name="lokalizacja"
-				$output .= $city;
-				$output .= '</button>';
-				$output .= '</li>';
-			}
+			$output .= '<li>';
+			//$output .= print_r($inwestycja_attr[$city]);
+			$output .= '<button class="nav-link" data-inwestycje="'.$inwestycja_attr.'" onclick="setLokalizacja(this)"  value="">'; //name="lokalizacja"
+			$output .= $city;
+			$output .= '</button>';
+			$output .= '</li>';
 		}
 		$output .= '</ul>';
 	return $output;

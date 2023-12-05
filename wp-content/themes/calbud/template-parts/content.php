@@ -83,7 +83,7 @@
 						
 							<div class="additional">
 							
-								<a class="more-open" role="button" href="#collapse02" data-toggle="collapse" aria-expanded="false" aria-controls="collapse02">czytaj więcej</a>
+								<a class="more-open more-invest" role="button" href="#collapse02" data-toggle="collapse" aria-expanded="false" aria-controls="collapse02">czytaj więcej</a>
 								
 								<div id="collapse02" class="collapse">
 								
@@ -114,7 +114,8 @@
 					<h3><?php the_field('tytul_sekcji_wyszukiwarka_mapa'); ?></h3>
 				</div>
 				
-				<!-- <div class="col-md-12 text-center">
+				<?php /*
+				<div class="col-md-12 text-center">
 					<ul class="nav nav-pills" id="pills-tab" role="tablist">
 					  <li class="nav-item">
 						<a class="nav-link active" id="pills-01-tab" data-toggle="pill" href="#pills-01" role="tab" aria-controls="pills-01" aria-selected="true">Wybór interaktywny</a>
@@ -123,32 +124,35 @@
 						<a class="nav-link" id="pills-02-tab" data-toggle="pill" href="#pills-02" role="tab" aria-controls="pills-02" aria-selected="false">Lista mieszkań</a>
 					  </li>
 					</ul>
-				</div> -->
+				</div>
+				*/?>
 				
 				<div class="col-md-12 text-center">
 					<div class="tab-content" id="pills-tabContent">
 						<div class="tab-pane fade show active" id="pills-01" role="tabpanel" aria-labelledby="pills-01-tab">
 							<p class="info-text"><?php the_field('tekst_info_mapa'); ?></p>
-							
+
+
+
 							<?php 
 							// Widok pojedynczej inwestycji
 							$inwestycja = trim($post->post_title); 
 							
 							?>
+							
 
+							
 							<?php 
 							
 							echo do_shortcode("[allimagemap name='".$inwestycja."' view='single']"); 
 							
 							?>
 							
-							  
 						</div>
 						<div class="tab-pane fade" id="pills-02" role="tabpanel" aria-labelledby="pills-02-tab">
-						
+
 							<p class="info-text02"><?php the_field('tekst_info_wyszukiwarka'); ?></p>
 							
-						  
 						</div>
 					</div>
 				</div>
@@ -287,7 +291,7 @@
 						
 							<div class="additional">
 							
-								<a class="more-open" role="button" href="#collapse01" data-toggle="collapse" aria-expanded="false" aria-controls="collapse01">dowiedz się więcej</a>
+								<a class="more-open more-additional" role="button" href="#collapse01" data-toggle="collapse" aria-expanded="false" aria-controls="collapse01">dowiedz się więcej</a>
 								
 								<div id="collapse01" class="collapse">
 								
@@ -493,7 +497,22 @@
 		</div>
 		
 		<div class="invest-gallery row-full">
-			<?php the_field('galeria_zdjec'); ?>
+			<?php //the_field('galeria_zdjec'); ?>
+			
+			<?php 
+			$images = get_field('galeria_zdjec');
+			if( $images ): ?>
+				<div class="row gallery no-gutters">
+					<?php foreach( $images as $image ): ?>
+						<div class="col-md-4">
+							<a href="<?php echo esc_url($image['url']); ?>" class="foobox" rel="gallery">
+								 <img src="<?php echo esc_url($image['sizes']['large']); ?>" alt="<?php echo esc_attr($image['alt']); ?>" class="size-full"/>
+							</a>
+						</div>
+					<?php endforeach; ?>
+				</div>
+			<?php endif; ?>
+			
 		</div>	
 	
 	<?php } else { ?>

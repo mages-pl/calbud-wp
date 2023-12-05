@@ -15,26 +15,26 @@
 		*/?>
 		
 		<a class="modal-link" data-toggle="collapse" href="#collapseExampleOpis<?php the_ID(); ?>" role="button" aria-expanded="false" aria-controls="collapseExampleOpis">
-			Dowiedz się więcej
+			szczegóły/aplikuj
 		</a>
 
 		<?/* button do modala, nie dziala przekazywanie title
 		<button type="button" class="modal-button" data-toggle="modal" data-target="#exampleModalCenter">
 			Aplikuj
 		</button>
-		*/?>
+		
 		
 		<a class="modal-button" data-toggle="collapse" href="#collapseExample<?php the_ID(); ?>" role="button" aria-expanded="false" aria-controls="collapseExample">
 			Aplikuj
 		</a>
 	
-
+*/?>
 
 
 	</div>
 
 </div>
-
+<?/*
 <div class="collapse" id="collapseExample<?php the_ID(); ?>">
       <div class="modal-body">
 	  
@@ -57,23 +57,32 @@
 
       </div>
 </div>
-
+*/?>
 <div class="collapse" id="collapseExampleOpis<?php the_ID(); ?>">
       <div class="modal-body">
 	  	
 		<div class="row">
 			<div class="col-md-12">
 				<h4><?php the_title(); ?></h4>	
+				<br />
 			</div>
 			<div class="col-md-12">
-				<?php the_content(); ?>		
+				<?php the_content(); ?>	
+				<br /><br />				
 			</div>
+			
+			<div class="col-md-12">
+				<?php echo do_shortcode('[contact-form-7 id="76b094d" title="Formularz Oferta Pracy"]'); ?>
+			</div>
+			
+			<?/*
 			<div class="col-md-12 text-center">
 				<br /><br />
 				<a class="modal-link" data-toggle="collapse" href="#collapseExampleOpis<?php the_ID(); ?>" role="button" aria-expanded="false" aria-controls="collapseExampleOpis">
 				Zamknij
 				</a>	
 			</div>
+			*/?>
 		</div>
 		
       </div>

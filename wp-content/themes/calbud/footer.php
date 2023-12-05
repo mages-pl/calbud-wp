@@ -165,36 +165,7 @@ $('#submit').on('click', function() {
 
 	<?php } ?>
 
- 
-	<!-- <link href="https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" rel="stylesheet">  -->
-	
-      <!-- <script src="https://code.jquery.com/jquery-1.10.2.js"></script>   -->
-	 
-      <!-- <script src="https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>  -->
-   
-	<!-- <script>  
-         $(function() {  
-            $( "#slide" ).slider({  
-orientation: "horizontal",                 
-range:true,  
-               min: 0,  
-               max: $("#powierzchnia_content").attr('data-max'),  
-               values: [ 0, parseFloat($("#powierzchnia_content").attr('data-max')) ],  
-               slide: function( event, ui ) {
-				$( "input[name=metraz]" ).val( ui.values[ 0 ] );  
-				$( "input[name=metraz_do]" ).val(   ui.values[ 1 ] ); 
-				ajaxImagemapperSearch(''); 
 
-				$( "#powierzchnia_content" ).val( "" + ui.values[ 0 ] +  
-    	 " - " + ui.values[ 1 ] +"m2" ); 
-               }  
-           });  
-        $( "#powierzchnia_content" ).val( "" + $( "#slide" ).slider( "values", 0 ) +  
-    	 " - " + $( "#slide" ).slider( "values", 1 ) +"m2");  
-         });  
-      </script>  -->
-	
-	
 
 </body>
 </html>

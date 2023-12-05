@@ -35,7 +35,23 @@
 		</style>
 	<?php } ?>	
 	
-	
+	<?php if (is_page('deweloper')){ ?>
+		<style>
+			.developer-search{padding-bottom:0!important;}
+			.only-dev{background:#090909;}
+			.current-invest-search{margin-top:0!important;}
+			.checkbox-container{border:2px solid #707070!important;}
+			.checkbox-container::before{border-bottom:2px solid #707070!important;}
+			.image_search_form .row.panel{background-color:#090909!important;padding:0!important;margin-bottom:80px;}
+			.image_search_form select,.checkbox-container{background:transparent!important;color:#fff!important;}
+			.no-input{background:transparent!important;color:#fff!important;}
+			#powierzchnia_content{background:#090909!important;color:#fff!important;}
+			.ui-slider-range.ui-corner-all.ui-widget-header{background:#707070!important;}
+			.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default{border:0!important;}
+			
+			.only-dev-real{padding-top:118px;padding-bottom:50px;background:#fff;margin-bottom:110px;}
+		</style>
+	<?php } ?>
 	
 	
 <?php wp_head(); ?>
@@ -84,7 +100,7 @@
 							<img src="<?php echo get_template_directory_uri(); ?>/img/logo.svg" alt="CalBud">
 						</a>
 						
-						<?php if (is_page('kontakt-deweloper') || is_page('realizacje') || in_category('realizacje-deweloper') || in_category('inwestycje')){ ?>
+						<?php if (is_page('kontakt-deweloper') || is_page('deweloper') || is_page('realizacje') || in_category('realizacje-deweloper') || in_category('inwestycje')){ ?>
 							<h6>Deweloper</h6>
 						<?php } ?>
 						
@@ -92,7 +108,7 @@
 							|| in_category('inwestycje-komercyjne') || in_category('inwestycje-mieszkaniowe') || in_category('inwestycje-przemyslowe') || in_category('inwestycje-uzytecznosci-publicznej')
 							|| is_page('inwestycje-komercyjne') || is_page('inwestycje-mieszkaniowe') || is_page('inwestycje-przemyslowe') || is_page('inwestycje-uzytecznosci-publicznej')
 						){ ?>
-							<h6>Generalny Wykonawca</h6>
+							<h6>Wykonawca</h6>
 						<?php } ?>
 						
 					<?php } ?>
