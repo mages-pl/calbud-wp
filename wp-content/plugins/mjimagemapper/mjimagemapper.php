@@ -1220,7 +1220,7 @@ function imgmap_frontend_table($atts, $filters, $type) {
 		if(@$atts['view'] != 'single') {
 			$output .= $outputInwestycje;
 		}
-		$output .= '<h2 class="title-section">Tabela mieszkań</h2>';
+		#$output .= '<h2 class="title-section">Tabela mieszkań</h2>';
 	} else {
 		$output .= '<div id="firstAjaxSearchResult">';
 		//Jesli wywołujemy shortcode w widku innym niz pojedynczej inwestycji pokaz miniatury innych inwestycji
@@ -1237,7 +1237,7 @@ function imgmap_frontend_table($atts, $filters, $type) {
 		if($type != 'ajax')	{
 
 		}
-		$output .= '<div class="table-responsive">';
+		#$output .= '<div class="table-responsive">';
         $output .= '<table id="tabela_mieszkania" class="dataTable no-footer table">';
         $output .= '<thead><tr>';
 		$output .= '<th>';
@@ -1372,7 +1372,7 @@ $output .= '<!-- Modal -->
 	}
         $output .= '</tbody>';
         $output .= '</table>';
-		$output .= '</div>';
+		#$output .= '</div>';
     }
 	//echo "FILTER:".print_r($_POST);
 	
@@ -1452,12 +1452,14 @@ function imgmap_frontend_city_list() {
 			//$output .= print_r(implode(";",$inwestycjaCity[$city]));
 			$inwestycja_attr = implode(";",$inwestycjaCity[$city]);
 
-			$output .= '<li>';
-			//$output .= print_r($inwestycja_attr[$city]);
-			$output .= '<button class="nav-link" data-inwestycje="'.$inwestycja_attr.'" onclick="setLokalizacja(this)"  value="">'; //name="lokalizacja"
-			$output .= $city;
-			$output .= '</button>';
-			$output .= '</li>';
+			if(!empty($city)) {
+				$output .= '<li>';
+				//$output .= print_r($inwestycja_attr[$city]);
+				$output .= '<button class="nav-link" data-inwestycje="'.$inwestycja_attr.'" onclick="setLokalizacja(this)"  value="">'; //name="lokalizacja"
+				$output .= $city;
+				$output .= '</button>';
+				$output .= '</li>';
+			}
 		}
 		$output .= '</ul>';
 	return $output;

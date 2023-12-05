@@ -100,7 +100,7 @@ jQuery(function ($) {
 	$('.inwestycja, .backToFirst').click(function () {
 
 		$('.block-group').css('display', 'none');
-
+		$(".blockBackToFirst").toggle();
 		$('.block-group:nth-child(1) ').css('display', 'block'); // .block-group:last-child
 		return false;
 	});

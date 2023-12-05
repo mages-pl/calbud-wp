@@ -776,12 +776,13 @@ div#slide {
   border-color: #fff;
 }
 .blockBackToFirst { 
+  display: none;
   margin: 0px;
   padding: 0px 10px;
   border: 1px solid;
   border-radius: 5px;
   top: -40px;
-  display: block;
+  /* display: block; */
   background: #ec6502;
     border: 0;
     border-radius: 0;
