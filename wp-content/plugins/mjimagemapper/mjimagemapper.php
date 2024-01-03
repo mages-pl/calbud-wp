@@ -603,6 +603,12 @@ function imgmap_save_meta($id = false) {
 		// Basically when you need one of them, you need all others as well, so it's inefficient to save them in separate columns.
 		update_post_meta($id, 'imgmap_area_vars', @$area_vars);
 	}
+
+	if(get_post_type($id) == IMAGEMAP_AREA_POST_TYPE) {
+		if(!empty(@$_POST['coords'])) {
+			update_post_meta($id, 'coords', @$_POST['coords']);
+		}
+	}
 }
 
 function imgmap_updated_message( $messages ) {
@@ -645,6 +651,9 @@ function imgmap_custom_form() {
 	
 	remove_post_type_support(IMAGEMAP_AREA_POST_TYPE, 'editor');
 		
+	add_meta_box('imagemap-area-coords', 'Koordynaty', 'imgmap_area_form_coords', IMAGEMAP_AREA_POST_TYPE, 'side');
+
+	
 	add_meta_box('imagemap-area-highlight', 'Podświetlenia', 'imgmap_area_form_highlight', IMAGEMAP_AREA_POST_TYPE, 'side');
 	add_meta_box('imagemap-area-settings', 'Ustawienia', 'imgmap_area_form_settings', IMAGEMAP_AREA_POST_TYPE, 'side');
 	add_meta_box('imagemap-area-types', 'Efekt po kliknięciu myszą', 'imgmap_area_form_types', IMAGEMAP_AREA_POST_TYPE, 'normal');
@@ -1497,7 +1506,18 @@ function imgmap_area_form_settings($post) {
 	<p><a title="The HTML title attribute often shows as a small tooltip when mouse hovers over an element. No tooltip is shown if the field is left empty.">What is this?<br>Hover mouse over this text for an example.</a></p>
 	<?php
 }
-
+/**
+ * Koordynaty
+ */
+function imgmap_area_form_coords($post) { 
+	// $imgmap_colors = get_option('imgmap_colors');
+	// $meta = imgmap_get_imgmap_area_vars($post->ID);
+	?> 
+	<h4>Koordynaty</h4>
+	<!-- <?php print_r($post); ?> -->
+	<input type="text" name="coords" value="<?= esc_attr(get_post_meta($post->ID, 'coords', true)) ?>">
+	<?php
+}
 /* Settings for the single imagemap area highlight */
 function imgmap_area_form_highlight($post) {
 	$imgmap_colors = get_option('imgmap_colors');

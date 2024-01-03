@@ -818,3 +818,6 @@ a.inwestycja.more.more-reverse.btn.btn-primary {
 .ui-dialog {
   background: #fff !important;
 }
+.single-post .table_view {
+  display: none;
+}
