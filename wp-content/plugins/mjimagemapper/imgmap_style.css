@@ -437,7 +437,7 @@ display:block;
     padding: 20px;
     margin-bottom:50px;
 }
-.image_search_form .row.panel { 
+.image_search_form .row.panel { margin-bottom:60px;
   background-color: #fff;
   padding: 25px;
   margin-left:0px !important;
@@ -487,10 +487,12 @@ input[name=imagemapper_search]  {
 .widget.widget_text {
     margin: 0;
 }
+/*
 .image_search_form .row {
     display: inline-block;
     width: 100%;
 }
+*/
 .image_search_form button[type=submit] {
     margin: auto;
     display: block;

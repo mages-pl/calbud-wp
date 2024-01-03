@@ -25,9 +25,9 @@
 						<h1><?php the_field('haslo_reklamowe'); ?></h1>
 					<?php } ?>
 					
-					<a href="#" class="orange" data-toggle="modal" data-target="#exampleModalOffer">Zapytaj o ofertę</a>
+					<a href="#" class="<?php/*orange*/?> trans-frame" data-toggle="modal" data-target="#exampleModalOffer">Zapytaj o ofertę</a>
 					
-					<a href="#pills-tabContent" class="white">Wyszukaj apartament</a>
+					<a href="#pills-tabContent" class="<?php/*white*/?> trans-frame">Wyszukaj apartament</a>
 				
 				</div>	
 			</div>	
@@ -167,7 +167,7 @@
 		
 			<p><?php the_field('tekst_sekcji_kontakt'); ?></p>
 			
-			<a href="/kontakt-deweloper/" class="orange">Skontaktuj się z nami</a>
+			<a href="/kontakt-deweloper/" class="trans-frame">Skontaktuj się z nami</a>
 		
 		</div>
 		
@@ -490,6 +490,22 @@
 					</div>
 					<div class="invest-single-content">
 						<?php echo the_content(); ?>
+						
+						
+						<?php if( get_field('dodatkowa_rozwijana_tresc') ) { ?>
+						
+							<a class="more-open more-invest" role="button" href="#collapse03" data-toggle="collapse" aria-expanded="false" aria-controls="collapse03">czytaj więcej</a>
+								
+							<div id="collapse03" class="collapse">
+								
+									<?php the_field('dodatkowa_rozwijana_tresc'); ?>
+								
+									<a class="more-close" role="button" href="#collapse03" data-toggle="collapse" aria-expanded="false" aria-controls="collapse03">mniej</a>
+								
+							</div>
+						<?php } ?>
+						
+
 					</div>
 				</div>	
 			</div>	

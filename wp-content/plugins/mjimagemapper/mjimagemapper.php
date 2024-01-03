@@ -956,7 +956,7 @@ function imgmap_frontend_search($atts) {
     $output_search .= '<div class="row panel">';
 
 	// Typ nieruchomości
-	$output_search .= '<div class="col-md-4">';
+	$output_search .= '<div class="col-md-6 col-lg-3">';
 
 	#$output_search .= print_r($typ_nieruchomosci_list);
 
@@ -971,7 +971,7 @@ function imgmap_frontend_search($atts) {
 	$output_search .= '</div>';
 
 	// Inwestycja
-    $output_search .= '<div class="col-md-4 d-none">';
+    $output_search .= '<div class="col-md-6 col-lg-3 d-none">';
 	// d-none
     $output_search .= '<label>Inwestycja</label><select multiple name="inwestycja[]" onchange="ajaxImagemapperSearch(this)">'; 
 		//$output_search .= "<option value=''>Wszystkie</option>";
@@ -980,7 +980,7 @@ function imgmap_frontend_search($atts) {
     $output_search .= '</div>';
     
 	// Powierzchnia
-	$output_search .= '<div class="col-md-4">';
+	$output_search .= '<div class="col-md-6 col-lg-3">';
 
 	$output_search .= ' 
 	<div class="d-none d-lg-block" style="background:transparent;">
@@ -999,7 +999,7 @@ function imgmap_frontend_search($atts) {
     $output_search .= '</div>
 	</div>';
 	// Pietra
-    $output_search .= '<div class="col-md-2">';
+    $output_search .= '<div class="col-md-6 col-lg-3">';
     $output_search .= '<label>Piętro</label>';
 
 	$output_search .= "<div class='checkbox-container' onclick='toggleCheckboxList(this)'>";
@@ -1016,7 +1016,7 @@ function imgmap_frontend_search($atts) {
 	$output_search .= "</div>";
 
 	// Pokoje
-    $output_search .= '<div class="col-md-2">';
+    $output_search .= '<div class="col-md-6 col-lg-3">';
     $output_search .= '<label>Pokoje</label>';
 	
 	$output_search .= "<div class='checkbox-container' onclick='toggleCheckboxList(this)'>";

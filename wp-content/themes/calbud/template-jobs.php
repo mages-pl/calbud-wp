@@ -14,7 +14,7 @@
 		<a href="<?php the_permalink(); ?>" class="modal-link">Dowiedz się więcej</a>
 		*/?>
 		
-		<a class="modal-link" data-toggle="collapse" href="#collapseExampleOpis<?php the_ID(); ?>" role="button" aria-expanded="false" aria-controls="collapseExampleOpis">
+		<a class="white-frame" data-toggle="collapse" href="#collapseExampleOpis<?php the_ID(); ?>" role="button" aria-expanded="false" aria-controls="collapseExampleOpis">
 			szczegóły/aplikuj
 		</a>
 
