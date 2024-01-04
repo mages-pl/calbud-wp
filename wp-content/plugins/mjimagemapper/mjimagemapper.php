@@ -723,7 +723,7 @@ function media_imgmap_media_upload_tab_inside() {
 
 	$args = array(
         'numberposts'      => -1,
-        'orderby'          => 'typ',
+        'orderby'          => 'post_title',
         'order'            => 'ASC',
         // 'include'          => array(),
         // 'exclude'          => array(),
@@ -742,19 +742,38 @@ function media_imgmap_media_upload_tab_inside() {
     // 'meta_value'    => 'red'
 	// echo 'post_type='.IMAGEMAP_POST_TYPE.'&numberposts=-1&inwestycja='.$nazwaInwestycji;
 	// echo "<Br/>";
-
+	$outputKondygnacje = '';
 	$output = '';
 	$output .= '<div class="mjmapperarea mt-5">';
-	$output .= '<p class="blockBackToFirst"><span class="backToFirst">Powrót</span></p>';
+	//$output .= '<p class="blockBackToFirst"><span class="backToFirst">Powrót</span></p>';
 
-	$output .=  '<button class="more gold-button small-margin-top  m-auto d-inline-block" onclick=\'switchDisplayMode("interactive_view")\'>Widok interaktywny</button>';
-	$output .=  '<button class="more gold-button small-margin-top  ml-5 d-inline-block" onclick=\'switchDisplayMode("table_view")\'>Tabela mieszkań</button>';
+	$outputKondygnacje .=  '<button class="more gold-button small-margin-top  m-auto d-inline-block" onclick=\'switchDisplayMode("interactive_view")\'>Widok interaktywny</button>';
+	$outputKondygnacje .=  '<button class="more gold-button small-margin-top  ml-5 d-inline-block" onclick=\'switchDisplayMode("table_view")\'>Tabela mieszkań</button>';
 
 	$output .= '<div class="invest-search extendfull">';
 
 	// Widok interaktywny
 	$output .= '<div class="interactive_view">';
 
+	// Przelaczanie sie miedzy kondygnacjami
+		$getKondygnacje = $getPosts;
+		$outputKondygnacje .= '<div class="kondygnacje interactive_view">';
+		$outputKondygnacje .= '<h4>Wybierz piętro</h4>';
+		$outputKondygnacje .= '<div class="kondygnacje--container">';
+		foreach($getKondygnacje as $key => $kondygnacja) {
+			if($key == 0) { 
+				$outputKondygnacje .= '<button data-layer="'.$key.'" onclick="switchInteractiveLayer(this)" type="button" class="active btn btn-primary more">'.$kondygnacja->post_title.'</button>';
+			} else { 
+				$outputKondygnacje .= '<button data-layer="'.$key.'" onclick="switchInteractiveLayer(this)" type="button" class="btn btn-primary more">'.$kondygnacja->post_title.'</button>';
+			}
+			
+		 
+		}
+		$outputKondygnacje .= "</div>";
+		$outputKondygnacje .= "</div>";
+ 
+	
+	// Koniec przelaczania sie miedzy kondygnacjami
 	foreach($getPosts as $key => $itemMap) { 
 		$output .= '<div class="block-group">';
 		$output .= '<h2 class="title-section">'.$itemMap->post_title.'</h2>';
@@ -778,7 +797,7 @@ function media_imgmap_media_upload_tab_inside() {
 	$output .= '</div>';
 
 	$output .= '</div>';
-	return $output;
+	return $outputKondygnacje.$output;
 
 
  }
@@ -1018,7 +1037,12 @@ function imgmap_frontend_search($atts) {
 	// Zwróć listę pieter
 	$output_search .= "<div>";
 	foreach ($pietra_list as $key => $value) {
-		$output_search .= '<label><input data-input="pietro" onclick="setCheckboxOption(this)" type="checkbox" value="'.$value.'">'.$value.'</label>';	 
+		//<label class="container">Four
+//   <input type="radio" name="radio">
+//   <span class="checkmark"></span>
+// </label>
+
+		$output_search .= '<label class="container-checkbox"><input data-input="pietro" onclick="setCheckboxOption(this)" type="checkbox" value="'.$value.'"><span class="checkmark"></span>'.$value.'</label>';	 
 	}
 	$output_search .= "</div>";
 	$output_search .= "</div>";
@@ -1035,7 +1059,7 @@ function imgmap_frontend_search($atts) {
 	// Zwróć listę pokoi
 	$output_search .= "<div>";
 	foreach ($pokoje_list as $key => $value) {
-		$output_search .= '<label><input data-input="pokoje" onclick="setCheckboxOption(this)" type="checkbox" value="'.$value.'">'.$value.'</label>';	 
+		$output_search .= '<label  class="container-checkbox"><input data-input="pokoje" onclick="setCheckboxOption(this)" type="checkbox" value="'.$value.'"><span class="checkmark"></span>'.$value.'</label>';	 
 	}
 	$output_search .= "</div>";
 	$output_search .= "</div>";
@@ -1247,7 +1271,7 @@ function imgmap_frontend_table($atts, $filters, $type) {
 
 		}
 		#$output .= '<div class="table-responsive">';
-        $output .= '<table id="tabela_mieszkania" class="dataTable no-footer table">';
+        $output .= '<table id="tabela_mieszkania" class="table-responsive dataTable no-footer table">';
         $output .= '<thead><tr>';
 		$output .= '<th>';
         $output .= 'Inwestycja';

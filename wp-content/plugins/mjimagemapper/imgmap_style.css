@@ -821,3 +821,124 @@ a.inwestycja.more.more-reverse.btn.btn-primary {
 .single-post .table_view {
   display: none;
 }
+
+/*
+Custom checkbox
+*/
+
+/* The container */
+.container-checkbox {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 22px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Hide the browser's default radio button */
+.container-checkbox input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+
+}
+
+/* Create a custom radio button */
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  background-color: #eee;
+border:2px solid #c4c4c4;
+
+}
+
+/* On mouse-over, add a grey background color */
+.container-checkbox:hover input ~ .checkmark {
+  background-color: #ccc;
+}
+
+/* When the radio button is checked, add a blue background */
+.container input:checked ~ .checkmark {
+/*  background-color: #2196F3;*/
+}
+
+/* Create the indicator (the dot/circle - hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the indicator (dot/circle) when checked */
+.container-checkbox input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the indicator (dot/circle) */
+.container-checkbox .checkmark:after {
+      top: 50%;
+    left: 50%;
+    width: 12px;
+    height: 12px;
+    background: #ec6502;
+    transform: translateX(-50%) translateY(-50%);
+}
+
+
+.only-dev span.checkmark {
+  background-color: transparent;
+}
+.page-id-1439 .only-dev .checkmark {
+  border: 2px solid #707070;
+}
+.page-id-1439 .only-dev .container-checkbox:hover input ~ .checkmark {
+  background-color: #3e3d3d;
+}
+@media(min-width:992px) {
+  #tabela_mieszkania thead, #tabela_mieszkania tbody {
+    width: 100%;
+    /* display: table; */
+  }
+  #tabela_mieszkania { 
+    display: table;
+  }
+}
+
+.kondygnacje--container button.btn.btn-primary.more {
+  background: transparent;
+  color: #ec6502;
+  border: 1px solid;
+  border-radius: 0;
+  margin: 0.5rem;
+}
+.kondygnacje--container button.btn.btn-primary.more.active {
+  background: #ec6505;
+  color: #fff;
+ }
+ .single-post .current-invest-search button.more {
+  background: transparent;
+}
+.single-post .current-invest-search button.gold-button:hover {
+  border: 3px solid #ec6502!important;
+  background-color: #ec6502;
+  color: #fff !important;
+}
+.single-post .current-invest-search button.gold-button:focus {
+  border: 3px solid #ec6502!important;
+  color: #ec6502 !important;
+  background: transparent !important;
+}
+.single-post .kondygnacje {
+  margin: 2rem 0;
+}
+.current-invest-search .tab-content p.info-text {
+  margin-bottom: 2rem !important;
+}

@@ -85,12 +85,15 @@ jQuery(function ($) {
 				scrollTop: $($(getSelector).parent().parent()).offset().top
 			}, 'slow');
 		}
+		var getNumberOfLayer = ($(this).index())+2;
+		$(".kondygnacje--container button").removeClass('active');
+		$(".kondygnacje--container button:nth-child("+getNumberOfLayer+")").addClass('active');
 			// Jesli pierwszy segment jest niewidoczny pokaz button powrot	
-			if($(".interactive_view .block-group:nth-child(1)").is(':visible')) {
-				$(".blockBackToFirst").css("display","none");
-			} else { 
-				$(".blockBackToFirst").css("display","block");
-			}
+			// if($(".interactive_view .block-group:nth-child(1)").is(':visible')) {
+			// 	$(".blockBackToFirst").css("display","none");
+			// } else { 
+			// 	$(".blockBackToFirst").css("display","block");
+			// }
 	});
  
 	/**
@@ -489,13 +492,20 @@ function setCheckboxOption(obj) {
 }
 
 function switchDisplayMode(display) {
+	var getAllInteractiveView = document.querySelectorAll('.interactive_view');
 	if(display == 'interactive_view') { 
 		// Wyswietlanie interaktywnego widoku
-		document.querySelector('.interactive_view').style.display='block';
+		getAllInteractiveView.forEach(function(item) {
+			item.style.display='block';
+		});
+		// document.querySelector('.interactive_view').style.display='block';
 		document.querySelector('.table_view').style.display='none';
 	} else { 
 		// Wyswietlanie tabeli
-		document.querySelector('.interactive_view').style.display='none';
+		getAllInteractiveView.forEach(function(item) {
+			item.style.display='none';
+		});
+		//document.querySelector('.interactive_view').style.display='none';
 		document.querySelector('.table_view').style.display='block';
 	}
 }
@@ -536,6 +546,25 @@ function setLokalizacja(obj) {
 	document.getElementById('lokalizacja').value = obj.value;
 	ajaxImagemapperSearch(obj);
 
+}
+function switchInteractiveLayer(obj) { 
+	//alert("A");
+	var getNumberOfLayer = obj.getAttribute('data-layer');
+
+	var getAllViews = document.querySelectorAll(".interactive_view .block-group");
+	var getAllKondygnacjeBtn = document.querySelectorAll(".kondygnacje--container button");
+
+	for(var dt=0;dt<getAllKondygnacjeBtn.length;dt++) {
+		getAllKondygnacjeBtn[dt].classList.remove("active");
+	}
+	for(var dx=0;dx<getAllViews.length;dx++) { 
+		document.querySelectorAll(".interactive_view .block-group")[dx].style.display = "none";
+		document.querySelectorAll(".interactive_view .block-group")[dx].style.opacity = "0";
+	}
+
+	document.querySelectorAll(".interactive_view .block-group")[getNumberOfLayer].style.display = "block";
+	document.querySelectorAll(".interactive_view .block-group")[getNumberOfLayer].style.opacity = "1";
+	obj.classList.add("active");
 }
 
 

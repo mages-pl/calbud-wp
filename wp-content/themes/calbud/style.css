@@ -1022,7 +1022,7 @@ table.dataTable thead .sorting, table.dataTable thead .sorting_asc, table.dataTa
 table.dataTable a.more.more-reverse{background:url('./img/download.png')no-repeat center center;}
 table.dataTable a.more.more-reverse em{display:none;}
 /*.blockBackToFirst{display:none!important;}*/
-.invest-search.extendfull{/*background:#fff;*/padding-top:90px;padding-bottom:90px;padding-bottom:2px;margin-top:70px;}
+.invest-search.extendfull{/*background:#fff;*/padding-top:0px;padding-bottom:90px;margin-top:70px;}
 .invest-search h2.title-section{display:none;}
 
 
