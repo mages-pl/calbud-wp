@@ -165,7 +165,25 @@ $('#submit').on('click', function() {
 
 	<?php } ?>
 
+<script type="text/javascript">
+	window.onload = function() { 
+		document.querySelector(".half.first").addEventListener('mouseover', function() {
+			document.querySelector(".half.second .inner").style.opacity = '0';
+		});
+		document.querySelector(".half.first").addEventListener('mouseout', function() {
+			document.querySelector(".half.second .inner").style.opacity = '1';
+		});
 
+		document.querySelector(".half.second").addEventListener('mouseover', function() {
+			document.querySelector(".half.first .inner").style.opacity = '0';
+		});
+
+		document.querySelector(".half.second").addEventListener('mouseout', function() {
+			document.querySelector(".half.first .inner").style.opacity = '1';
+		});
+	}
+	 
+</script>
 
 </body>
 </html>

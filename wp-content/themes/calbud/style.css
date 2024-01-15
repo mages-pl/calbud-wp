@@ -253,7 +253,17 @@ body.home .hp-hidden{display:none!important;}
 */
 
 .hp-top-acc{height:968px;}
-.hp-top-acc:hover .half{cursor:pointer;width:0;}
+.hp-top-acc:hover .half{
+	cursor:pointer;width:10%;
+
+}
+/* .hp-top-acc .half:not(:hover) .inner  {
+	transform: rotate(90deg);
+}
+.hp-top-acc .half .inner  {
+	transform: rotate(0deg);
+} */
+
 .hp-top-acc .half {
   width: 50%;
   height: 100%;
@@ -290,7 +300,7 @@ body.home .hp-hidden{display:none!important;}
   padding-top: 540px;
 }
 .hp-top-acc .half:hover {
-  width: 100%;
+  width: 90%;
   z-index: 50;
 }
 .hp-top-acc .half:hover:first-child {height: 968px;
@@ -2140,15 +2150,26 @@ a.offer-box-test:hover{background:none!important;border:2px solid transparent;}
 a.offer-box-test div{transition:all.3s ease-out;padding:50px 25px 61px 40px;min-height:474px;}
 a.offer-box-test:hover div{transition:all .3s ease-in; transition-delay:.4s;}
 */
+.hp-top-acc * {
+	transition: 0.5s all ease-in-out;
+}
+.half.first, .half.second {
+    position: relative;
+}
 
+.half.first .inner, .half.second .inner {
+    position: absolute;
+}
+.half.second .inner {
+    right: 0;
+}
 
-
-
-
-
-
-
-
-
-
+@media(max-width:600px) { 
+	.hp-top-acc h6 { 
+		font-size: 2.5rem;
+	}
+	.half.first .inner, .half.second .inner {
+		word-break: break-all;
+	}
+}
 
