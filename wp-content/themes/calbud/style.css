@@ -186,7 +186,9 @@ body.home .hp-hidden{display:none!important;}
 .hp-top h6{margin-bottom:33px;font-size:64px;line-height:1;color:#F5F5F5;font-weight:300;text-transform:uppercase;}
 .hp-top h6:before{content:'';position:absolute;width:63px;height:2px;background:#EC6500;top:-34px;}
 .hp-top p{font-size:20px;line-height:36px;color:#C4C4C4;}
-.hp-top a.check{margin-top:109px;}
+.hp-top a.check{margin-top:92px;
+/* 109px */
+}
 
 .hp-top .second{text-align:right;}
 .hp-top .second h6:before{right:0;}
@@ -254,7 +256,8 @@ body.home .hp-hidden{display:none!important;}
 
 .hp-top-acc{height:968px;}
 .hp-top-acc:hover .half{
-	cursor:pointer;width:10%;
+	cursor:pointer;width:5%;
+	/* 10% */
 
 }
 /* .hp-top-acc .half:not(:hover) .inner  {
@@ -300,7 +303,8 @@ body.home .hp-hidden{display:none!important;}
   padding-top: 540px;
 }
 .hp-top-acc .half:hover {
-  width: 90%;
+  /* width: 90%; */
+  width: 95%;
   z-index: 50;
 }
 .hp-top-acc .half:hover:first-child {height: 968px;
@@ -2173,3 +2177,23 @@ a.offer-box-test:hover div{transition:all .3s ease-in; transition-delay:.4s;}
 	}
 }
 
+.half.first:hover .inner, .half.second:hover .inner {
+	background: rgba(0,0,0,0.65) !important;
+	padding: 4rem 2rem 2rem 2rem;
+}
+
+.half.first .inner, .half.second .inner {
+    position: absolute;
+    top: 66%;
+    transform: translateY(-50%);
+    padding: 4rem 2rem 2rem 2rem;
+}
+.hp-top-acc h6 {
+	margin-bottom: 0px;
+}
+.hp-top-acc h6 + p {
+	display: none;
+}
+.hp-top-acc .second a.check { 
+	margin-top: 25px;
+}
