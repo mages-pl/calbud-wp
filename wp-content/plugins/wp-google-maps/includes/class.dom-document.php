@@ -41,7 +41,7 @@ class DOMDocument extends \DOMDocument
 	{
 
 		try{
-			if(version_compare(phpversion(), '8.2', '>=')){
+			if(version_compare(phpversion(), '8.2', '>=') && function_exists('mb_encode_numericentity')){
 				/* Deprecations in PHP require us to rework the way we do conversions */
 				$converted = htmlspecialchars_decode(mb_encode_numericentity(htmlentities($html, ENT_QUOTES, 'UTF-8'), [0x80, 0x10FFFF, 0, ~0], 'UTF-8'));
 				return $converted;
@@ -89,6 +89,7 @@ class DOMDocument extends \DOMDocument
 	 * @param int $options See http://php.net/manual/en/domdocument.load.php
 	 * @return boolean TRUE on success, FALSE otherwise
 	 */
+	#[\ReturnTypeWillChange]
 	public function load($src, $options=null)
 	{
 		if(!is_string($src))

@@ -206,14 +206,24 @@ function foogallery_admin_settings_url()
 }
 
 /**
- * Returns the FooGallery extensions page Url within the admin
+ * DEPRECATED!
  *
  * @return string The Url to the FooGallery extensions page in admin
  */
 function foogallery_admin_extensions_url()
 {
+    return foogallery_admin_extensions_url();
+}
+
+/**
+ * Returns the FooGallery features page Url within the admin
+ *
+ * @return string The Url to the FooGallery extensions page in admin
+ */
+function foogallery_admin_features_url()
+{
     return admin_url( add_query_arg( array(
-        'page' => FOOGALLERY_ADMIN_MENU_EXTENSIONS_SLUG,
+        'page' => FOOGALLERY_ADMIN_MENU_FEATURES_SLUG,
     ), foogallery_admin_menu_parent_slug() ) );
 }
 
@@ -1046,8 +1056,6 @@ function foogallery_uninstall()
     
     delete_option( FOOGALLERY_OPTION_VERSION );
     delete_option( FOOGALLERY_OPTION_THUMB_TEST );
-    delete_option( FOOGALLERY_EXTENSIONS_SLUGS_OPTIONS_KEY );
-    delete_option( FOOGALLERY_EXTENSIONS_SLUGS_OPTIONS_KEY );
     delete_option( FOOGALLERY_EXTENSIONS_ACTIVATED_OPTIONS_KEY );
     delete_option( FOOGALLERY_EXTENSIONS_ERRORS_OPTIONS_KEY );
     //let any extensions clean up after themselves
@@ -1135,11 +1143,34 @@ function foogallery_get_fields_for_template( $template )
         }
     
     }
-    // Finally, remove the fields that were marked for removal.
+    // remove the fields that were marked for removal.
     foreach ( $indexes_to_remove as $index ) {
         unset( $fields[$index] );
     }
+    // Finally, sort the fields.
+    uasort( $fields, 'foogallery_sort_template_fields' );
     return $fields;
+}
+
+/**
+ * Used to sort gallery template fields
+ *
+ * @param mixed $a
+ * @param mixed $b
+ *
+ * @return int
+ */
+function foogallery_sort_template_fields( $a, $b )
+{
+    
+    if ( isset( $a['order'] ) && isset( $b['order'] ) ) {
+        if ( $a['order'] === $b['order'] ) {
+            return 0;
+        }
+        return ( $a['order'] < $b['order'] ? -1 : 1 );
+    }
+    
+    return 0;
 }
 
 /**
@@ -1223,7 +1254,7 @@ function foogallery_current_gallery_attachments_for_rendering()
     if ( $attachments !== false ) {
         return $attachments;
     }
-    //by default, return all attachments
+    // by default, return all attachments.
     return $current_foogallery->attachments();
 }
 
@@ -1495,7 +1526,15 @@ function foogallery_marketing_pro_features()
  */
 function foogallery_allowed_post_types_for_usage()
 {
-    return apply_filters( 'foogallery_allowed_post_types_for_attachment', array( 'post', 'page' ) );
+    $allowed_post_types = apply_filters( 'foogallery_allowed_post_types_for_attachment', array( 'post', 'page' ) );
+    // Use foogallery_get_setting to retrieve the selected custom post types.
+    $selected_custom_post_types = foogallery_get_setting( 'allowed_custom_post_types', array() );
+    if ( !is_array( $selected_custom_post_types ) ) {
+        $selected_custom_post_types = array();
+    }
+    // Merge the selected custom post types with the default allowed post types.
+    $allowed_post_types = array_merge( $allowed_post_types, $selected_custom_post_types );
+    return $allowed_post_types;
 }
 
 /**
@@ -1880,19 +1919,6 @@ function foogallery_admin_url(
 }
 
 /**
- * Determines the best lightbox to use for a demo gallery
- *
- * @return string
- */
-function foogallery_demo_content_determine_best_lightbox()
-{
-    if ( foogallery_is_pro() ) {
-        return 'foogallery';
-    }
-    return 'foobox';
-}
-
-/**
  * Returns true if on the plugin activation page
  *
  * @return bool
@@ -2125,6 +2151,23 @@ function foogallery_admin_fields_find_index_of_field( $fields, $field_id )
 }
 
 /**
+ * Returns true if the field exists in the array
+ *
+ * @param $fields
+ * @param $field_id
+ * @return bool
+ */
+function foogallery_admin_fields_has_field( $fields, $field_id )
+{
+    foreach ( $fields as $field ) {
+        if ( isset( $field['id'] ) && $field_id === $field['id'] ) {
+            return true;
+        }
+    }
+    return false;
+}
+
+/**
  * Returns the path of the URL
  *
  * @param $url
@@ -2171,4 +2214,62 @@ function foogallery_prepare_code( $text )
     }
     
     return false;
+}
+
+/**
+ * Returns true if the feature is enabled.
+ *
+ * @param $feature
+ * @return bool
+ */
+function foogallery_feature_enabled( $feature )
+{
+    global  $foogallery_features ;
+    
+    if ( empty($foogallery_features) ) {
+        $api = new FooGallery_Extensions_API();
+        $foogallery_features = $api->get_all_for_view();
+    }
+    
+    return array_key_exists( $feature, $foogallery_features ) && $foogallery_features[$feature]['is_active'];
+}
+
+/**
+ * Returns an array of the pro features available in FooGallery.
+ *
+ * @return array
+ */
+function foogallery_pro_features()
+{
+    global  $foogallery_pro_features ;
+    if ( !isset( $foogallery_pro_features ) ) {
+        $foogallery_pro_features = (include FOOGALLERY_PATH . 'includes/admin/pro-features.php');
+    }
+    return $foogallery_pro_features;
+}
+
+/**
+ * Retrieves the target options for FooGallery attachments.
+ *
+ * The function retrieves an array of target options that can be used for customizing
+ * the behavior of attachment links within the FooGallery plugin.
+ *
+ * @return array An associative array of target options with keys like '_blank', '_self', etc.
+ *
+ * @since 1.0.0
+ */
+function foogallery_get_target_options()
+{
+    /**
+     * Filter the target options for FooGallery attachments.
+     *
+     * @param array $target_options An associative array of target options.
+     */
+    $target_options = apply_filters( 'foogallery_attachment_field_custom_target_options', array(
+        'default' => __( 'Default', 'foogallery' ),
+        '_blank'  => __( 'New tab (_blank)', 'foogallery' ),
+        '_self'   => __( 'Same tab (_self)', 'foogallery' ),
+        'foobox'  => __( 'FooBox', 'foogallery' ),
+    ) );
+    return $target_options;
 }

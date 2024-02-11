@@ -126,6 +126,7 @@
 	<h2><?php _e("Security","wp-google-maps"); ?></h2>
 	<div class="credit-container">
 		<ul class="list-chain">
+			<li>Rafie Muhammad</li>
 			<li>Visse</li>
 			<li>Mohammed Adam</li>
 			<li>Thomas Chauchefoin</li>
@@ -196,6 +197,9 @@
 	<h2><?php _e("Translators","wp-google-maps"); ?></h2>
 	<div class="credit-container">
 		<ul class="list-chain">
+			<li>Daniel Tan</li>
+			<li>Mats Wale</li>
+			<li>Starlogic</li>
 			<li>Pedro Ponz</li>
 			<li>Neno</li>
 			<li>Martin Sleipner</li>

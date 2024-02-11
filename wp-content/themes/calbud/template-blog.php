@@ -15,6 +15,7 @@
 
 
 <div class="post hentry ivycat-post col-md-6">
+
 	<div class="inner">
 	
 		<p class="date"><?php echo get_the_date(); ?></p>
@@ -31,5 +32,6 @@
 		<a href="<?php the_permalink(); ?>" class="check">Czytaj więcej</a>
 
 	</div>
+	
 </div>
 

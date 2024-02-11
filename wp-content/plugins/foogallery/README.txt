@@ -2,9 +2,9 @@
 Contributors: bradvin, steveush, fooplugins
 Donate link: https://fooplugins.com
 Tags: gallery, image gallery, photo gallery, responsive gallery, wordpress gallery plugin, best gallery plugin, albums, media gallery, video gallery, lightbox
-Requires at least: 5.2
-Tested up to: 6.3
-Stable tag: 2.3.3
+Requires at least: 5.3
+Tested up to: 6.4
+Stable tag: 2.4.6
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -147,8 +147,8 @@ There are 3 PRO plans available, that will work with any budget:
 *   Buttons and Ribbons
     *   Add custom buttons to your images
     *   Add custom ribbons to your images to attract attention
-*	Master Galleries
-    *   Set a gallery as a master and then all galleries who use that master will inherit all settings from the master - [docs](https://fooplugins.com/documentation/foogallery/pro-commerce/use-master-gallery/)
+*	Gallery Blueprints
+    *   Set a gallery as a blueprint and then all galleries who use that blueprint will inherit all settings from the blueprint - [docs](https://fooplugins.com/documentation/foogallery/pro-commerce/use-master-gallery/)
 *   White Labeling
     *   Rebrand FooGallery to whatever you like for your clients. Ideal for freelancers and agencies. [docs](https://fooplugins.com/documentation/foogallery/pro-commerce/white-labeling/)
 
@@ -315,9 +315,25 @@ We did the research and comparison. See our findings : [What is the Best WordPre
 
 == Upgrade Notice ==
 
-Please update in order to for FooGallery to work in WP 5.5+!
+Please update in order for FooGallery to work in WP 5.5+!
 
 == Changelog ==
+
+= 2.4.7 =
+* Date Updated : 21 Dec 2023
+* Fix : fixed paging not showing anymore!
+
+= 2.4.6 =
+* Date Updated : 17 Dec 2023
+* Update : Freemius SDK update 2.6.1
+* Fix : fixed PHP 8.1 warnings
+* New : Overhauled features listing, and added a bunch of features to the list, which can be activated/deactivated like plugins.
+* Fix : added sanitization to advanced gallery settings.
+
+
+= 2.3.4 =
+* Date Updated : 6 Sep 2023
+* Fix : fixed bug with demo galleries not using the default lightbox
 
 = 2.3.3 =
 * Date Updated : 6 Sep 2023

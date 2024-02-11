@@ -988,14 +988,16 @@ function imgmap_frontend_search($atts) {
 
 	#$output_search .= print_r($typ_nieruchomosci_list);
 
-	$output_search .= '<label>Typ nieruchomości</label><select name="typ_nieruchomosci" onchange="ajaxImagemapperSearch(this)">';
-		
+	$output_search .= '<label>Typ nieruchomości</label><div class="custom-select-opt"><select name="typ_nieruchomosci" onchange="ajaxImagemapperSearch(this)">';
+	
+	$output_search .= '<option value="">Wybierz</option>';
 	$output_search .= '<option value="">Wszystkie</option>';
 	foreach ($typ_nieruchomosci_list as $key => $value) {
-		$output_search .= '<option value="'.$value['value'].'">'.$value['label'].'</option>';	 
+		$output_search .= '<option value="'.$value['value'].'">'.$value['label'].'</option>';	
 	}
+	
 	//$output_search .= '<option value="Mieszkanie">Mieszkanie</option>';
-	$output_search .= '</select>';
+	$output_search .= '</select></div>';
 	$output_search .= '</div>';
 
 	// Inwestycja
@@ -1032,7 +1034,7 @@ function imgmap_frontend_search($atts) {
 
 	$output_search .= "<div class='checkbox-container' onclick='toggleCheckboxList(this)'>";
 
-	$output_search .= '<input type="text" onchange="ajaxImagemapperSearch(this)" value="'.@$_POST['pietro'].'" readonly   class="no-input cursor-pointer" name="pietro">'; 
+	$output_search .= '<input type="text" onchange="ajaxImagemapperSearch(this)" value="'.@$_POST['pietro'].'" readonly class="no-input cursor-pointer" name="pietro">'; 
 
 	// Zwróć listę pieter
 	$output_search .= "<div>";
@@ -1350,7 +1352,7 @@ $output .= '<!-- Modal -->
       <div class="modal-body">
 	  <form method="POST" class="sendQuestionForm">
 	  <div class="row text-left">
-	  <div class="formFlashMessage"></div>
+	  
 	  <div class="col-md-12">
 	    <p class="modal-title col-md-12" id="exampleModalLabel">Uprzejmie prosimy o wypełnienie poniższego formularza, abyśmy mogli skontaktować się z Państwem i przedstawić ofertę, dotyczącą wybranego lokalu.</p>
 	  </div>
@@ -1382,6 +1384,9 @@ $output .= '<!-- Modal -->
 					<button name="send_question" type="button" onclick="ajaxSendQuestion(this)" class="orange">Wyślij zapytanie</button>
 					<p>* pozycje obowiązkowe</p>
 			</div>
+			
+			<div class="formFlashMessage"></div>
+			
 			</form>
 	  </div>
       </div>
@@ -1415,7 +1420,7 @@ $output .= '<!-- Modal -->
 
 	#$output .= print_r($args);
 	if(count($getPosts) == 0)  {
-		$output .= '<div class="alert alert-info">Nic nie znaleziono</div>';
+		$output .= '<div class="alert alert-info">Żadne z mieszkań nie spełnia podanych kryteriów wyszukiwania</div>';
 	}
 	// echo "FILTER:".$type;
 	if($type == 'search') {

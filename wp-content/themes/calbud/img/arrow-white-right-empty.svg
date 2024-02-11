@@ -1,0 +1,11 @@
+<svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 62 62" width="62" height="62">
+	<title>arrow-white-svg</title>
+	<style>
+		.s0 { fill: none } 
+		.s1 { fill: none;stroke: #ffffff;stroke-width: 2 } 
+	</style>
+	<g id="Ellipse_1">
+		<path id="Layer" class="s0" d="m31 62c-17.1 0-31-13.9-31-31 0-17.1 13.9-31 31-31 17.1 0 31 13.9 31 31 0 17.1-13.9 31-31 31z"/>
+	</g>
+	<path id="Path_3" fill-rule="evenodd" class="s1" d="m26.8 20.8l10.7 10.7-10.7 10.7"/>
+</svg>

@@ -515,12 +515,14 @@
 		<div class="invest-gallery row-full">
 			<?php //the_field('galeria_zdjec'); ?>
 			
+		
+			
 			<?php 
 			$images = get_field('galeria_zdjec');
 			if( $images ): ?>
 				<div class="row gallery no-gutters">
 					<?php foreach( $images as $image ): ?>
-						<div class="col-md-4">
+						<div class="col-md-<?php if(is_single(2351)){ ?>2<?php } else { ?>4<?php } ?>">
 							<a href="<?php echo esc_url($image['url']); ?>" class="foobox" rel="gallery">
 								 <img src="<?php echo esc_url($image['sizes']['large']); ?>" alt="<?php echo esc_attr($image['alt']); ?>" class="size-full"/>
 							</a>

@@ -69,6 +69,7 @@
 	<?php } ?>
 
 
+
 </head>
 
 <body <?php body_class(); ?>>
@@ -251,6 +252,6 @@ jQuery(document).ready(function($){$('#two-sides .cleft').on('mouseenter',functi
 	
 	
 	<div id="content" class="site-content">
-		<div class="container">
+		<div class="container<?php if (in_category('Inwestycje')){ ?>-fluid container-inwestycje<?php } ?>">
 			<div class="row">
                 <?php endif; ?>

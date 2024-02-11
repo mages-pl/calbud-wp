@@ -19,7 +19,18 @@
 			<p class="date"><?php echo get_the_date(); ?></p>
 		</div>
 		<div class="col-md-6">
-			<?php the_post_thumbnail(); ?>
+		
+		<?php if (has_post_thumbnail()){ ?>
+		
+			<?php the_post_thumbnail(); ?> 
+		
+		<?php } else {?>
+		
+			<img src="<?php echo get_template_directory_uri(); ?>/img/calbud-gradient.jpg" alt="CalBud">
+
+		<?php } ?>
+		
+			
 		</div>
 	</div>
 	<div class="entry-content">
@@ -39,6 +50,26 @@
 		<a href="/aktualnosci/" class="check-left">Powrót</a>
 		
 	</div>
+	
+	
+		<div class="current-invest-gallery row-full">
+			<div class="container-fluid">
+			<?php 
+			$images = get_field('galeria_aktualnosci');
+			if( $images ): ?>
+				<div class="row gallery no-gutters">
+					<?php foreach( $images as $image ): ?>
+						<div class="col-md-6">
+							<a href="<?php echo esc_url($image['url']); ?>" class="foobox" rel="gallery">
+								 <img src="<?php echo esc_url($image['sizes']['large']); ?>" alt="<?php echo esc_attr($image['alt']); ?>" class="size-full"/>
+							</a>
+						</div>
+					<?php endforeach; ?>
+				</div>
+			<?php endif; ?>
+			</div>
+		</div>
+	
 	
 	<div class="posts-add row-full">
 	<div class="container">
