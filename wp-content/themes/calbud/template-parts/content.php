@@ -531,6 +531,21 @@
 				</div>
 			<?php endif; ?>
 			
+			<?php 
+			$images = get_field('galeria_zdjec_pion');
+			if( $images ): ?>
+				<div class="row gallery no-gutters">
+					<?php foreach( $images as $image ): ?>
+						<div class="col-md-2">
+							<a href="<?php echo esc_url($image['url']); ?>" class="foobox" rel="gallery">
+								 <img src="<?php echo esc_url($image['sizes']['large']); ?>" alt="<?php echo esc_attr($image['alt']); ?>" class="size-full"/>
+							</a>
+						</div>
+					<?php endforeach; ?>
+				</div>
+			<?php endif; ?>
+			
+			
 		</div>	
 	
 	<?php } else { ?>

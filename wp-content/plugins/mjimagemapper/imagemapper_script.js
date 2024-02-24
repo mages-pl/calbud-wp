@@ -88,6 +88,8 @@ jQuery(function ($) {
 		var getNumberOfLayer = ($(this).index())+2;
 		$(".kondygnacje--container button").removeClass('active');
 		$(".kondygnacje--container button:nth-child("+getNumberOfLayer+")").addClass('active');
+		//alert(getNumberOfLayer);
+		$("#numberFloor").val(getNumberOfLayer-1);
 			// Jesli pierwszy segment jest niewidoczny pokaz button powrot	
 			// if($(".interactive_view .block-group:nth-child(1)").is(':visible')) {
 			// 	$(".blockBackToFirst").css("display","none");
@@ -549,7 +551,8 @@ function setLokalizacja(obj) {
 }
 function switchInteractiveLayer(obj) { 
 	//alert("A");
-	var getNumberOfLayer = obj.getAttribute('data-layer');
+	var getNumberOfLayer = obj.value;//obj.getAttribute('data-layer');
+
 
 	var getAllViews = document.querySelectorAll(".interactive_view .block-group");
 	var getAllKondygnacjeBtn = document.querySelectorAll(".kondygnacje--container button");
@@ -565,6 +568,8 @@ function switchInteractiveLayer(obj) {
 	document.querySelectorAll(".interactive_view .block-group")[getNumberOfLayer].style.display = "block";
 	document.querySelectorAll(".interactive_view .block-group")[getNumberOfLayer].style.opacity = "1";
 	obj.classList.add("active");
+	// alert(obj.value);
+	document.querySelector("#numberFloor").value = obj.value;
 }
 
 

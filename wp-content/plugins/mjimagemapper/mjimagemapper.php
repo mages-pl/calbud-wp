@@ -760,16 +760,32 @@ function media_imgmap_media_upload_tab_inside() {
 		$outputKondygnacje .= '<div class="kondygnacje interactive_view">';
 		$outputKondygnacje .= '<h4>Wybierz piętro</h4>';
 		$outputKondygnacje .= '<div class="kondygnacje--container">';
+
+		$outputKondygnacje .= '<select id="numberFloor" onchange="switchInteractiveLayer(this)">';
 		foreach($getKondygnacje as $key => $kondygnacja) {
 			if($key == 0) { 
-				$outputKondygnacje .= '<button data-layer="'.$key.'" onclick="switchInteractiveLayer(this)" type="button" class="active btn btn-primary more">'.$kondygnacja->post_title.'</button>';
+				$outputKondygnacje .= '<option value="'.$key.'" class="active btn btn-primary more">'.$kondygnacja->post_title.'</option>';
+				//$outputKondygnacje .= '<button data-layer="'.$key.'" onclick="switchInteractiveLayer(this)" type="button" class="active btn btn-primary more">'.$kondygnacja->post_title.'</button>';
 			} else { 
-				$outputKondygnacje .= '<button data-layer="'.$key.'" onclick="switchInteractiveLayer(this)" type="button" class="btn btn-primary more">'.$kondygnacja->post_title.'</button>';
+				//$outputKondygnacje .= '<button data-layer="'.$key.'" onclick="switchInteractiveLayer(this)" type="button" class="btn btn-primary more">'.$kondygnacja->post_title.'</button>';
+				$outputKondygnacje .= '<option value="'.$key.'" class="btn btn-primary more">'.$kondygnacja->post_title.'</option>';
 			}
 			
 		 
 		}
+		$outputKondygnacje .= '</select>';
 		$outputKondygnacje .= "</div>";
+
+		// Wroc do modelu
+		$outputKondygnacje .= "<div class='backToModel'>";
+		$outputKondygnacje .= '<button value="0" onclick="switchInteractiveLayer(this)" type="button" class="active btn btn-primary more">Wróć do modelu</button>';
+		$outputKondygnacje .= "</div>";
+
+		// 
+		$outputKondygnacje .= "<div class='legend'>";
+		$outputKondygnacje .= '<ul><li>dostępne</li><li>zarezerwowane</li><li>sprzedane</li></ul>';
+		$outputKondygnacje .= "</div>";
+
 		$outputKondygnacje .= "</div>";
  
 	
