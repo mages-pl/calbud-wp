@@ -2400,3 +2400,6 @@ a.offer-box-test:hover div{transition:all .3s ease-in; transition-delay:.4s;}
 	color: #ec6911;
 	font-family: Material Symbols Outlined;
 }
+select#numberFloor:focus-visible {
+    outline: none;
+}

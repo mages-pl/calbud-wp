@@ -1501,6 +1501,7 @@ function imgmap_frontend_city_list() {
 		$output .= '</button>';
 		$output .= '</li>';
 
+		//$output .= print_r($city_list);
 		foreach($city_list as $city) { 
 		 
 			//$output .= print_r(implode(";",$inwestycjaCity[$city]));
