@@ -72,7 +72,7 @@ jQuery(function ($) {
   */
 	$('.imgmap-frontend-image map area').click(function () {
 
-		var propertyTypes = ["Mieszkanie", "Miejsce postojowe", "Lokal usłguowy", "Apartament", "Komórka lokatorska"];
+		var propertyTypes = ["Mieszkanie", "Miejsce postojowe", "Lokal usługowy", "Apartament", "Komórka lokatorska"];
 
 		if ($(this).attr('data-object') != 'Mieszkanie') {
 			$('.block-group').css('display', 'none');
@@ -84,12 +84,25 @@ jQuery(function ($) {
 			$('html,body').animate({
 				scrollTop: $($(getSelector).parent().parent()).offset().top
 			}, 'slow');
+			var getDataTitle = $(this).attr('data-title');
+			//alert(getDataTitle);
+			if((getDataTitle != null) && (getDataTitle != '') && (getDataTitle != undefined) && isNaN(getDataTitle)){
+			 //document.querySelector("#numberFloor").value = getDataTitle;
+			 //alert(document.querySelector("#numberFloor").value);
+			 //$('#numberFloor').prop('selected', true);
+			 //alert(getDataTitle);
+			 $("#numberFloor").val(getDataTitle);
+			}
 		}
-		var getNumberOfLayer = ($(this).index())+2;
-		$(".kondygnacje--container button").removeClass('active');
-		$(".kondygnacje--container button:nth-child("+getNumberOfLayer+")").addClass('active');
+		// Pobierz data-title dla przelaczenia odpowiedniej kondygnacji
+
+		//var getNumberOfLayer = ($(this).index())+2;
+		//$(".kondygnacje--container button").removeClass('active');
+		//$(".kondygnacje--container button:nth-child("+getNumberOfLayer+")").addClass('active');
 		//alert(getNumberOfLayer);
-		$("#numberFloor").val(getNumberOfLayer-1);
+		//$("#numberFloor").val(getNumberOfLayer-1);
+		// alert("TEST"+$(this).attr('data-title'));
+		
 			// Jesli pierwszy segment jest niewidoczny pokaz button powrot	
 			// if($(".interactive_view .block-group:nth-child(1)").is(':visible')) {
 			// 	$(".blockBackToFirst").css("display","none");
@@ -564,12 +577,18 @@ function switchInteractiveLayer(obj) {
 		document.querySelectorAll(".interactive_view .block-group")[dx].style.display = "none";
 		document.querySelectorAll(".interactive_view .block-group")[dx].style.opacity = "0";
 	}
-
-	document.querySelectorAll(".interactive_view .block-group")[getNumberOfLayer].style.display = "block";
-	document.querySelectorAll(".interactive_view .block-group")[getNumberOfLayer].style.opacity = "1";
-	obj.classList.add("active");
 	// alert(obj.value);
+
+	//document.querySelectorAll(".interactive_view .block-group")[getNumberOfLayer].style.display = "block";
+	//document.querySelectorAll(".interactive_view .block-group")[getNumberOfLayer].style.opacity = "1";
+	document.querySelector(".interactive_view .block-group[data-title='"+obj.value+"']").style.display = "block";
+	document.querySelector(".interactive_view .block-group[data-title='"+obj.value+"']").style.opacity = "1";
+	obj.classList.add("active");
+
+	// alert(obj.value);
+	if(obj.value != null) {
 	document.querySelector("#numberFloor").value = obj.value;
+	}
 }
 
 

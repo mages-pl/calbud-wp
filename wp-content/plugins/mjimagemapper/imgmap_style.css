@@ -584,8 +584,9 @@ area[data-title]:hover::after {
   content: '';
   position: absolute;
   bottom: -10px;
+  display: none;
   left: 8px;
-  display: inline-block;
+  /* display: inline-block; */
   color: #fff;
   border: 8px solid transparent;	
   border-bottom: 8px solid #000;

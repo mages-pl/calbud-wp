@@ -723,7 +723,7 @@ function media_imgmap_media_upload_tab_inside() {
 
 	$args = array(
         'numberposts'      => -1,
-        'orderby'          => 'post_title',
+        'orderby'          => 'post_title',//post_title
         'order'            => 'ASC',
         // 'include'          => array(),
         // 'exclude'          => array(),
@@ -763,13 +763,16 @@ function media_imgmap_media_upload_tab_inside() {
 
 		$outputKondygnacje .= '<select id="numberFloor" onchange="switchInteractiveLayer(this)">';
 		foreach($getKondygnacje as $key => $kondygnacja) {
-			if($key == 0) { 
-				$outputKondygnacje .= '<option value="'.$key.'" class="active btn btn-primary more">'.$kondygnacja->post_title.'</option>';
+			#if($key == 0) { 
+				//$key
+			#	$outputKondygnacje .= '<option data-title="'.$kondygnacja->post_title.'" value="'.$kondygnacja->post_title.'" class="active btn btn-primary more">'.$kondygnacja->post_title.'</option>';
+
 				//$outputKondygnacje .= '<button data-layer="'.$key.'" onclick="switchInteractiveLayer(this)" type="button" class="active btn btn-primary more">'.$kondygnacja->post_title.'</button>';
-			} else { 
+			#} else { 
 				//$outputKondygnacje .= '<button data-layer="'.$key.'" onclick="switchInteractiveLayer(this)" type="button" class="btn btn-primary more">'.$kondygnacja->post_title.'</button>';
-				$outputKondygnacje .= '<option value="'.$key.'" class="btn btn-primary more">'.$kondygnacja->post_title.'</option>';
-			}
+				//$key
+				$outputKondygnacje .= '<option data-title="'.$kondygnacja->post_title.'" value="'.$kondygnacja->post_title.'" class="btn btn-primary more">'.$kondygnacja->post_title.'</option>';
+			#}
 			
 		 
 		}
@@ -778,7 +781,7 @@ function media_imgmap_media_upload_tab_inside() {
 
 		// Wroc do modelu
 		$outputKondygnacje .= "<div class='backToModel'>";
-		$outputKondygnacje .= '<button value="0" onclick="switchInteractiveLayer(this)" type="button" class="active btn btn-primary more">Wróć do modelu</button>';
+		$outputKondygnacje .= '<button value="'.$nazwaInwestycji.'" onclick="switchInteractiveLayer(this)" type="button" class="active btn btn-primary more">Wróć do modelu</button>';
 		$outputKondygnacje .= "</div>";
 
 		// 
@@ -791,7 +794,7 @@ function media_imgmap_media_upload_tab_inside() {
 	
 	// Koniec przelaczania sie miedzy kondygnacjami
 	foreach($getPosts as $key => $itemMap) { 
-		$output .= '<div class="block-group">';
+		$output .= '<div class="block-group" data-title="'.$itemMap->post_title.'">';
 		$output .= '<h2 class="title-section">'.$itemMap->post_title.'</h2>';
 		$output .= '<div class="block-inner">';
 		$output .= do_shortcode( '[imagemap id="'.$itemMap->ID.'"]' );
@@ -1345,8 +1348,13 @@ function imgmap_frontend_table($atts, $filters, $type) {
             $output .= '</td>';
         
             $output .= '<td>';
+			if((float)get_field("powierzchnia", $post->ID) > 0) {
             $output .= @number_format((float)get_field("powierzchnia", $post->ID), 2, '.', ' ');
-            $output .= 'm<sup>2</sup></td>';
+			$output .= 'm<sup>2</sup></td>';
+			} else { 
+				$output .= '';
+			}
+            
         
             $output .= '<td>';
             if (!empty(@number_format((float)get_field("cena", $post->ID), 2, '.', ' '))) {
@@ -1977,7 +1985,7 @@ function imgmap_create_area_element($id, $title) {
 	} else {
 		$title_area = $meta->title_attribute;//get_field("numerlokalu", $id).' - '.get_field("status", $id);
 	}
-	return '<area title="'.$title_area.'" data-type="'.esc_attr($meta->type).'" data-tooltip="'.esc_attr($meta->type == 'tooltip' ? $meta->tooltip_text : false ). '" data-fill-color="'.esc_attr(str_replace('#', '', $color['fillColor'])).'" data-fill-opacity="'.esc_attr($color['fillOpacity']).'" data-stroke-color="'.esc_attr(str_replace('#', '', $color['strokeColor'])).'" data-stroke-opacity="'.esc_attr($color['strokeOpacity']).'" data-stroke-width="'.esc_attr($color['strokeWidth']).'" data-mapkey="area-'.$id.'" data-object="'.get_field("typ", $id).'" shape="poly" coords="'.esc_attr(get_post_meta($id, 'coords', true)).'" href="'.esc_attr($link) .'" title="'.(isset($meta->title_attribute) ? $meta->title_attribute : $title).'" />';
+	return '<area title="'.$title_area.'" data-type="'.esc_attr($meta->type).'" data-tooltip="'.esc_attr($meta->type == 'tooltip' ? $meta->tooltip_text : false ). '" data-fill-color="'.esc_attr(str_replace('#', '', $color['fillColor'])).'" data-fill-opacity="'.esc_attr($color['fillOpacity']).'" data-stroke-color="'.esc_attr(str_replace('#', '', $color['strokeColor'])).'" data-stroke-opacity="'.esc_attr($color['strokeOpacity']).'" data-stroke-width="'.esc_attr($color['strokeWidth']).'" data-title="'.$title.'" data-mapkey="area-'.$id.'" data-object="'.get_field("typ", $id).'" shape="poly" coords="'.esc_attr(get_post_meta($id, 'coords', true)).'" href="'.esc_attr($link) .'" title="'.(isset($meta->title_attribute) ? $meta->title_attribute : $title).'" />';
 }
 
 /* Creates an list element to the list of imagemap's areas. */
