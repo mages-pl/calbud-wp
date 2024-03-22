@@ -881,6 +881,7 @@ function imgmap_frontend_search($atts) {
 	
     $output_search = '';  
     $options = '';
+	$typy_transakcji = '';
 
 	//1239
 	// Jesli jest wybeane pole z ACF trzymające informacje o inwestycjach.
@@ -889,6 +890,31 @@ function imgmap_frontend_search($atts) {
 	} else { 
 		$post_acf_id = null;
 	}
+
+	// Sprawdz czy sa zmapowane typy transakcji
+
+	if(!empty(get_option('id_acf_imagemapping_transaction'))) {
+		$post_acf_id_transaction = get_option('id_acf_imagemapping_transaction');
+	} else { 
+		$post_acf_id_transaction = null;
+	}
+
+	if($post_acf_id_transaction != null) { 
+		// Zwracaj transakcje do selecta
+		$typy_transakcji .= '<option value="">Wszystkie</option>';
+		foreach((@unserialize(@get_post($post_acf_id_transaction)->post_content)['choices']) as $key => $choice) {
+			if(
+				($key == trim(@$_POST['typ_transakcji'])) ||
+				($key == trim(@$atts['id']))
+			) {
+				$typy_transakcji .= '<option selected="selected" value="'.$key.'">'.$choice.'</option>';
+			} else {
+				$typy_transakcji .=	 '<option  value="'.$key.'">'.$choice. '</option>';
+			}
+		}
+	} else { 
+	}
+
 	if($post_acf_id != null) { 
 		// Zwracaj inwestyje do selecta
 		foreach((@unserialize(@get_post($post_acf_id)->post_content)['choices']) as $key => $choice) {
@@ -996,9 +1022,20 @@ function imgmap_frontend_search($atts) {
 	$output_search .= '<div class="col-md-12">';
     //$output_search .= '<h2 class="title-section mt-5">Wyszukaj</h2>'; 
     $output_search .= '<form class="image_search_form" method="POST">'; 
+
+
+	// Typ zwracanej wyszukiwarki [mieszkanie, lokal_uslugowy, miejsce_postojowe]
+
+	$output_search .= imgmap_frontend_property_types();
+	$output_search .= '<input type="hidden" name="typ_wyszukiwarki" id="typ_wyszukiwarki" value="mieszkanie"/>';
+
+	// Url wysyłanego formularza
 	$output_search .= '<input type="hidden" id="filter_site_url" value="'.get_site_url().'"/>';
+	
+	// Tryb wyświetlania -> zakładka /deweloper lub widok pojedyńczej inwestycji
 	$output_search .= "<input type='hidden' name='view' id='view' value='".@$atts['view']."'/>";
 
+	// Wybór aktualnego miasta
 	$output_search .= "<input type='hidden' name='lokalizacja' id='lokalizacja' value=''/>";
     $output_search .= '<div class="row panel">';
 
@@ -1007,29 +1044,41 @@ function imgmap_frontend_search($atts) {
 
 	#$output_search .= print_r($typ_nieruchomosci_list);
 
-	$output_search .= '<label>Typ nieruchomości</label><div class="custom-select-opt"><select name="typ_nieruchomosci" onchange="ajaxImagemapperSearch(this)">';
+	$output_search .= '<label>Typ nieruchomości</label><div class="custom-select-opt typ_nieruchomosci_select"><select name="typ_nieruchomosci" onchange="ajaxImagemapperSearch(this)">';
 	
-	$output_search .= '<option value="">Wybierz</option>';
+	$output_search .= '<option data-type="Wybierz" value="">Wybierz</option>';
 	$output_search .= '<option value="">Wszystkie</option>';
 	foreach ($typ_nieruchomosci_list as $key => $value) {
-		$output_search .= '<option value="'.$value['value'].'">'.$value['label'].'</option>';	
+		if(@$_POST['typ_wyszukiwarki'] == 'lokal_uzytkowy') {
+			// Tylko lokal uzytkowy
+			if($value['value'] == 'Lokal usługowy') {
+				$output_search .= '<option data-type="'.$value['label'].'" value="'.$value['value'].'">'.$value['label'].'</option>';	
+			}
+		} else if(@$_POST['typ_wyszukiwarki'] == 'miejsce_postojowe') {
+			// Tylko miejsce postojowe
+			if($value['value'] == 'Lokal usługowy') {
+				$output_search .= '<option data-type="'.$value['label'].'" value="'.$value['value'].'">'.$value['label'].'</option>';	
+			}
+		} else {
+			$output_search .= '<option data-type="'.$value['label'].'" value="'.$value['value'].'">'.$value['label'].'</option>';	
+		}
 	}
 	
 	//$output_search .= '<option value="Mieszkanie">Mieszkanie</option>';
 	$output_search .= '</select></div>';
 	$output_search .= '</div>';
 
-	// Inwestycja
+	// Inwestycja (jej nazwa - ukryte)
     $output_search .= '<div class="col-md-6 col-lg-3 d-none">';
 	// d-none
     $output_search .= '<label>Inwestycja</label><select multiple name="inwestycja[]" onchange="ajaxImagemapperSearch(this)">'; 
-		//$output_search .= "<option value=''>Wszystkie</option>";
-    	$output_search .= @$options;
+	//$output_search .= "<option value=''>Wszystkie</option>";
+	$output_search .= @$options;
     $output_search .= '</select>'; 
     $output_search .= '</div>';
     
 	// Powierzchnia
-	$output_search .= '<div class="col-md-6 col-lg-3">';
+	$output_search .= '<div class="col-md-6 col-lg-3" data-type="lokal_uslugowy,mieszkanie" >';
 
 	$output_search .= ' 
 	<div class="d-none d-lg-block" style="background:transparent;">
@@ -1048,7 +1097,7 @@ function imgmap_frontend_search($atts) {
     $output_search .= '</div>
 	</div>';
 	// Pietra
-    $output_search .= '<div class="col-md-6 col-lg-3">';
+    $output_search .= '<div class="col-md-6 col-lg-3" data-type="mieszkanie,lokal_uslugowy">';
     $output_search .= '<label>Piętro</label>';
 
 	$output_search .= "<div class='checkbox-container' onclick='toggleCheckboxList(this)'>";
@@ -1070,7 +1119,7 @@ function imgmap_frontend_search($atts) {
 	$output_search .= "</div>";
 
 	// Pokoje
-    $output_search .= '<div class="col-md-6 col-lg-3">';
+    $output_search .= '<div class="col-md-6 col-lg-3" data-type="mieszkanie">';
     $output_search .= '<label>Pokoje</label>';
 	
 	$output_search .= "<div class='checkbox-container' onclick='toggleCheckboxList(this)'>";
@@ -1085,10 +1134,20 @@ function imgmap_frontend_search($atts) {
 	$output_search .= "</div>";
 	$output_search .= "</div>";
 
+    $output_search .= '</div>';
 
+	// Typ sprzedazy (spzedaz / wynajem)
+	$output_search .= '<div class="col-md-6 col-lg-3" data-type="lokal_uslugowy,miejsce_postojowe" style="display:none;">';
+	$output_search .= '<label>Typ transakcji</label>
+	<div class="custom-select-opt"><select name="typ_transakcji" onchange="ajaxImagemapperSearch(this)">'; 
+	$output_search .= "<option value=''>Wszystkie</option>";
+	$output_search .= @$typy_transakcji;
+	$output_search .= '</select>'; 
+	$output_search .= '</div>';
+	//
+	
     $output_search .= '</div>';
-    $output_search .= '</div>';
-    $output_search .= '</select>'; 
+    $output_search .= '</select></div>'; 
     $output_search .= '<button type="button" onclick="ajaxImagemapperSearch(this)" name="imagemapper_search" style="border:0px;border-radius:0px;" class="more gold-button small-margin-top  m-auto d-table"><em>Wyszukaj</em></button>'; 
     $output_search .= '</form>'; 
 	$output_search .= '</div>'; 
@@ -1109,6 +1168,8 @@ function imgmap_frontend_table($atts, $filters, $type) {
 
     if($atts) {
 		$inwestycja = $atts['id'];
+		// Typ wyszukiwarki
+		$typWyszukiwarki = $atts['typ_wyszukiwarki'];
     }
     $addons_filters = array();
     if($filters) {
@@ -1166,8 +1227,8 @@ function imgmap_frontend_table($atts, $filters, $type) {
             }
             //$addons_filters = $filter;
         }
-//        print_r($addons_filters);
-//        exit();
+    //    print_r($addons_filters);
+    //    exit();
 	$output = '';
 	$mode='';
     if (!$filters) {
@@ -1180,6 +1241,24 @@ function imgmap_frontend_table($atts, $filters, $type) {
 		$inwestycja = (array)$inwestycja;
 	}
 
+	// if($key == 'typ_wyszkiwarki') {
+	// 	$add_option = array(
+	// 		'key' => $key,
+	// 		'value' => 'mieszkanie',
+	// 		'compare' => '=',
+	// 	  );
+	// 	  array_push($addons_filters, $add_option);
+	// }
+
+	if(empty($_POST['typ_wyszukiwarki'])) { 
+		$wyszukiwarkaFilter =  array(
+			'key' => 'typ_wyszukiwarki',
+			'value' => 'mieszkanie',
+			'compare' => '=',
+		);
+	} else {
+		$wyszukiwarkaFilter = null;
+	}
 	// Jesli inwestycja jest tablica i ma przynajmniej 1 wybrana opcje
 	if((is_array($inwestycja)) && (count($inwestycja) > 0)) { 
 		$args = array(
@@ -1209,7 +1288,8 @@ function imgmap_frontend_table($atts, $filters, $type) {
 				 'value' => 'Sprzedane',
 				 'compare' => '!=',
 			   ),
-			   $addons_filters
+				$wyszukiwarkaFilter,
+			   	$addons_filters
 				
 		));
 	} else { 
@@ -1235,6 +1315,7 @@ function imgmap_frontend_table($atts, $filters, $type) {
 				 'value' => 'Sprzedane',
 				 'compare' => '!=',
 			   ),
+			   $wyszukiwarkaFilter,
 			   $addons_filters
 				
 		));
@@ -1292,6 +1373,7 @@ function imgmap_frontend_table($atts, $filters, $type) {
 
 		}
 		#$output .= '<div class="table-responsive">';
+		//$output .= "typ wyszukiwarki: ".$typWyszukiwarki;
         $output .= '<table id="tabela_mieszkania" class="table-responsive dataTable no-footer table">';
         $output .= '<thead><tr>';
 		$output .= '<th>';
@@ -1303,18 +1385,35 @@ function imgmap_frontend_table($atts, $filters, $type) {
         $output .= '<th>';
         $output .= 'Status';
         $output .= '</th>';
+		// Dla lokale usługowe i mieszkania
+		if($typWyszukiwarki != 'miejsce_postojowe') {
         $output .= '<th>';
         $output .= 'Piętro';
         $output .= '</th>';
-        $output .= '<th>';
-        $output .= 'Pokoje';
-        $output .= '</th>';
-        $output .= '<th>';
-        $output .= 'Metraż (m<sup>2</sup>)';
-        $output .= '</th>';
+		}
+		// Tylko dla tabeli mieszkania
+		if(($typWyszukiwarki == 'mieszkanie') || ($typWyszukiwarki == null)) {
+			$output .= '<th>';
+			$output .= 'Pokoje';
+			$output .= '</th>';
+		}
+		// Dla lokale usługowe i mieszkania
+		if($typWyszukiwarki != 'miejsce_postojowe') {
+			$output .= '<th>';
+			$output .= 'Metraż (m<sup>2</sup>)';
+			$output .= '</th>';
+		}
         $output .= '<th>';
         $output .= 'Cena';
         $output .= '</th>';
+
+		// Dla lokale usługowe i miejsca postojowe
+		if(($typWyszukiwarki == 'lokal_uslugowy') || ($typWyszukiwarki == 'miejsce_postojowe')) {
+			$output .= '<th>';
+			$output .= 'Typ transakcji';
+			$output .= '</th>';
+		}
+
         $output .= '<th>';
         $output .= 'Rzut';
         $output .= '</th>';
@@ -1339,22 +1438,29 @@ function imgmap_frontend_table($atts, $filters, $type) {
             $output .= get_field("status", $post->ID);
             $output .= '</td>';
         
-            $output .= '<td>';
-            $output .= get_field("pietro", $post->ID);
-            $output .= '</td>';
-        
-            $output .= '<td>';
-            $output .= get_field("pokoje", $post->ID);
-            $output .= '</td>';
-        
-            $output .= '<td>';
-			if((float)get_field("powierzchnia", $post->ID) > 0) {
-            $output .= @number_format((float)get_field("powierzchnia", $post->ID), 2, '.', ' ');
-			$output .= 'm<sup>2</sup></td>';
-			} else { 
-				$output .= '';
+			// Dla lokale usługowe i mieszkania
+			if($typWyszukiwarki != 'miejsce_postojowe') {
+				$output .= '<td>';
+				$output .= get_field("pietro", $post->ID);
+				$output .= '</td>';
 			}
-            
+			// Tylko dla tabeli mieszkania
+			if(($typWyszukiwarki == 'mieszkanie') || ($typWyszukiwarki == null)) {
+				$output .= '<td>';
+				$output .= get_field("pokoje", $post->ID);
+				$output .= '</td>';
+			}
+
+			// Dla lokale usługowe i mieszkania
+			if($typWyszukiwarki != 'miejsce_postojowe') {
+				$output .= '<td>';
+				if((float)get_field("powierzchnia", $post->ID) > 0) {
+				$output .= @number_format((float)get_field("powierzchnia", $post->ID), 2, '.', ' ');
+				$output .= 'm<sup>2</sup></td>';
+				} else { 
+					$output .= '';
+				}
+			}
         
             $output .= '<td>';
             if (!empty(@number_format((float)get_field("cena", $post->ID), 2, '.', ' '))) {
@@ -1423,6 +1529,18 @@ $output .= '<!-- Modal -->
 				}
             }
             $output .= '</td>';
+
+			// Dla lokale usługowe i miejsca postojowe
+			if(($typWyszukiwarki == 'lokal_uslugowy') || ($typWyszukiwarki == 'miejsce_postojowe')) {
+				$output .= '<td>';
+				if(get_field("typ_transakcji", $post->ID) != '') {
+				$output .= get_field("typ_transakcji", $post->ID)['label'];
+				$output .= '</td>';
+				} else { 
+					$output .= '';
+				}
+			}
+
             $output .= '<td>';
             if (!empty(get_field("rzut", $post->ID)['url'])) {
                 $output .= '<a target="_blank" href="'.get_field("rzut", $post->ID)['url'].'" class="more more-reverse" style="min-width: 50%;padding: 0px 10px;font-size: 20px !important;"><em style="font-size: 14px;line-height: 44px;">Pobierz rzut</em></a>';
@@ -1444,7 +1562,7 @@ $output .= '<!-- Modal -->
 
 	#$output .= print_r($args);
 	if(count($getPosts) == 0)  {
-		$output .= '<div class="alert alert-info">Żadne z mieszkań nie spełnia podanych kryteriów wyszukiwania</div>';
+		$output .= '<div class="alert alert-info">Żaden z elementów nie spełnia podanych kryteriów wyszukiwania</div>';
 	}
 	// echo "FILTER:".$type;
 	if($type == 'search') {
@@ -1460,10 +1578,47 @@ add_shortcode( 'imagemap', 'imgmap_frontend_image_shortcode' );
 add_shortcode( 'tablemap', 'imgmap_frontend_table' );
 add_shortcode( 'searchmap', 'imgmap_frontend_search' );
 add_shortcode('button_city_list', 'imgmap_frontend_city_list');
+
+#add_shortcode('button_type_property', 'imgmap_frontend_property_types');
+
 // Dodaj wszystkie mapy związane z daną inwestycją za pomocą jednego shortcoda
 add_shortcode( 'allimagemap', 'all_imgmap_frontend_image_shortcode' );
 add_shortcode( 'search_mjwpimagemapper', 'all_search_frontend_shortcode' );
 
+function imgmap_frontend_property_types() { 
+
+//mieszkanie] [lokal usługowy] [miejsce postojowe
+	$typesProperty = [
+		"mieszkanie" => "Mieszkanie",
+		"lokal_uslugowy" => "Lokal usługowy",
+		"miejsce_postojowe" => "Miejsce postojowe",
+	];
+	$output = '';
+
+	$output .= '<div class="col-md-12 text-center">';
+	$output .= '<h3>Czego szukasz?</h3>';
+	$output .= '</div>';
+
+
+	$output .= '<div class="col-md-12 text-center">';
+	$output .= '<ul class="nav mb-5">';
+
+	foreach($typesProperty as $key => $property) { 
+		$output .= '<li class="propertyItem">';
+		if($key == 'mieszkanie') {
+		$output .= '<button  type="button" class="nav-link gold-button active" onclick="setTypeProperty(this)" value="'.$key.'" data-type="'.$key.'">'; 
+		} else { 
+			$output .= '<button type="button"  class="nav-link gold-button" onclick="setTypeProperty(this)" value="'.$key.'" data-type="'.$key.'">'; 
+		}
+		$output .= $property;
+		$output .= '</button>';
+		$output .= '</li>';
+	}
+	$output .= '</ul>';
+	$output .= '</div>';
+	
+	return $output;
+}
 function imgmap_frontend_city_list() {
 	$city_list = [];
 	 
@@ -1729,6 +1884,18 @@ function imgmap_imagemap_settings() {
 				</td>
 				
 			</tr>
+			<tr>
+			<th>
+				 
+				 <a>Podaj ID strony z wtyczki ACF z której bedą pobierane typy transakcji
+				 </a>
+				 </th>
+			 <td>
+				 <input type="number" name="id_acf_imagemapping_transaction"  
+				 value="<?php echo get_option('id_acf_imagemapping_transaction'); ?>" class="form-control"/>
+			 </td>
+			
+			</tr>
 
 			<tr>
 				<th>
@@ -1821,6 +1988,8 @@ function imgmap_save_settings() {
 	update_option('imgmap-pulse', $_POST['imgmap-settings-pulse']);
 
 	update_option('id_acf_imagemapping', $_POST['id_acf_imagemapping']);
+	update_option('id_acf_imagemapping_transaction', $_POST['id_acf_imagemapping_transaction']);
+	
 	update_option('phone_contact_imagemapping', $_POST['phone_contact_imagemapping']);
 
 	update_option('imgmap-alt-dialog', $_POST['imgmap-settings-alt-dialog'] == 'yes');

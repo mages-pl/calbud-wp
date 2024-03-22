@@ -1274,7 +1274,7 @@ a.mj-invest-title:hover{color:#EC6500;}
 .developer-bottom h6{font-size:24px;line-height:29px;font-weight:600;margin-top:40px;margin-right:30px;color:#c4c4c4;}
 .developer-bottom div.wppb-wrapper{width:100%;}
 .developer-bottom div.wppb-progress{height:108px;border-radius:0;background:transparent;margin-bottom:19px;}
-.developer-bottom div.wppb-progress > span{height:108px;border-radius:0;background:linear-gradient(to right,transparent 0%,#ec6500 100%);box-shadow:none;}
+.developer-bottom div.wppb-progress > span{height:95px;border-radius:0;background:linear-gradient(to right,transparent 0%,#ec6500 100%);box-shadow:none;}
 .developer-bottom .second div.wppb-progress > span{background:linear-gradient(to right,transparent 0%,#000 100%);}
 .developer-bottom .third div.wppb-progress > span{background:linear-gradient(to right,transparent 0%,#fff 100%);}
 .developer-bottom div.wppb-wrapper.after div.after{font-size:40px;line-height:49px;font-weight:300;float:none;position:absolute;left:50px;top:29px;z-index:9;color:#fff;}

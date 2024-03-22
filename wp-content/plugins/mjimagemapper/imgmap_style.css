@@ -967,3 +967,21 @@ border:2px solid #c4c4c4;
 .current-invest-search .tab-content p.info-text {
   margin-bottom: 2rem !important;
 }
+.row-full.only-dev h3{
+  color: #fff;
+}
+.single-post .row-full.only-dev h3 { 
+  color: #000;
+}
+.single-post .image_search_form
+button.nav-link.gold-button.active {
+  border-color: #3e3d3d !important;
+  color: #3e3d3d !important;
+}
+/* 
+select[name=typ_nieruchomosci] option[value="Lokal usługowy"] {
+  display: none;
+} */
+/* .select-items > div {
+  
+} */

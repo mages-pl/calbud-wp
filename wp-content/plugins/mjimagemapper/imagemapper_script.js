@@ -52,6 +52,7 @@ jQuery(function ($) {
 	});
 
 	$(document).ready(function(){
+		switchSelectOptions();
  /**
   * Po załadowaniu dokumentu pokaz przegladarke i glowna mape inwestycji
   */
@@ -561,6 +562,142 @@ function setLokalizacja(obj) {
 	document.getElementById('lokalizacja').value = obj.value;
 	ajaxImagemapperSearch(obj);
 
+}
+ 
+function switchSelectOptions() {
+
+	// Jesli jest wlaczony custom select
+	if(document.querySelectorAll('.typ_nieruchomosci_select .select-items').length > 0) {
+
+		//Dla kazdego elementu z custom select
+		for(var dz=0;dz<document.querySelectorAll(".typ_nieruchomosci_select .select-items > div").length;dz++) {
+
+			if(document.getElementById('typ_wyszukiwarki').value == 'lokal_uslugowy') {
+				
+				
+				if((document.querySelectorAll(".typ_nieruchomosci_select .select-items > div")[dz].innerHTML == 'Lokal usługowy') || (document.querySelectorAll(".typ_nieruchomosci_select .select-items > div")[dz].innerHTML == 'Wszystkie')) {
+					document.querySelectorAll(".typ_nieruchomosci_select .select-items > div")[dz].style.display = 'block';
+				} else {
+					document.querySelectorAll(".typ_nieruchomosci_select .select-items > div")[dz].style.display = 'none';
+				}
+				
+			}
+			else if(document.getElementById('typ_wyszukiwarki').value == 'miejsce_postojowe') {
+
+				if((document.querySelectorAll(".typ_nieruchomosci_select .select-items > div")[dz].innerHTML == 'Miejsce postojowe') || (document.querySelectorAll(".typ_nieruchomosci_select .select-items > div")[dz].innerHTML == 'Miejsce postojowe z zapleczem') || (document.querySelectorAll(".typ_nieruchomosci_select .select-items > div")[dz].innerHTML == 'Wszystkie')) {
+					document.querySelectorAll(".typ_nieruchomosci_select .select-items > div")[dz].style.display = 'block';
+				} else {
+					document.querySelectorAll(".typ_nieruchomosci_select .select-items > div")[dz].style.display = 'none';
+				}
+
+			} else { 
+
+
+				if((document.querySelectorAll(".typ_nieruchomosci_select .select-items > div")[dz].innerHTML == 'Miejsce postojowe') || (document.querySelectorAll(".typ_nieruchomosci_select .select-items > div")[dz].innerHTML == 'Miejsce postojowe z zapleczem') || (document.querySelectorAll(".typ_nieruchomosci_select .select-items > div")[dz].innerHTML == 'Lokal usługowy')) {
+					document.querySelectorAll(".typ_nieruchomosci_select .select-items > div")[dz].style.display = 'none';
+				} else {
+					document.querySelectorAll(".typ_nieruchomosci_select .select-items > div")[dz].style.display = 'block';
+				}
+
+			}
+			
+
+		}
+	
+	}
+	
+}
+function setTypeProperty(obj) {
+	
+	//Pobierz wartosc z kliknietego buttonu
+	let getTypeProperty = obj.getAttribute('data-type');
+
+	// Zresetuj pola w wyszukiwarce
+	$('input[name="pietro"]').val('');
+	$('input[data-input="pietro"]').prop('checked',false);
+	$('input[name="pokoje"]').val('');
+	$('input[data-input="pokoje"]').prop('checked',false);
+	
+	$('select[name="typ_transakcji"]').val('');
+	$('select[name="typ_nieruchomosci"]').val('');
+ 
+	$( "input[name=metraz]" ).val( '' );  
+	$( "input[name=metraz_do]" ).val( '' ); 
+	  
+	$("#slide .ui-slider-range.ui-corner-all.ui-widget-header").css({"left":"0%", "width":"100%"});
+
+	$("#slide span:nth-child(2)").css("left","0%");
+	
+	$( "#powierzchnia_content" ).val( "0 - " + parseInt($('#powierzchnia_content').attr('data-max')) +"m2" ); 
+	
+
+	//usun z pozosralych buttonow active
+	var lenghtItem = document.querySelectorAll(".propertyItem").length;
+	for(var i=0;i<lenghtItem;i++) {
+		document.querySelector(".propertyItem:nth-child("+(i+1)+") button").classList.remove("active");
+	}
+	//dodaj klase active 
+	obj.classList.add('active');
+	// Pobierz wszystkie elementy formularza z atrybutem [data-type]
+	var searchItem = document.querySelectorAll(".image_search_form div[data-type]");
+
+	document.getElementById('typ_wyszukiwarki').value = getTypeProperty;
+
+
+
+//Zaktualizuj listę typow nieruchomosci 
+var typyNieruchomosci = document.querySelectorAll('select[name="typ_nieruchomosci"] option');
+
+//Pobierz typ wyszukiwarki
+var typWyszukiwarki = document.getElementById("typ_wyszukiwarki").value;
+
+for(var dx=0;dx<typyNieruchomosci.length;dx++) {
+	var getTypeOption = typyNieruchomosci[dx].getAttribute('data-type');
+
+	//Aktualnie wybrana opcja
+	document.querySelector(".typ_nieruchomosci_select .select-selected").innerHTML = 'Wszystkie';//obj.innerHTML;
+
+	// Lokal uslugowy
+	if(typWyszukiwarki == 'lokal_uslugowy') {
+		if(getTypeOption == 'Lokal usługowy') {
+			typyNieruchomosci[dx].style.display = 'block';
+		} else {
+			typyNieruchomosci[dx].style.display = 'none';
+		}
+	} 
+	// Miejsce postojowe
+	else if(typWyszukiwarki == 'miejsce_postojowe') { 
+		if((getTypeOption == 'Miejsce postojowe') || (getTypeOption  == 'Miejsce postojowe z zapleczem')) {
+			typyNieruchomosci[dx].style.display = 'block';
+		} else {
+			typyNieruchomosci[dx].style.display = 'none';
+		}
+	} else {
+		if((getTypeOption == 'Miejsce postojowe') || (getTypeOption  == 'Miejsce postojowe z zapleczem') || (getTypeOption  == 'Lokal usługowy')) {
+			typyNieruchomosci[dx].style.display = 'none';
+		} else {
+			typyNieruchomosci[dx].style.display = 'block';
+		}
+	}
+}
+
+
+	//Dla kazdego data-type sprawdz wartosc
+	for(var dx=0;dx<searchItem.length;dx++) {
+		//Pobierz do tablicy wartosci odzielone ,
+		const TypePropertyArray = searchItem[dx].getAttribute('data-type').split(",");
+
+		// Jesli w tablicy znajduje sie wartosc z kliknietego buttona, zostaw ten element frmularza widoczny, w przeciwnym wypadku ukryj go 
+		if(TypePropertyArray.includes(getTypeProperty) == true) { 
+			searchItem[dx].style.display='block';
+		} else { 
+			searchItem[dx].style.display='none';
+		}
+
+	}
+   
+	switchSelectOptions();
+	ajaxImagemapperSearch(obj);
 }
 function switchInteractiveLayer(obj) { 
 	//alert("A");
