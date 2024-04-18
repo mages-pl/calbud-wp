@@ -2353,17 +2353,20 @@ a.offer-box-test:hover div{transition:all .3s ease-in; transition-delay:.4s;}
 }
 .legend ul {
 	text-align: left;
+	margin: 0;
+    padding: 0;
 }
 .legend ul li {
 	position: relative;
 	display: block;
-	padding-left: 20px;
+	padding-left: 40px;
 	font-weight: 600;
+	font-size: 14px;
 }
 .legend ul li::before  {
 	content: " ";
-	width: 10px;
-	height: 10px;
+	width: 20px;
+	height: 20px;
 	position: absolute;
 	top: 50%;
     transform: translateY(-50%);
@@ -2386,21 +2389,45 @@ a.offer-box-test:hover div{transition:all .3s ease-in; transition-delay:.4s;}
     color: #ec6911 !important;
     margin: 25px 0;
 }
+.backToModel {
+    text-align: left;
+    margin: 20px 0;
+    border-top: 1px solid #fafafa;
+    border-bottom: 1px solid #fafafa;
+    position: relative;
+	padding: 20px 0;
+}
 #numberFloor {
+	font-weight: 500;
 	border: 2px solid #ec6911;
     padding: 10px;
     /* width: 100%; */
-    margin: 0 20px;
+	margin: 0;
     display: block;
-	font-size: 12px;
-    width: calc(100% - 40px);
+    font-size: 12px;
+    width: calc(100% - 0px);
 }
-.backToModel button::after { 
-	content: "\e5cb";
-	position: absolute;
-	right: 50px;
-	color: #ec6911;
-	font-family: Material Symbols Outlined;
+button.active.btn.btn-primary.more {
+    text-transform: uppercase !important;
+	font-size: 14px;
+    padding: 0;
+
+}
+.backToModel button::after {
+    content: "\e5cb";
+    position: absolute;
+    right: 0px;
+    color: #ec6502;
+    border: 2px solid;
+    font-family: Material Symbols Outlined;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    font-weight: 400 !important;
+    padding-top: 2px;
+    font-size: 20px;
+    top: 50%;
+    transform: translateY(-50%);
 }
 select#numberFloor:focus-visible {
     outline: none;
@@ -2415,5 +2442,8 @@ area[data-title]:hover::before {
 }
 #numberFloor option:nth-child(1) {
     display: none;
+}
+.kondygnacje.interactive_view {
+	padding-bottom: 2.5rem;
 }
 

@@ -761,7 +761,10 @@ function media_imgmap_media_upload_tab_inside() {
 		$outputKondygnacje .= '<h4>Wybierz piętro</h4>';
 		$outputKondygnacje .= '<div class="kondygnacje--container">';
 
+		$outputKondygnacje .= '<div>';
+
 		$outputKondygnacje .= '<select id="numberFloor" onchange="switchInteractiveLayer(this)">';
+
 		foreach($getKondygnacje as $key => $kondygnacja) {
 			#if($key == 0) { 
 				//$key
@@ -777,6 +780,7 @@ function media_imgmap_media_upload_tab_inside() {
 		 
 		}
 		$outputKondygnacje .= '</select>';
+		$outputKondygnacje .= '</div>';
 		$outputKondygnacje .= "</div>";
 
 		// Wroc do modelu
@@ -1148,7 +1152,7 @@ function imgmap_frontend_search($atts) {
 	
     $output_search .= '</div>';
     $output_search .= '</select></div>'; 
-    $output_search .= '<button type="button" onclick="ajaxImagemapperSearch(this)" name="imagemapper_search" style="border:0px;border-radius:0px;" class="more gold-button small-margin-top  m-auto d-table"><em>Wyszukaj</em></button>'; 
+    $output_search .= '<button type="button" id="search_button" onclick="ajaxImagemapperSearch(this)" name="imagemapper_search" style="border:0px;border-radius:0px;" class="more gold-button small-margin-top  m-auto d-table imagemapper_search"><em>Wyszukaj</em></button>'; 
     $output_search .= '</form>'; 
 	$output_search .= '</div>'; 
 	$output_search .= '</div>'; 
