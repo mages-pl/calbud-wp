@@ -127,6 +127,7 @@
 
 
 <script>
+	 jQuery(function($) {
 $('#submit').on('click', function() {
     if ($('#container').css('opacity') == 0) {
         $('#container').css('opacity', 1);
@@ -135,6 +136,7 @@ $('#submit').on('click', function() {
         $('#container').css('opacity', 0);
     }
 });
+	 });
 
 </script>
 

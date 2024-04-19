@@ -374,30 +374,8 @@ jQuery(function ($) {
 		});
 	}
 
-
 	$(document).ready(function () {
-		$('#tabela_mieszkania').DataTable({
-			"dom": '<"top"l>rt<"bottom"p><"clear">',
-			"responsive": true,
-			"paging": false,
-			"language": {
-				"lengthMenu": "Wyświetl _MENU_ wyników na stronie",
-				"zeroRecords": "Nic nie znaleziono",
-				"info": "Pokazuję _PAGE_ z _PAGES_ stron",
-				"infoEmpty": "Brak wyników",
-				"infoFiltered": "(przefiltrowano z _MAX_ wyników)",
-    			"loadingRecords": "Wczytywanie...",
-    			"processing":     "",
-    			"search":         "Szukaj:",
-				"paginate": {
-					"first":      "Pierwszy",
-					"last":       "Ostatni",
-					"next":       "Dalej",
-					"previous":   "Wstecz"
-				},
-			}
-		});
-		;
+		buildDatatableForProprety();
 	});
 
 	
@@ -416,6 +394,7 @@ function ajaxImagemapperSearch(obj) {
 	console.log($(".image_search_form").serialize());
 	jQuery(function ($) {
 	var currentObj = $(obj);
+
 	$.ajax({
 		url: $("#filter_site_url").val()+"/wp-content/plugins/mjimagemapper/ajaxSearch.php",
 		method: "POST",
@@ -434,6 +413,9 @@ function ajaxImagemapperSearch(obj) {
 					scrollTop: $("#search_button").offset().top
 				}, 1000);
 			}
+
+			buildDatatableForProprety();
+			 
 		}
 	});
 	});
@@ -441,6 +423,34 @@ function ajaxImagemapperSearch(obj) {
 });
 
 }
+
+function buildDatatableForProprety() { 
+	jQuery(function ($) {
+
+		$('#tabela_mieszkania').DataTable({
+			"dom": '<"top"l>rt<"bottom"p><"clear">',
+			"responsive": true,
+			"paging": false,
+			"language": {
+				"lengthMenu": "Wyświetl _MENU_ wyników na stronie",
+				"zeroRecords": "Nic nie znaleziono",
+				"info": "Pokazuję _PAGE_ z _PAGES_ stron",
+				"infoEmpty": "Brak wyników",
+				"infoFiltered": "(przefiltrowano z _MAX_ wyników)",
+				"loadingRecords": "Wczytywanie...",
+				"processing":     "",
+				"search":         "Szukaj:",
+				"paginate": {
+					"first":      "Pierwszy",
+					"last":       "Ostatni",
+					"next":       "Dalej",
+					"previous":   "Wstecz"
+				},
+			}
+		});
+	});
+}
+
 function ajaxSendQuestion(obj) { 
 	console.log("send question...");
 	console.log(obj);
