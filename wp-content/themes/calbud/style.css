@@ -848,12 +848,14 @@ a.orange:hover:after{width:100%;height:100%;border-bottom-color:#EC6500;border-l
 .progress-invest span.counter{font-size:40px;line-height:49px;font-weight:300;float:none;position:absolute;left:50px;top:14px;z-index:9;}
 */
 
-.developer-bottom div.after{font-size:40px;line-height:49px;font-weight:300;float:none;position:absolute;left:0;top:28px;z-index:9;color:#fff;}
+.developer-bottom div.after{font-size:40px;line-height:49px;font-weight:300;float:none;position:absolute;left:0;/*top:28px;*/top:0;z-index:9;color:#fff;}
 .developer-bottom .meter{height:108px;}
 .developer-bottom .meter > span{background-color:transparent;}
 .developer-bottom .orange > span{background-image:linear-gradient(90deg, transparent 0%, rgba(236,101,0,1) 100%);height:108px;}
 .developer-bottom .orange.white > span{background-image:linear-gradient(90deg, transparent 0%, white 100%);}
 .developer-bottom .orange.black > span{background-image:linear-gradient(90deg, transparent 0%, black 100%);}
+
+.developer-bottom .first,.developer-bottom .second{margin-bottom:110px;}
 
 .meter{box-sizing:content-box;height:74px;position:relative;padding-left:60px;margin-bottom:15px;}
 .meter > span{display:block;height:100%;background-color:rgb(43, 194, 83);background-image:linear-gradient(center bottom,rgb(43, 194, 83) 37%,rgb(84, 240, 84) 69%);position:relative;overflow:hidden;}
@@ -1086,19 +1088,32 @@ a.trans-frame:hover{border:3px solid #fff;color:#fff;}
 
 
 
-
+/*
 button.gold-button,button.gold-button:active,button.gold-button:focus{font-size:14px;line-height:18px;padding:28px 48px;letter-spacing:2.8px;background:#EC6500;color:#fff;text-transform:uppercase;text-align:center;border-radius:0;border:0;font-weight:500;display:inline-block;}
 button.gold-button:hover{background:#fff;color:#EC6500;}
 button.gold-button em{font-style:normal;}
+*/
+
+button.gold-button,button.gold-button:active,button.gold-button:focus{font-size:14px;line-height:18px;padding:28px 48px;letter-spacing:2.8px;background:#fff;color:#EC6500;text-transform:uppercase;text-align:center;border-radius:0;border:3px solid #EC6500!important;font-weight:600;display:inline-block;}
+button.gold-button:hover{border:3px solid #fff!important;color:#fff!important;background:transparent!important;}
+button.gold-button em{font-style:normal;}
+
+
+.current-invest-search > button.gold-button,.current-invest-search > button.gold-button:active,.current-invest-search > button.gold-button:focus{font-size:14px;line-height:18px;padding:28px 48px;letter-spacing:2.8px;background:#fff;color:#EC6500;text-transform:uppercase;text-align:center;border-radius:0;border:3px solid #EC6500!important;font-weight:600;display:inline-block;}
+.current-invest-search > button.gold-button:hover{border:3px solid #000!important;color:#000!important;background:transparent!important;}
+.current-invest-search > button.gold-button em{font-style:normal;}
+
 #firstAjaxSearchResult h2.title-section{display:none;}
 .dataTables_wrapper{margin-bottom:90px;}
 #tabela_mieszkania thead{font-family:'Montserrat',sans-serif;}
-table.dataTable thead th, table.dataTable thead td{font-size:14px;line-height:20px;letter-spacing:2.8px;color:#313131;font-weight:600;padding-bottom:28px;padding-top:0;}
+table.dataTable thead th, table.dataTable thead td{text-align:left;font-size:14px;line-height:20px;letter-spacing:2.8px;color:#313131;font-weight:600;padding-bottom:28px;padding-top:0;}
 /*table.dataTable thead .sorting,table.dataTable thead .sorting_asc{background-color:#fff;}*/
 table.dataTable td{font-size:1.042vw!important;line-height:36px;font-family:'Montserrat',sans-serif;white-space:nowrap;}
+/*
 table.dataTable tbody tr td:nth-child(4){padding-left:46px;}
 table.dataTable tbody tr td:nth-child(5){padding-left:46px;}
 table.dataTable tbody tr td:nth-child(6){padding-left:35px;}
+*/
 table.dataTable td.sorting_1{font-weight:600;}
 table.dataTable td button{text-transform:lowercase;color:#EC6500!important;border:0;box-shadow:none!important;}
 .modal-body .accept button.orange{/*text-transform:uppercase;color:#fff!important;border:0;*/box-shadow:none!important;margin-top:30px;margin-bottom:15px;
@@ -1107,7 +1122,7 @@ font-size:14px;line-height:18px;padding:28px 48px;letter-spacing:2.8px;backgroun
 .modal-body .wpcf7-submit{color:#EC6500;box-shadow:none!important;}
 .modal-body .wpcf7-submit:focus,.modal-body .wpcf7-submit:active{background-color:transparent!important;border-color:#fff!important;color:#fff!important;}
 
-table.dataTable tbody th, table.dataTable tbody td{padding:18px 10px;}
+table.dataTable tbody th, table.dataTable tbody td{text-align:left;padding:18px 10px;}
 table.dataTable tbody tr:nth-child(2n+1) td{background:#fff;}
 table.dataTable thead .sorting, table.dataTable thead .sorting_asc, table.dataTable thead .sorting_desc, table.dataTable thead .sorting_asc_disabled, table.dataTable thead .sorting_desc_disabled {
 	background-position: top left;
@@ -1128,13 +1143,13 @@ a.mj-invest-title{margin-top:19px;color:#313131;display:block;font-weight:600;fo
 a.mj-invest-title:hover{color:#EC6500;}
 
 
-
+/*
 .current-invest-search button.gold-button{font-size:14px;line-height:18px;padding:28px 48px;letter-spacing:2.8px;background:#000;color:#EC6500;text-transform:uppercase;text-align:center;border-radius:0;border:3px solid #EC6500!important;font-weight:600;display:inline-block;}
 .current-invest-search button.gold-button:hover,.current-invest-search button.gold-button:active,.current-invest-search button.gold-button:focus{border:3px solid #fff!important;color:#fff;}
 
 .current-invest-search .mjmapperarea button.gold-button,.current-invest-search .mjmapperarea button.gold-button:active,.current-invest-search .mjmapperarea button.gold-button:focus{font-size:14px;line-height:18px;padding:28px 48px;letter-spacing:2.8px;background:#fff;color:#EC6500;text-transform:uppercase;text-align:center;border-radius:0;border:3px solid #EC6500!important;font-weight:600;display:inline-block;}
 .current-invest-search .mjmapperarea button.gold-button:hover{border:3px solid #EC6500!important;color:#fff;}
-
+*/
 .invest-search button.gold-button,.invest-search button.gold-button:active,.invest-search button.gold-button:focus{font-size:14px;line-height:18px;padding:28px 48px;letter-spacing:2.8px;background:#fff;color:#EC6500;text-transform:uppercase;text-align:center;border-radius:0;border:3px solid #EC6500!important;font-weight:600;display:inline-block;}
 .invest-search button.gold-button:hover{border:3px solid #000!important;color:#000;}
 
@@ -1259,7 +1274,7 @@ a.mj-invest-title:hover{color:#EC6500;}
 .developer-search .tab-content p.info-text{font-size:28px;line-height:34px;margin:65px auto 0;max-width:1100px;}
 .developer-search .tab-content p.info-text02{font-size:42px;line-height:52px;margin:65px auto 0;max-width:1100px;font-weight:500;}
 
-.nav .nav-link.active, .nav .nav-link:focus,.nav .nav-link.active:active{border-width:2px!important;background:transparent;border-color:#fff!important;color:#fff;border-style:solid!important;}
+.nav .nav-link.active, .nav .nav-link:focus,.nav .nav-link.active:active{border-width:3px!important;background:transparent;border-color:#fff!important;color:#fff;border-style:solid!important;}
 .nav .nav-link:hover{background:transparent;color:#fff;}
 
 .developer-ask{text-align:center;padding-top:96px;padding-bottom:108px;background:#fff;}
@@ -1698,6 +1713,7 @@ footer.entry-meta,.entry-footer,.post-navigation{display:none;}
 	.developer-bottom h6{font-size:19px;margin-top:10px;margin-right:0;margin-bottom:10px;}
 	.developer-bottom div.wppb-wrapper.after div.after{left:30px;top:11px;}
 	.developer-bottom .last a.check{font-size:11px;}
+	.developer-bottom .first,.developer-bottom .second{margin-bottom:80px;}
 	
 	.modal-body p.big{font-size:24px;line-height:38px;margin:0 auto 40px;}
 	.modal-body h4{font-size:28px;}
