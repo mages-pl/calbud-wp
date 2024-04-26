@@ -2370,7 +2370,7 @@ a.offer-box-test:hover div{transition:all .3s ease-in; transition-delay:.4s;}
 .legend ul {
 	text-align: left;
 	margin: 0;
-    padding: 0;
+    padding: 5px;
 }
 .legend ul li {
 	position: relative;
@@ -2411,7 +2411,7 @@ a.offer-box-test:hover div{transition:all .3s ease-in; transition-delay:.4s;}
     border-top: 1px solid #fafafa;
     border-bottom: 1px solid #fafafa;
     position: relative;
-	padding: 20px 0;
+	padding: 20px 3px;
 }
 #numberFloor {
 	font-weight: 500;
@@ -2432,7 +2432,7 @@ button.active.btn.btn-primary.more {
 .backToModel button::after {
     content: "\e5cb";
     position: absolute;
-    right: 0px;
+    right: 3px;
     color: #ec6502;
     border: 2px solid;
     font-family: Material Symbols Outlined;

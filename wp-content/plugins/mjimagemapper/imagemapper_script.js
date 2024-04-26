@@ -91,8 +91,20 @@ jQuery(function ($) {
 			 //document.querySelector("#numberFloor").value = getDataTitle;
 			 //alert(document.querySelector("#numberFloor").value);
 			 //$('#numberFloor').prop('selected', true);
-			 //alert(getDataTitle);
-			 $("#numberFloor").val(getDataTitle);
+			//  alert(getDataTitle);
+			
+				// document.querySelector("#numberFloor").value = getDataTitle;
+			 
+
+				// selectToLevels
+				 document.querySelector("#numberFloor").value = getDataTitle;
+				//  $("#test2").val(getDataTitle);
+				 $(".styledSelect").html(getDataTitle);
+				// alert(document.querySelector("#numberFloor").value);
+				// document.querySelector("#numberFloor").value = $(areas[area].key);
+		// switchInteractiveLayer(document.querySelector("#numberFloor"));
+// alert("OOOO"+getDataTitle);
+	
 			}
 		}
 		// Pobierz data-title dla przelaczenia odpowiedniej kondygnacji

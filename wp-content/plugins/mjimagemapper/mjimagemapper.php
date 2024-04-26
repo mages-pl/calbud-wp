@@ -763,6 +763,7 @@ function media_imgmap_media_upload_tab_inside() {
 
 		$outputKondygnacje .= '<div>';
 
+
 		$outputKondygnacje .= '<select id="numberFloor" onchange="switchInteractiveLayer(this)">';
 
 		foreach($getKondygnacje as $key => $kondygnacja) {

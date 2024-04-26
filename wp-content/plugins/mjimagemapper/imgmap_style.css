@@ -1030,7 +1030,7 @@ Custom select
   border:5px solid transparent;
   border-color:#ec6502 transparent transparent transparent;
   position:absolute;
-  top:9px;
+  top:50%;
   right:6px;
 }
 .styledSelect:active, .styledSelect.active {
