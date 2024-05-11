@@ -49,7 +49,7 @@
 			.ui-slider-range.ui-corner-all.ui-widget-header{background:#707070!important;}
 			.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default{border:0!important;}
 			
-			.only-dev-real{padding-top:118px;padding-bottom:50px;background:#fff;margin-bottom:110px;}
+			.only-dev-real{padding-top:60px;padding-bottom:15px;background:#fff;margin-bottom:50px;}
 		</style>
 	<?php } ?>
 	

@@ -1015,6 +1015,7 @@ a.orange:hover:after{width:100%;height:100%;border-bottom-color:#EC6500;border-l
 
 .current-invest-search td.even{background:#fafafa;}
 .current-invest-search td{border:0;}
+.current-invest-search button.gold-button#search_button, button.gold-button#search_button:active, button.gold-button#search_button:focus{background:transparent;}
 
 .kondygnacje.interactive_view h4{margin-top:50px;margin-bottom:30px;font-size:24px;}
 
@@ -1087,21 +1088,59 @@ a.trans-frame{font-size:14px;line-height:18px;padding:28px 48px;letter-spacing:2
 a.trans-frame:hover{border:3px solid #fff;color:#fff;}
 
 
-
 /*
 button.gold-button,button.gold-button:active,button.gold-button:focus{font-size:14px;line-height:18px;padding:28px 48px;letter-spacing:2.8px;background:#EC6500;color:#fff;text-transform:uppercase;text-align:center;border-radius:0;border:0;font-weight:500;display:inline-block;}
 button.gold-button:hover{background:#fff;color:#EC6500;}
 button.gold-button em{font-style:normal;}
 */
 
-button.gold-button,button.gold-button:active,button.gold-button:focus{font-size:14px;line-height:18px;padding:28px 48px;letter-spacing:2.8px;background:#fff;color:#EC6500;text-transform:uppercase;text-align:center;border-radius:0;border:3px solid #EC6500!important;font-weight:600;display:inline-block;}
+button.gold-button,button.gold-button:active,button.gold-button:focus{font-size:16px;/*font-size:14px;*/line-height:18px;padding:26px 41px;
+/*letter-spacing:2.8px;*/letter-spacing:3.2px;background:#fff;color:#EC6500;text-transform:uppercase;text-align:center;
+border-radius:0;border:3px solid #EC6500!important;font-weight:600;display:inline-block;}
 button.gold-button:hover{border:3px solid #fff!important;color:#fff!important;background:transparent!important;}
 button.gold-button em{font-style:normal;}
 
 
-.current-invest-search > button.gold-button,.current-invest-search > button.gold-button:active,.current-invest-search > button.gold-button:focus{font-size:14px;line-height:18px;padding:28px 48px;letter-spacing:2.8px;background:#fff;color:#EC6500;text-transform:uppercase;text-align:center;border-radius:0;border:3px solid #EC6500!important;font-weight:600;display:inline-block;}
-.current-invest-search > button.gold-button:hover{border:3px solid #000!important;color:#000!important;background:transparent!important;}
-.current-invest-search > button.gold-button em{font-style:normal;}
+.nav .nav-link {
+ border:3px solid #EC6500;
+    background: transparent;
+    color: #EC6500;
+    font-size: 16px;
+    line-height: 19px;
+    text-transform: uppercase;
+    letter-spacing: 3.2px;
+    font-weight: 500;
+    border-radius: 0;
+    padding: 26px 41px;
+    margin: 0 5px;
+    cursor: pointer;
+ }
+ .nav .nav-link.active
+ {
+  background: #fff;
+  border-color: #fff;
+ }
+ button.nav-link:hover {
+  background: #fff;
+  border-color: #fff;
+}
+
+.nav .nav-link.active, .nav .nav-link:focus,.nav .nav-link.active:active{font-weight:600;border-width:3px!important;background:transparent;
+border-color:#fff!important;color:#fff;border-style:solid!important;      letter-spacing:3.2px;font-weight:500;font-size:16px;}
+.nav .nav-link:hover{background:transparent;color:#fff;}
+
+
+/*
+.current-invest-search  button.gold-button,.current-invest-search button.gold-button:active,.current-invest-search button.gold-button:focus{font-size:14px;line-height:18px;padding:26px 41px;letter-spacing:3.2px;background:#fff;color:#EC6500;text-transform:uppercase;text-align:center;border-radius:0;border:3px solid #EC6500!important;font-weight:600;display:inline-block;}
+*/
+.container-inwestycje .current-invest-search  button.gold-button:focus,.container-inwestycje .current-invest-search  button.gold-button:active{letter-spacing:3.2px!important;font-weight:600;font-size:16px;}
+.container-inwestycje .current-invest-search  button.gold-button:hover{border:3px solid #000!important;color:#000!important;background:transparent;}
+.current-invest-search  button.gold-button em{font-style:normal;letter-spacing:3.2px!important;font-weight:600;font-size:16px;}
+
+.invest-search {}
+.single-post .image_search_form button.nav-link.gold-button.active,
+.single-post .image_search_form button.nav-link.gold-button:focus,
+.single-post .image_search_form button.nav-link.gold-button:active{letter-spacing:3.2px;font-weight:600;font-size:14px;padding:28px 48px!important;}
 
 #firstAjaxSearchResult h2.title-section{display:none;}
 .dataTables_wrapper{margin-bottom:90px;}
@@ -1150,7 +1189,7 @@ a.mj-invest-title:hover{color:#EC6500;}
 .current-invest-search .mjmapperarea button.gold-button,.current-invest-search .mjmapperarea button.gold-button:active,.current-invest-search .mjmapperarea button.gold-button:focus{font-size:14px;line-height:18px;padding:28px 48px;letter-spacing:2.8px;background:#fff;color:#EC6500;text-transform:uppercase;text-align:center;border-radius:0;border:3px solid #EC6500!important;font-weight:600;display:inline-block;}
 .current-invest-search .mjmapperarea button.gold-button:hover{border:3px solid #EC6500!important;color:#fff;}
 */
-.invest-search button.gold-button,.invest-search button.gold-button:active,.invest-search button.gold-button:focus{font-size:14px;line-height:18px;padding:28px 48px;letter-spacing:2.8px;background:#fff;color:#EC6500;text-transform:uppercase;text-align:center;border-radius:0;border:3px solid #EC6500!important;font-weight:600;display:inline-block;}
+.invest-search button.gold-button,.invest-search button.gold-button:active,.invest-search button.gold-button:focus{font-size:14px;line-height:18px;padding:28px 48px;letter-spacing:3.2px!important;background:#fff;color:#EC6500;text-transform:uppercase;text-align:center;border-radius:0;border:3px solid #EC6500!important;font-weight:600;display:inline-block;}
 .invest-search button.gold-button:hover{border:3px solid #000!important;color:#000;}
 
 .current-invest-search .modal-content{background:#090909;color:#C4C4C4;}
@@ -1201,7 +1240,7 @@ a.mj-invest-title:hover{color:#EC6500;}
 
 
 /*the container must be positioned relative:*/
-.current-invest-search .custom-select-opt{text-align:left;position:relative;color:#707070;}
+.current-invest-search .custom-select-opt{text-align:left;position:relative;color:#c3c4c3;}
 .current-invest-search .custom-select-opt select{display:none;/*hide original SELECT element:*/}
 .current-invest-search .select-selected{background-color:#090909;}
 
@@ -1274,8 +1313,7 @@ a.mj-invest-title:hover{color:#EC6500;}
 .developer-search .tab-content p.info-text{font-size:28px;line-height:34px;margin:65px auto 0;max-width:1100px;}
 .developer-search .tab-content p.info-text02{font-size:42px;line-height:52px;margin:65px auto 0;max-width:1100px;font-weight:500;}
 
-.nav .nav-link.active, .nav .nav-link:focus,.nav .nav-link.active:active{border-width:3px!important;background:transparent;border-color:#fff!important;color:#fff;border-style:solid!important;}
-.nav .nav-link:hover{background:transparent;color:#fff;}
+
 
 .developer-ask{text-align:center;padding-top:96px;padding-bottom:108px;background:#fff;}
 .developer-ask h3{font-size:42px;line-height:52px;font-weight:500;margin:0 auto 40px;max-width:800px;}
@@ -1723,7 +1761,12 @@ footer.entry-meta,.entry-footer,.post-navigation{display:none;}
 	.site-footer{padding-top:60px;}
 	.site-footer .links{margin-top:45px;}
 	
-	button.gold-button, button.gold-button:active, button.gold-button:focus{display:block;width:100%;margin:30px 0 15px!important;}
+	button.gold-button, button.gold-button:active, button.gold-button:focus{display:block!important;width:100%!important;margin:30px 0 15px!important;}
+	.invest-search button.gold-button, .invest-search button.gold-button:active, .invest-search button.gold-button:focus{display:block !important;width:100% !important;}
+	.nav .nav-link{margin-bottom:15px;display:block;width:100%;}
+	.current-invest-search ul.nav{margin-top:15px;}
+	.current-invest-search ul.nav li{display:block;}
+	.developer-search ul.nav li{display:block;width:100%;text-align:center;}
 }
 
 @media (min-width: 769px){
@@ -1899,7 +1942,7 @@ footer.entry-meta,.entry-footer,.post-navigation{display:none;}
 	
 	.site-footer .links{margin-top:40px;}
 
-	table.dataTable thead th{letter-spacing:0;font-size:11px;}
+	table.dataTable thead th{letter-spacing:0;font-size:7px;}
 }
 @media (min-width: 992px) and (max-width:1200px) {
 	#mega-menu-wrap-primary .mega-menu-toggle + #mega-menu-primary,
@@ -2015,6 +2058,8 @@ footer.entry-meta,.entry-footer,.post-navigation{display:none;}
 	
 	table.dataTable thead th{letter-spacing:0;}
 	.current-invest-search label,.invest-search label{font-size:12px;}
+	
+	table.dataTable thead th, table.dataTable thead td{font-size:13px;}
 	
 }
 @media (min-width: 1201px) and (max-width:1769px) {

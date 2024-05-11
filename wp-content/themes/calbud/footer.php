@@ -88,7 +88,8 @@
 					
 					<p>
 					P.B. CALBUD Sp. z o.o.<br />
-					ul. Kapitańska 2, 71-602 Szczecin<br />
+					ul. Kapitańska 2<br />
+					71-602 Szczecin<br />
 					tel: <a href="tel:+48914806101">91 48 06 101</a><br />
 					fax: 91 44 80 523<br />
 					e-mail: <a href="mailto:firma@calbud.com.pl">firma@calbud.com.pl</a>
