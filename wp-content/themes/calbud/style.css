@@ -1189,7 +1189,7 @@ a.mj-invest-title:hover{color:#EC6500;}
 .current-invest-search .mjmapperarea button.gold-button,.current-invest-search .mjmapperarea button.gold-button:active,.current-invest-search .mjmapperarea button.gold-button:focus{font-size:14px;line-height:18px;padding:28px 48px;letter-spacing:2.8px;background:#fff;color:#EC6500;text-transform:uppercase;text-align:center;border-radius:0;border:3px solid #EC6500!important;font-weight:600;display:inline-block;}
 .current-invest-search .mjmapperarea button.gold-button:hover{border:3px solid #EC6500!important;color:#fff;}
 */
-.invest-search button.gold-button,.invest-search button.gold-button:active,.invest-search button.gold-button:focus{font-size:14px;line-height:18px;padding:28px 48px;letter-spacing:3.2px!important;background:#fff;color:#EC6500;text-transform:uppercase;text-align:center;border-radius:0;border:3px solid #EC6500!important;font-weight:600;display:inline-block;}
+.invest-search button.gold-button,.invest-search button.gold-button:active,.invest-search button.gold-button:focus{font-size:14px;line-height:18px;padding:28px 48px;letter-spacing:3.2px!important;background:#fff;color:#EC6500;text-transform:uppercase;text-align:center;border-radius:0;border:3px solid #EC6500;font-weight:600;display:inline-block;}
 .invest-search button.gold-button:hover{border:3px solid #000!important;color:#000;}
 
 .current-invest-search .modal-content{background:#090909;color:#C4C4C4;}

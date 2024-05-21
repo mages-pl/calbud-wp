@@ -747,8 +747,8 @@ function media_imgmap_media_upload_tab_inside() {
 	$output .= '<div class="mjmapperarea mt-5">';
 	//$output .= '<p class="blockBackToFirst"><span class="backToFirst">Powrót</span></p>';
 
-	$outputKondygnacje .=  '<button class="more gold-button small-margin-top  m-auto d-inline-block" onclick=\'switchDisplayMode("interactive_view")\'>Widok interaktywny</button>';
-	$outputKondygnacje .=  '<button class="more gold-button small-margin-top  ml-5 d-inline-block" onclick=\'switchDisplayMode("table_view")\'>Tabela mieszkań</button>';
+	$outputKondygnacje .=  '<button class="more gold-button small-margin-top  m-auto d-inline-block active" onclick=\'switchDisplayMode("interactive_view", this)\'>Widok interaktywny</button>';
+	$outputKondygnacje .=  '<button class="more gold-button small-margin-top  ml-5 d-inline-block" onclick=\'switchDisplayMode("table_view", this)\'>Tabela mieszkań</button>';
 
 	$output .= '<div class="invest-search extendfull">';
 

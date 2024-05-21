@@ -399,13 +399,19 @@ jQuery(function ($) {
 
 function ajaxImagemapperSearch(obj) { 
 
+	if(obj != '') {
+			obj.classList.add("active");
+	}
+
 	jQuery(function($) {
 
 	console.log("search...");
 
 	console.log($(".image_search_form").serialize());
 	jQuery(function ($) {
-	var currentObj = $(obj);
+		if(obj != '') {
+			var currentObj = $(obj);
+		}
 
 	$.ajax({
 		url: $("#filter_site_url").val()+"/wp-content/plugins/mjimagemapper/ajaxSearch.php",
@@ -420,13 +426,16 @@ function ajaxImagemapperSearch(obj) {
 			$("#tabela_mieszkania_wrapper").html(data);
 			 $("#tabela_mieszkania_wrapper").css("opacity",1);
 
-			 if(currentObj.hasClass('imagemapper_search')) {
-				$('html, body').animate({
-					scrollTop: $("#search_button").offset().top
-				}, 1000);
+			 if(obj != '') {
+				if(currentObj.hasClass('imagemapper_search')) {
+					$('html, body').animate({
+						scrollTop: $("#search_button").offset().top
+					}, 1000);
+				}
+				buildDatatableForProprety();
 			}
 
-			buildDatatableForProprety();
+			
 			 
 		}
 	});
@@ -536,7 +545,14 @@ function setCheckboxOption(obj) {
 
 }
 
-function switchDisplayMode(display) {
+function switchDisplayMode(display, obj) {
+	//Usuwamy wszystkoe active w buttonach odpowiedzialnych za przelaczanie widoku i dodajemy active w tym ktory kliknelismy
+	var buttonsCheck = document.querySelectorAll('.current-invest-search .gold-button');
+	for(var di = 0;di<buttonsCheck.length;di++) {
+		document.querySelectorAll('.current-invest-search .gold-button')[di].classList.remove("active");
+	}
+	obj.classList.add("active");
+
 	var getAllInteractiveView = document.querySelectorAll('.interactive_view');
 	if(display == 'interactive_view') { 
 		// Wyswietlanie interaktywnego widoku
@@ -604,9 +620,13 @@ function switchSelectOptions() {
 			if(document.getElementById('typ_wyszukiwarki').value == 'lokal_uslugowy') {
 				
 				
-				if((document.querySelectorAll(".typ_nieruchomosci_select .select-items > div")[dz].innerHTML == 'Lokal usługowy') || (document.querySelectorAll(".typ_nieruchomosci_select .select-items > div")[dz].innerHTML == 'Wszystkie')) {
+				if((document.querySelectorAll(".typ_nieruchomosci_select .select-items > div")[dz].innerHTML == 'Lokal usługowy') || document.querySelectorAll(".typ_nieruchomosci_select .select-items > div")[dz].innerHTML == 'Wszystkie') {
 					document.querySelectorAll(".typ_nieruchomosci_select .select-items > div")[dz].style.display = 'block';
-				} else {
+				} 
+				// else if(document.querySelectorAll(".typ_nieruchomosci_select .select-items > div")[dz].innerHTML == 'Wszystkie') {
+				// 	document.querySelectorAll(".typ_nieruchomosci_select .select-items > div")[0].style.display = 'none';
+				// } 
+				else {
 					document.querySelectorAll(".typ_nieruchomosci_select .select-items > div")[dz].style.display = 'none';
 				}
 				
@@ -638,6 +658,7 @@ function switchSelectOptions() {
 }
 function setTypeProperty(obj) {
 	
+	document.querySelector(".imagemapper_search").classList.remove('active');
 	//Pobierz wartosc z kliknietego buttonu
 	let getTypeProperty = obj.getAttribute('data-type');
 

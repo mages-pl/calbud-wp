@@ -977,9 +977,14 @@ border:2px solid #707070;
   color: #000;
 }
 .single-post .image_search_form
-button.nav-link.gold-button.active {
+button.nav-link.gold-button.active,
+.more.gold-button.active {
   border-color: #3e3d3d !important;
+  border-width: 3px !important;
   color: #3e3d3d !important;
+}
+.btn-primary:not(:disabled):not(.disabled).active:focus, .btn-primary:not(:disabled):not(.disabled):active:focus, .show>.btn-primary.dropdown-toggle:focus {
+  box-shadow: none !important;
 }
 /* 
 select[name=typ_nieruchomosci] option[value="Lokal usługowy"] {
