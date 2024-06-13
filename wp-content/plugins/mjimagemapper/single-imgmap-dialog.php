@@ -10,7 +10,27 @@
 	//	echo str_replace(']]>', ']]&gt;', $content);
 	?>
     <div class="row">
-    <div class="col-md-4">
+    <div class="row modal-bar">
+        <div class="col-md-6">
+             <?php
+    if(empty(get_field("rzut", $post->ID)['url'])) {
+        ?>
+        <a target="_blank" id="pobierz-rzut" href="#pobierz-rzut" class="inwestycja more more-reverse btn btn-primary" style="cursor:not-allowed;display: block;border: 0px;">Pobierz rzut</a>
+        <?php
+    } else {
+        ?>
+    <a target="_blank" href="<?php echo get_field("rzut", $post->ID)['url']; ?>" class="inwestycja more more-reverse btn btn-primary" style="display: block;border: 0px;">Pobierz rzut</a>
+        <?php
+    }
+        ?>
+    </div>
+    <div class="col-md-6">
+    <a href="tel:<?php echo get_option('phone_contact_imagemapping'); ?>" style="color: inherit;    display: block;
+    color: inherit;
+    text-align: center;">tel.  <?php echo get_option('phone_contact_imagemapping'); ?></a>
+    </div>
+</div>
+    <!-- <div class="col-md-4">
     <h4>Lokal:
     <?php 
      echo get_field("numerlokalu", $post->ID);
@@ -44,23 +64,9 @@
         ?>
     <br/>
     <br/>
-    <?php
-    if(empty(get_field("rzut", $post->ID)['url'])) {
-        ?>
-        <a target="_blank" id="pobierz-rzut" href="#pobierz-rzut" class="inwestycja more more-reverse btn btn-primary" style="cursor:not-allowed;margin: 50px auto;display: block;border: 0px;"><em>Pobierz rzut</em></a>
-        <?php
-    } else {
-        ?>
-    <a target="_blank" href="<?php echo get_field("rzut", $post->ID)['url']; ?>" class="inwestycja more more-reverse btn btn-primary" style="margin: 50px auto;display: block;border: 0px;"><em>Pobierz rzut</em></a>
-        <?php
-    }
-        ?>
-    
-    <a href="tel:<?php echo get_option('phone_contact_imagemapping'); ?>" style="color: inherit;    display: block;
-    color: inherit;
-    text-align: center;">tel.  <?php echo get_option('phone_contact_imagemapping'); ?></a>
-</div>
-    <div class="col-md-8 imgmap_prawy_panel">
+   
+</div> -->
+    <div class="col-md-12 imgmap_prawy_panel">
     <?php
     if(empty(str_replace(".pdf", "-pdf.jpg", get_field("rzut", $post->ID)['url']))) {
     ?>

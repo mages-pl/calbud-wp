@@ -753,6 +753,9 @@ function media_imgmap_media_upload_tab_inside() {
 	$output .= '<div class="invest-search extendfull">';
 
 	// Widok interaktywny
+	$tooltip = '<div id="mark" class="tooltip" style=" position: absolute; top: 266px; left: 874px; z-index: 1000;"><div class="tooltip-wrap"><div class="tooltip-inner" style="float: left"><div class="tooltip-arrow2" style="float:left"><div class="flats-tooltip">  </div>    </div></div></div></div>';
+	$output .= $tooltip;
+
 	$output .= '<div class="interactive_view">';
 
 	// Przelaczanie sie miedzy kondygnacjami
@@ -2155,10 +2158,21 @@ function imgmap_create_area_element($id, $title) {
 	
 	if(get_field("typ", $id) == "Mieszkanie") {
 		$title_area = get_field("numerlokalu", $id).' - '.get_field("status", $id);
+		$content = '<span class=\'title_tooltip '.get_field("status", $id).'\'>'.get_field("numerlokalu", $id).'</span> <br> '.get_field("powierzchnia", $id).' m<sup>2</sup> <br> ';
+		// Jesli jest to mieszkanie
+		if(in_array(get_field("typ_nieruchomosci", $id)['value'], ["Mieszkanie","Apartament","Dom jednorodzinny","Dom w zabudowie bliźniaczej"])) {
+			$content .= '<span>mieszkanie&nbsp;'.get_field("pokoje", $id).'‑pokojowe</span> <br>';
+		} else {
+			$content .= '<span>'.get_field("typ_nieruchomosci", $id)['value'].'</span> <br>';
+		}
 	} else {
 		$title_area = $meta->title_attribute;//get_field("numerlokalu", $id).' - '.get_field("status", $id);
+		$content = '';
 	}
-	return '<area title="'.$title_area.'" data-type="'.esc_attr($meta->type).'" data-tooltip="'.esc_attr($meta->type == 'tooltip' ? $meta->tooltip_text : false ). '" data-fill-color="'.esc_attr(str_replace('#', '', $color['fillColor'])).'" data-fill-opacity="'.esc_attr($color['fillOpacity']).'" data-stroke-color="'.esc_attr(str_replace('#', '', $color['strokeColor'])).'" data-stroke-opacity="'.esc_attr($color['strokeOpacity']).'" data-stroke-width="'.esc_attr($color['strokeWidth']).'" data-title="'.$title.'" data-mapkey="area-'.$id.'" data-object="'.get_field("typ", $id).'" shape="poly" coords="'.esc_attr(get_post_meta($id, 'coords', true)).'" href="'.esc_attr($link) .'" title="'.(isset($meta->title_attribute) ? $meta->title_attribute : $title).'" />';
+
+
+		//title="'.$title_area.'"
+	return '<area  data-type="'.esc_attr($meta->type).'" data-tooltip="'.esc_attr($meta->type == 'tooltip' ? $meta->tooltip_text : false ). '" data-fill-color="'.esc_attr(str_replace('#', '', $color['fillColor'])).'" data-fill-opacity="'.esc_attr($color['fillOpacity']).'" data-stroke-color="'.esc_attr(str_replace('#', '', $color['strokeColor'])).'" data-stroke-opacity="'.esc_attr($color['strokeOpacity']).'" data-stroke-width="'.esc_attr($color['strokeWidth']).'" data-title="'.$title.'" data-mapkey="area-'.$id.'" data-object="'.get_field("typ", $id).'" shape="poly" coords="'.esc_attr(get_post_meta($id, 'coords', true)).'" href="'.esc_attr($link) .'" title="'.(isset($meta->title_attribute) ? $meta->title_attribute : $title).'" data-content="'.$content.'"/>';
 }
 
 /* Creates an list element to the list of imagemap's areas. */

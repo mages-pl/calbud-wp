@@ -136,6 +136,15 @@ jQuery(function ($) {
 		return false;
 	});
 
+	/**
+	 * Przesunięcie tooltipa wzgledem kursora
+	 */
+
+	$('area').hover(function(event) {
+		console.log("TOP"+event.clientY);
+		$("#mark").css("top",(parseFloat(event.clientY)+parseFloat($("#mark").height()*2))+'px');
+		$("#mark").css("left",(event.clientX-$("#mark").width()*2)+'px');
+	});
 	// $('.backToFirst').click(function () {
 	// 	//Po powrocie ukryj button 
 	// 	$('.backToFirst').css('display','none');
@@ -172,16 +181,27 @@ jQuery(function ($) {
 			toolTipClose: ['area-click'],
 			mapKey: 'data-mapkey',
 			onClick: AreaClicked,
-			onMouseover: function(m) {
+			onMouseover: function(m,event) {
 				console.log("mouseover");
-				console.log(areas);
+				//console.log(areas);
+				console.log(m.key);
+		 
+				var mark_content = $("area[data-mapkey="+m.key+"]").attr("data-content");
+
 				for (var area in areas) {
 					var typArea = $("area[data-mapkey="+areas[area].key+"]").attr("data-object");
 					console.log("AREA: "+areas[area].key);
 
 					if(typArea == "Mieszkanie") {
 						//console.log("KLUCZ"+key);
-						console.log(m.key);
+					
+						
+
+						// Pokaz tooltip
+						$("#mark").css('opacity','1');
+						$("#mark").css('display','block');
+						$("#mark").html(mark_content);
+						//
 
 						// Jesli nakierowalismy na mape ktora jest zgodna z aktualnym obszarem
 						console.log('TEST higlight: '+$(areas[area].key).mapster('highlight'));
@@ -215,6 +235,10 @@ jQuery(function ($) {
 				}
 			},
 			onMouseout: function(m) { 
+				// Ukryj tooltip 
+				$("#mark").css('opacity','0');
+				$("#mark").css('display','none');
+				//
 				console.log("mouseout");
 				console.log(areas);
 		
@@ -236,8 +260,13 @@ jQuery(function ($) {
 		if($( window ).width() < 768) {
 			for (var area in areas) {
 				console.log(areas[area].key);
-				console.log($("area[data-mapkey="+areas[area].key+"]").attr("data-object"));
-				$(this).mapster('highlight', areas[area].key);
+
+				// Jesli mamy typ mieszkania 
+				var getAreaType = $("area[data-mapkey="+areas[area].key+"]").attr("data-object");
+				if(getAreaType == 'Mieszkanie') {
+					console.log($("area[data-mapkey="+areas[area].key+"]").attr("data-object"));
+					$(this).mapster('highlight', areas[area].key);
+				}
 			} 
 		} else {
 			for (var area in areas) {

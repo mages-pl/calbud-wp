@@ -197,7 +197,7 @@ table.dataTable.row-border tbody tr:first-child th,table.dataTable.row-border tb
     flex-flow: column;
 
     padding: 7px;
-    min-height: 85vh !important;
+    /* min-height: 85vh !important; */
     max-height: 800px;
     /* max-height: 85vh !important; */
     overflow: auto; }
@@ -328,7 +328,7 @@ a.inwestycja.more.more-reverse.btn.btn-primary {
 .imgmap-dialog .ui-dialog-titlebar .ui-dialog-titlebar-close {
   float: right;
   color: transparent;
-  background: #000;
+  background: transparent !important;
   cursor: pointer;
   border: 0;
   padding: 10px 20px;
@@ -416,9 +416,10 @@ padding: 10px;
     /* background: #eee; */
 }
 #dialog-content .col-md-6:nth-child(1) {
-    padding: 25px;
+    padding: 15px;
 
 }
+
 .wp-block-group {
 /*    display:none;*/
     opacity: 0;
@@ -831,11 +832,24 @@ span.ui-slider-handle.ui-corner-all.ui-state-default {
 .ui-widget-header {
     cursor: default !important;
     border: 0px !important;
-    background: #000 !important;
-    margin: -5px !important;
+    /* background: #000 !important; */
+    background: #ec6502 !important;
+    /* margin: -5px !important; */
 }
 a.inwestycja.more.more-reverse.btn.btn-primary {
-  color: #fff;
+   font-weight: bold;
+    color: #ec6502;
+    background: transparent;
+    border-radius: 0px;
+    font-size: 0.9rem !important;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    border: 3px solid #ec6502 !important;
+
+}
+a.inwestycja.more.more-reverse.btn.btn-primary:hover {
+  border-color: #3e3d3d !important;
+  color: #3e3d3d !important;
 }
 .ui-widget-content {
   background: transparent !important;
@@ -1070,3 +1084,65 @@ Custom select
   background-color:#ec6502;
   color:white;
 }
+.imgmap-dialog-wrapper {
+  height: 100vh !important;
+  max-height: 750px !important;
+}
+.ui-dialog .ui-dialog-titlebar {
+  z-index: 2 !important;
+}
+.ui-dialog {
+  padding: 0px !important;
+}
+
+.modal-bar {
+  background: #eee;
+    position: fixed;
+    top: 50px;
+    display: flex;
+    z-index: 1;
+    align-items: center;
+    left: 0;
+    padding: 0 10px;
+}
+/**
+toltip 
+*/
+.title_tooltip {
+  font-weight: bold;
+}
+.title_tooltip.Sprzedane { 
+  color: #e68584;
+}
+.title_tooltip.Zarezerwowane { 
+  color: #ecd078;
+}
+.title_tooltip.Wolne { 
+  color: #6eaa75;
+}
+#mark { 
+  background: #fff;
+  padding: 3px;
+  text-align: center;
+}
+.tooltip {
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted black;
+}
+
+.tooltip .tooltiptext {
+    
+
+  width: 120px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+
+  /* Position the tooltip */
+  position: absolute;
+  z-index: 1;
+}
+
