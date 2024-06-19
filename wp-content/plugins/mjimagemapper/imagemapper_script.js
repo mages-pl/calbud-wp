@@ -140,7 +140,10 @@ jQuery(function ($) {
 	 * Przesunięcie tooltipa wzgledem kursora
 	 */
 
-	$('area').hover(function(event) {
+	// $('area').hover(function(event) {
+
+	// });
+	$('area').mousemove(function(event) {
 		console.log("TOP"+event.clientY);
 		$("#mark").css("top",(parseFloat(event.clientY)+parseFloat($("#mark").height()*2))+'px');
 		$("#mark").css("left",(event.clientX-$("#mark").width()*2)+'px');
