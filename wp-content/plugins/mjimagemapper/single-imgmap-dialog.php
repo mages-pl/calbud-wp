@@ -11,23 +11,27 @@
 	?>
     <div class="row">
     <div class="row modal-bar">
-        <div class="col-md-6">
+        <div class="col-md-8">
              <?php
     if(empty(get_field("rzut", $post->ID)['url'])) {
         ?>
-        <a target="_blank" id="pobierz-rzut" href="#pobierz-rzut" class="inwestycja more more-reverse btn btn-primary" style="cursor:not-allowed;display: block;border: 0px;">Pobierz rzut</a>
+        <a target="_blank" id="pobierz-rzut" href="#pobierz-rzut" class="inwestycja more more-reverse btn btn-primary" style="cursor:not-allowed;display: block;border: 0px;    max-width: 320px;
+    margin: 10px 0;">Pobierz rzut</a>
         <?php
     } else {
         ?>
-    <a target="_blank" href="<?php echo get_field("rzut", $post->ID)['url']; ?>" class="inwestycja more more-reverse btn btn-primary" style="display: block;border: 0px;">Pobierz rzut</a>
+    <a target="_blank" href="<?php echo get_field("rzut", $post->ID)['url']; ?>" class="inwestycja more more-reverse btn btn-primary" style="display: block;border: 0px;max-width: 320px;
+    margin: 10px 0;">Pobierz rzut</a>
         <?php
     }
         ?>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-4">
     <a href="tel:<?php echo get_option('phone_contact_imagemapping'); ?>" style="color: inherit;    display: block;
     color: inherit;
-    text-align: center;">tel.  <?php echo get_option('phone_contact_imagemapping'); ?></a>
+    text-align: center;"><i class="fa fa-phone" style="
+    transform: rotate(90deg);
+"></i>  <?php echo get_option('phone_contact_imagemapping'); ?></a>
     </div>
 </div>
     <!-- <div class="col-md-4">

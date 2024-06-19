@@ -847,6 +847,10 @@ a.inwestycja.more.more-reverse.btn.btn-primary {
     border: 3px solid #ec6502 !important;
 
 }
+a.inwestycja.more.more-reverse.btn.btn-primary:focus {
+  outline: none !important;
+  box-shadow: none;
+}
 a.inwestycja.more.more-reverse.btn.btn-primary:hover {
   border-color: #3e3d3d !important;
   color: #3e3d3d !important;
