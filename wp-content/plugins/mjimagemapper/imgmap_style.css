@@ -1126,9 +1126,12 @@ toltip
 }
 #mark { 
   background: #fff;
-  padding: 3px;
+  padding: 3px 10px;
+  font-size: 18px;
   text-align: center;
-  box-shadow:rgba(0, 0, 0, 0.2) 0px 1px 3px 0px;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 3px 0px;
+  color: #000 !important;
+  border-bottom: 0;
 }
 .tooltip {
   position: relative;
