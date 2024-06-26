@@ -5,13 +5,9 @@
 	} ?>
 </div>
 <div id="dialog-content">
-	<?php 
-		$content = apply_filters('the_content', $post->post_content);
-	//	echo str_replace(']]>', ']]&gt;', $content);
-	?>
-    <div class="row">
-    <div class="row modal-bar">
-        <div class="col-md-9">
+
+<div class="row modal-bar">
+        <div class="col-md-8">
              <?php
     if(empty(get_field("rzut", $post->ID)['url'])) {
         ?>
@@ -26,7 +22,7 @@
     }
         ?>
     </div>
-    <div class="col-md-3">
+    <div class="col-md-4">
     <a href="tel:<?php echo get_option('phone_contact_imagemapping'); ?>" style="color: inherit;    display: block;
     color: inherit;
     text-align: center;"><i class="fa fa-phone" style="
@@ -34,6 +30,12 @@
 "></i>  <?php echo get_option('phone_contact_imagemapping'); ?></a>
     </div>
 </div>
+	<?php 
+		$content = apply_filters('the_content', $post->post_content);
+	//	echo str_replace(']]>', ']]&gt;', $content);
+	?>
+    <div class="row">
+   
     <!-- <div class="col-md-4">
     <h4>Lokal:
     <?php 

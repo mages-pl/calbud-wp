@@ -997,9 +997,12 @@ border:2px solid #707070;
 .single-post .image_search_form
 button.nav-link.gold-button.active,
 .more.gold-button.active {
-  border-color: #3e3d3d !important;
+  /* border-color: #3e3d3d !important;
   border-width: 3px !important;
-  color: #3e3d3d !important;
+  color: #3e3d3d !important; */
+}
+.dataTables_empty { 
+  display: none !important;
 }
 .btn-primary:not(:disabled):not(.disabled).active:focus, .btn-primary:not(:disabled):not(.disabled):active:focus, .show>.btn-primary.dropdown-toggle:focus {
   box-shadow: none !important;
@@ -1119,7 +1122,7 @@ toltip
   color: #e68584;
 }
 .title_tooltip.Zarezerwowane { 
-  color: #ecd078;
+  color: #E0B400;
 }
 .title_tooltip.Wolne { 
   color: #6eaa75;
@@ -1129,7 +1132,7 @@ toltip
   padding: 3px 10px;
   font-size: 18px;
   text-align: center;
-  box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 3px 0px;
+  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.35);
   color: #000 !important;
   border-bottom: 0;
 }
