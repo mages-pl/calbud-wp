@@ -22,7 +22,7 @@
 		<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2376.991001152164!2d14.567407177076598!3d53.43286916824568!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47aa090b4c6ee395%3A0x46b629f5a9faa47d!2sCalbud%20Sp.%20z%20o.o.!5e0!3m2!1spl!2spl!4v1694619646669!5m2!1spl!2spl" width="100%" height="730" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
 	*/?>
 	
-		<iframe src="https://snazzymaps.com/embed/540680" width="100%" height="730px" style="border:none;"></iframe>
+		<iframe src="https://snazzymaps.com/embed/540680" width="100%" height="730px" style="border:none!important;border:0!important;"></iframe>
 	
 
 	
@@ -79,8 +79,17 @@
 						<a href="https://www.facebook.com/CALBUD/" title="CalBud Facebook" target="_blank">
 							<img src="<?php echo get_template_directory_uri(); ?>/img/fb.svg" alt="CalBud Facebook">
 						</a>
+						<a href="https://www.instagram.com/calbud_pl/" title="CalBud Instagram" target="_blank">
+							<img src="<?php echo get_template_directory_uri(); ?>/img/insta.webp" alt="CalBud Instagram">
+						</a>
+						<a href="https://pl.linkedin.com/company/calbudcompl" title="CalBud LinkedIn" target="_blank">
+							<img src="<?php echo get_template_directory_uri(); ?>/img/linkedin.webp" alt="CalBud LinkedIn">
+						</a>
+						<a href="https://www.youtube.com/@calbud-szczecin" title="CalBud YouTube" target="_blank">
+							<img src="<?php echo get_template_directory_uri(); ?>/img/yt.png" alt="CalBud Youtube">
+						</a>
 					</div>
-				
+
 				</div>
 				<div class="col-sm-6 col-lg-3">
 				
@@ -168,10 +177,7 @@ $('#submit').on('click', function() {
 				</button>
 			  </div>
 			  <div class="modal-body">
-			  
 
-				
-				
 				<?php echo do_shortcode('[contact-form-7 id="be959c5" title="Formularz Zapytaj o Ofertę"]'); ?>
 
 			  </div>
@@ -325,16 +331,6 @@ function closeAllSelect(elmnt) {
 then close all select boxes:*/
 document.addEventListener("click", closeAllSelect);
 </script>	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 
 

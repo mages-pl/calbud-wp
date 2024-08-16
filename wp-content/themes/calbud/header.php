@@ -7,6 +7,7 @@
     <link rel="profile" href="http://gmpg.org/xfn/11">
 	
 	<meta name="theme-color" content="#EC6500" />
+	<meta name="format-detection" content="telephone=no">
 	
 	<link rel="shortcut icon" href="<?php echo get_template_directory_uri(); ?>/img/favicon.ico" type="image/x-icon">
 	<link rel="icon" href="<?php echo get_template_directory_uri(); ?>/img/favicon.ico" type="image/x-icon">
@@ -21,19 +22,37 @@
 		</style>
 	<?php } ?>
 
-	<?php if (is_category('inwestycje') || is_category('realizacje-deweloper') || in_category('inwestycje') || in_category('realizacje-deweloper')){ ?>
+	<?php if (is_page('kontakt-deweloper') || is_page('deweloper') || is_category('inwestycje') || is_category('realizacje-deweloper') || in_category('inwestycje') || in_category('realizacje-deweloper')){ ?>
 		<style>
-			.hidden-services{display:none;}
+			.hidden-services,.simple-hidden{display:none!important;}
 		</style>
 	<?php } ?>
 
-	<?php if (is_category('inwestycje-komercyjne') || in_category('inwestycje-komercyjne') || is_category('inwestycje-mieszkaniowe') || in_category('inwestycje-mieszkaniowe')
+	<?php if (is_page('inwestycje-mieszkaniowe') || is_page('inwestycje-uzytecznosci-publicznej') || is_page('inwestycje-komercyjne') || is_page('inwestycje-przemyslowe') || is_page('kontakt-generalny-wykonawca') || is_page('generalny-wykonawca') || is_category('inwestycje-komercyjne') || in_category('inwestycje-komercyjne') || is_category('inwestycje-mieszkaniowe') || in_category('inwestycje-mieszkaniowe')
 		 || is_category('inwestycje-przemyslowe') || in_category('inwestycje-przemyslowe') || is_category('inwestycje-uzytecznosci-publicznej') || in_category('inwestycje-uzytecznosci-publicznej')
 	){ ?>
 		<style>
-			.hidden-realizations{display:none;}
+			.hidden-realizations,.simple-hidden{display:none!important;}
 		</style>
 	<?php } ?>	
+	
+	<?php if (is_front_page() || is_page('oferty-pracy') || is_page('dla-studenta') || is_page('kariera-w-calbud') || is_page('dlaczego-calbud') || is_page('kontakt') || is_page('kariera') || is_category('aktualnosci') || in_category('aktualnosci') || is_page('oferta') || is_page('o-firmie') || is_page('zarzad') || is_page('nagrody') || is_page('referencje') || is_page('wspierane-inicjatywy') || is_page('kodeks-postepowania')){ ?>
+		<style>
+			.hidden-services{display:none!important;}
+			.hidden-realizations{display:none!important;}
+			
+			@media (max-width: 768px){
+				.site-header{padding-bottom:34px!important;}
+			}
+			
+		</style>
+	<?php } ?>
+	
+	<?php if (is_front_page()){ ?>
+		<style>
+			.simple-show{display:block!important;}
+		</style>
+	<?php } ?>
 	
 	<?php if (is_page('deweloper')){ ?>
 		<style>

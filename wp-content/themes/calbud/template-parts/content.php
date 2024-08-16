@@ -12,7 +12,41 @@
 	<?php if (in_category('inwestycje')){ ?>
 	
 		<?php $backgroundImg = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), 'full' );?>
-		<div class="current-invest-single row-full" style="background-image:url('<?php echo get_template_directory_uri(); ?>/img/apla40.png') ,url('<?php echo $backgroundImg[0]; ?>');">
+		
+		
+		<div class="xs-hidden current-invest-single row-full" style="background-image:url('<?php echo get_template_directory_uri(); ?>/img/apla40XXX.png') ,url('<?php echo $backgroundImg[0]; ?>');">
+		
+		<div class="container">
+			<div class="row-full" style="padding-left:0;padding-right:0;">
+				<div class="col-lg-12">
+				
+					<?php if( get_field('logo') ): ?>
+						<img src="<?php the_field('logo'); ?>" class="logo" />
+					<?php endif; ?>
+					
+					<?php if( get_field('nazwa_inwestycji_top') ) { ?>
+						<h6><?php the_field('nazwa_inwestycji_top'); ?></h6>
+					<?php } ?>
+				
+					<div class="apla">
+					
+						<?php if( get_field('haslo_reklamowe') ) { ?>
+							<h1><?php the_field('haslo_reklamowe'); ?></h1>
+						<?php } ?>
+						
+						<a href="#" class="trans-frame-ask trans-frame" data-toggle="modal" data-target="#exampleModalOffer">Zapytaj o ofertę</a>
+						
+						<a href="#pills-tabContent" class="trans-frame">Wyszukaj apartament</a>
+						
+					</div>	
+				
+				</div>	
+			</div>	
+		</div>	
+		</div>
+		
+		<div class="xs-up-hidden current-invest-single row-full" style="background-image: url(<?php the_field('obrazek_tla_pod_mobile'); ?>);">
+		
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-12">
@@ -20,14 +54,18 @@
 					<?php if( get_field('logo') ): ?>
 						<img src="<?php the_field('logo'); ?>" class="logo" />
 					<?php endif; ?>
+					
+					<?php if( get_field('nazwa_inwestycji_top') ) { ?>
+						<h6><?php the_field('nazwa_inwestycji_top'); ?></h6>
+					<?php } ?>
 				
 					<?php if( get_field('haslo_reklamowe') ) { ?>
 						<h1><?php the_field('haslo_reklamowe'); ?></h1>
 					<?php } ?>
 					
-					<a href="#" class="<?php/*orange*/?> trans-frame" data-toggle="modal" data-target="#exampleModalOffer">Zapytaj o ofertę</a>
+					<a href="#" class="trans-frame-ask trans-frame" data-toggle="modal" data-target="#exampleModalOffer">Zapytaj o ofertę</a>
 					
-					<a href="#pills-tabContent" class="<?php/*white*/?> trans-frame">Wyszukaj apartament</a>
+					<a href="#pills-tabContent" class="trans-frame">Wyszukaj apartament</a>
 				
 				</div>	
 			</div>	
@@ -79,7 +117,8 @@
 						
 						<div class="col-md-12">
 
-							<p class="main-first"><?php the_field('tekst_glowny_pierwszej_sekcji'); ?></p>
+							<p class="main-first xs-hidden"><?php the_field('tekst_glowny_pierwszej_sekcji'); ?></p>
+							<p class="main-first xs-up-hidden"><?php the_field('tekst_glowny_pierwszej_sekcji_mob'); ?></p>
 						
 							<div class="additional">
 							
@@ -87,13 +126,16 @@
 								
 								<div id="collapse02" class="collapse">
 								
-									<p><?php the_field('tekst_dodatkowy_pierwszej_sekcji'); ?></p>
+									<p class="xs-hidden"><?php the_field('tekst_dodatkowy_pierwszej_sekcji'); ?></p>
+									<p class="xs-up-hidden"><?php the_field('tekst_dodatkowy_pierwszej_sekcji_mob'); ?></p>
 								
 									<a class="more-close" role="button" href="#collapse02" data-toggle="collapse" aria-expanded="false" aria-controls="collapse02">mniej</a>
 								
 								</div>
 							
 							</div>
+
+							
 						
 						</div>
 						
@@ -104,6 +146,16 @@
 			</div>
 
 		</div>		
+		
+		<div class="row-full current-invest-first-image xs-up-hidden" style="background-image:url('<?php the_field('obrazek_tla_pierwsza_mobile'); ?>');">
+		
+		</div>
+		
+		<div class="current-movie-mob row-full xs-up-hidden">
+			<div class="container-fluid">
+				<?php the_field('film_mobile'); ?>
+			</div>
+		</div>
 		
 		<?php /* sekcja Wyszukiwarka-Mapa*/ ?>
 		
@@ -217,18 +269,24 @@
 			</div>
 		</div>
 		
-		
+		<div class="row-full" style="padding-left:0;padding-right:0;">
 		<?php the_field('mapa'); ?>
 		<?php the_field('mapa_test'); ?>
-		
+		</div>
 		
 		<?php /* sekcja Standard */ ?>
+		
+		
+		<div class="row-full current-invest-standard-image xs-up-hidden" style="background-image:url('<?php the_field('obrazek_tla'); ?>');">
+		
+		</div>
 		
 		<div class="current-invest-standard row-full" style="background-image:url('<?php echo get_template_directory_uri(); ?>/img/apla60.png'),url('<?php the_field('obrazek_tla'); ?>');">
 		
 			<div class="container">
 				<div class="row">
 					<div class="col-lg-6">
+
 					</div>
 					<div class="col-lg-6">
 						
@@ -285,6 +343,22 @@
 							</div>
 							<?php } ?>
 							
+							<?php if( get_field('siodma_ikonka_standard') ) {?>
+							<div class="col-md-6 col-lg-12 col-xl-6">
+								<div class="inner" style="background-image:url('<?php the_field('siodma_ikonka_standard'); ?>');">
+								<p><?php the_field('siodmy_tekst_standard'); ?></p>
+								</div>
+							</div>
+							<?php } ?>
+							
+							<?php if( get_field('osma_ikonka_standard') ) {?>
+							<div class="col-md-6 col-lg-12 col-xl-6">
+								<div class="inner" style="background-image:url('<?php the_field('osma_ikonka_standard'); ?>');">
+								<p><?php the_field('osmy_tekst_standard'); ?></p>
+								</div>
+							</div>
+							<?php } ?>
+							
 						</div>
 						
 						<div class="col-md-12">
@@ -305,10 +379,21 @@
 						
 						</div>
 						
+						<?php /*
+						<div class="co-md-12 xs-up-hidden">
+						
+							<img src="<?php echo get_template_directory_uri(); ?>/img/pod-mob.webp" alt="CalBud" style="margin-top:40px;" />
+
+						</div>
+						*/?>
 	
 					</div>
 				</div>
 			</div>	
+		
+		</div>
+		
+		<div class="row-full current-invest-standard-image-bottom xs-up-hidden" style="background-image:url('<?php echo get_template_directory_uri(); ?>/img/pod-mob.webp');">
 		
 		</div>
 		
@@ -395,6 +480,12 @@
 		<?php } ?>
 		
 		
+		<div class="current-movie-mob row-full xs-hidden">
+			<div class="container-fluid">
+				<?php the_field('film_mobile'); ?>
+			</div>
+		</div>
+		
 		<div class="current-invest-gallery row-full">
 			<div class="container-fluid">
 			
@@ -403,15 +494,17 @@
 			<?php 
 			$images = get_field('galeria');
 			if( $images ): ?>
+			<div class="invest-gallery row-full">
 				<div class="row gallery no-gutters">
 					<?php foreach( $images as $image ): ?>
 						<div class="col-md-6">
 							<a href="<?php echo esc_url($image['url']); ?>" class="foobox" rel="gallery">
-								 <img src="<?php echo esc_url($image['sizes']['large']); ?>" alt="<?php echo esc_attr($image['alt']); ?>" class="size-full"/>
+								 <img src="<?php echo esc_url($image['sizes']['large']); ?>" alt="<?php echo esc_attr($image['alt']); ?>" class="size-full" style="max-height:fit-content;"/>
 							</a>
 						</div>
 					<?php endforeach; ?>
 				</div>
+			</div>	
 			<?php endif; ?>
 			</div>
 		</div>
