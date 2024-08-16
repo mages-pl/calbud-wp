@@ -126,7 +126,12 @@
 	<h2><?php _e("Security","wp-google-maps"); ?></h2>
 	<div class="credit-container">
 		<ul class="list-chain">
-			<li>Rafie Muhammad</li>
+			<li title='Organization: Wordfence'>Tim Coen</li>
+			<li title='Organization: Wordfence'>Marco Wotschka</li>
+			<li title='Organization: Wordfence'>Akbar Kustirama</li>
+			<li title='Organization: Wordfence'>Richard Telleng</li>
+			<li title='Organization: Patchstack'>Rafie Muhammad</li>
+			<li title='Organization: WPScan'>Marc</li>
 			<li>Visse</li>
 			<li>Mohammed Adam</li>
 			<li>Thomas Chauchefoin</li>
@@ -156,6 +161,7 @@
 			<li title="Core Improvements | GitHub: @nicoletta-maia">Nicoletta Maia</li>
 
 			<!-- Issue Reporters -->
+			<li title="Issue Reporter | Organization: Hostpoint AG">Pascal</li>
 			<li title="Issue Reporter">Arūnas Liuiza</li>
 			<li title="Issue Reporter | GitHub: @AmitT">Amit Tal</li>
 			<li title="Issue Reporter | GitHub: @Gismo1337">Sebastian Richter</li>
@@ -197,6 +203,10 @@
 	<h2><?php _e("Translators","wp-google-maps"); ?></h2>
 	<div class="credit-container">
 		<ul class="list-chain">
+			<li>Attila</li>
+			<li>Gerard Ayter Codina</li>
+			<li>Finn Sommer Jensen</li>
+			<li>Michael Møller</li>
 			<li>Daniel Tan</li>
 			<li>Mats Wale</li>
 			<li>Starlogic</li>

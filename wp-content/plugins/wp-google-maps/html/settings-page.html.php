@@ -20,6 +20,11 @@
 			</a>
 		</li>
 		<li>
+			<a href="#markers">
+				<?php esc_html_e('Markers', 'wp-google-maps'); ?>
+			</a>
+		</li>
+		<li>
 			<a href="#info-windows">
 				<?php esc_html_e('InfoWindows', 'wp-google-maps'); ?>
 			</a>
@@ -285,7 +290,30 @@
 				<option value='none'><?php esc_html_e("None", "wp-google-maps"); ?></option>
 			</select>
 		</fieldset>
+
+		<fieldset class="wpgmza-pro-feature wpgmza-pro-feature-hide">
+			<legend>
+				<?php esc_html_e('Marker Field Query Mode', 'wp-google-maps'); ?>
+			</legend>
+			<select name='marker_field_query_mode'>
+				<option value=''><?php esc_html_e("Partial", "wp-google-maps"); ?></option>
+				<option value='strict'><?php esc_html_e("Exact", "wp-google-maps"); ?></option>
+			</select>
+
+			<small>
+				<?php _e("By default, marker fields may return partial matches, in some cases you may prefer exact matches only", "wp-google-maps"); ?>
+			</small>
+		</fieldset>
 		
+		<fieldset class="wpgmza-pro-feature wpgmza-pro-feature-hide">
+			<legend>
+				<?php esc_html_e('ACF Description Type', 'wp-google-maps'); ?>
+			</legend>
+			<select name='acf_product_description_type'>
+				<option value='full'><?php esc_html_e("Full", "wp-google-maps"); ?></option>
+				<option value='excerpt'><?php esc_html_e("Excerpt", "wp-google-maps"); ?></option>
+			</select>
+		</fieldset>
 		
 		
 		<fieldset data-required-maps-engine="open-layers">
@@ -474,6 +502,16 @@
 			<legend><?php _e('Always exclude engine API on pages', 'wp-google-maps'); ?></legend>
 			<input name="wpgmza_always_exclude_engine_api_on_pages" placeholder="<?php _e('Page IDs'); ?>"/>
 		</fieldset>
+
+		<fieldset>
+			<legend><?php _e('Enable async loading API parameter', 'wp-google-maps'); ?></legend>
+			<input name="enable_google_api_async_param" type="checkbox"/>
+			<small>
+				<?php
+				_e("Aligns API loading with best-practice from Google. Considered beta for now, will become default later", "wp-google-maps");
+				?>
+			</small>
+		</fieldset>
 		
 		<fieldset>
 			<legend><?php _e('Prevent other plugins and theme loading API', 'wp-google-maps'); ?></legend>
@@ -494,21 +532,13 @@
 				<option value="edit_posts"><?php _e('Contributor', 'wp-google-maps'); ?></option>
 				<option value="read"><?php _e('Subscriber', 'wp-google-maps'); ?></option>
 			</select>
+			<small>
+				<strong><?php _e("Note:", "wp-google-maps"); ?></strong> 
+				<?php
+					_e("Granting lower level users access to the settings/editor will allow them to manage custom scripts (JavaScript), which could be abused, please exercise caution and consider this carefully.", "wp-google-maps");
+				?>
+			</small>
 		</fieldset>
-
-		<fieldset>
-			<legend><?php _e("Retina Icon Width","wp-google-maps"); ?></legend>
-			<span class="settings-group">
-				<input name='wpgmza_settings_retina_width' type='text' size='4' maxlength='4' id='wpgmza_settings_retina_width'/> px
-			</span>
-		</fieldset>
-		<fieldset>
-			<legend><?php _e("Retina Icon Height","wp-google-maps"); ?></legend>
-			<span class="settings-group">
-				<input name='wpgmza_settings_retina_height' type='text' size='4' maxlength='4' id='wpgmza_settings_retina_height'/> px
-			</span>
-		</fieldset>
-
 		
 		<!-- NB: Usage tracking dropped as of 2018 GDPR changes -->
 		
@@ -556,6 +586,151 @@
 		</fieldset>
 	</div>
 	
+	<div id="markers">
+
+		<fieldset data-required-maps-engine="google-maps">
+			<legend>
+				<?php esc_html_e('Marker Render Mode', 'wp-google-maps'); ?>
+			</legend>
+			<label>
+				<select name="googleMarkerMode" id="googleMarkerMode">
+					<option value="marker"><?php esc_html_e('Marker (Default)', 'wp-google-maps'); ?></option>
+					<option value="advancedMarkerElement"><?php esc_html_e('Advanced Marker (Beta)', 'wp-google-maps'); ?></option>
+				</select>
+				<p>
+					<small style="width: 700px; display: block;">
+						<?php
+							_e("Google Maps has deprecated the default Marker module. They encourage using the Advanced Marker module instead, which allows CSS selection and minor performance improvements. We support this new render mode, which is considered beta for now, while we finalize our implementation.", "wp-google-maps");
+						?>
+					</small>
+				</p>
+			</label>
+		</fieldset>
+
+		<fieldset data-required-maps-engine="open-layers">
+			<legend>
+				<?php esc_html_e('Marker Render Mode', 'wp-google-maps'); ?>
+			</legend>
+			<label>
+				<select name="olMarkerMode" id="olMarkerMode">
+					<option value="element"><?php esc_html_e('Element (Default)', 'wp-google-maps'); ?></option>
+					<option value="vector"><?php esc_html_e('Vector (Alpha)', 'wp-google-maps'); ?></option>
+				</select>
+				<p>
+					<small style="width: 700px; display: block;">
+						<?php
+							_e("OpenLayers supports two render modes, Element is the most well supported and reliable option (recommended for most users). Vector is available in alpha (early-preview) as an alternative which has some performance improvements. Vector mode does not support all of our features, for example, hover icons, animations and transitions will no longer function when this mode is enabled.", "wp-google-maps");
+						?>
+					</small>
+				</p>
+			</label>
+		</fieldset>
+
+		<fieldset>
+			<legend><?php _e("Retina Icon Width","wp-google-maps"); ?></legend>
+			<span class="settings-group">
+				<input name='wpgmza_settings_retina_width' type='text' size='4' maxlength='4' id='wpgmza_settings_retina_width'/> px
+			</span>
+		</fieldset>
+
+		<fieldset>
+			<legend><?php _e("Retina Icon Height","wp-google-maps"); ?></legend>
+			<span class="settings-group">
+				<input name='wpgmza_settings_retina_height' type='text' size='4' maxlength='4' id='wpgmza_settings_retina_height'/> px
+			</span>
+		</fieldset>
+
+		<h3>
+			<?php
+			esc_html_e("Marker Data Location", "wp-google-maps");
+			?>
+		</h3>
+		
+		
+		
+		<fieldset>
+			<legend><?php esc_html_e("Pull marker data from", "wp-google-maps"); ?></legend>
+			
+			<ul>
+				<li>
+					<label>
+						<input name="wpgmza_settings_marker_pull" value="0" type="radio" checked="checked"/>
+						<?php
+						esc_html_e("Database", "wp-google-maps");
+						?>
+					</label>
+				</li>
+				<li>
+					<label>
+						<input name="wpgmza_settings_marker_pull" value="1" type="radio"/>
+						<?php
+						esc_html_e("XML File", "wp-google-maps");
+						?>
+					</label>
+				</li>
+			</ul>
+		</fieldset>
+		
+		<fieldset id="xml-cache-settings">
+			<p>
+				<?php
+				esc_html_e("We suggest that you change the two fields below ONLY if you are experiencing issues when trying to save the marker XML files.", "wp-google-maps");
+				?>
+			</p>
+			<fieldset>
+				<legend><?php esc_html_e("Marker data XML directory", "wp-google-maps"); ?></legend>
+				<input name="wpgmza_marker_xml_location" class="regular-text code"/>
+				<p>
+					<small>
+						<?php esc_html_e("You can use the following", "wp-google-maps"); ?>
+						: {wp_content_dir},{plugins_dir},{uploads_dir}
+					</small>
+				</p>
+				<p>
+					<small>
+						<?php esc_html_e("Currently using", "wp-google-maps"); ?>
+						<strong>
+							NB: Add $marker_location here
+						</strong>
+					</small>
+				</p>
+				<!-- NB: See wpgmza_file_perms_check in legacy-core.php -->
+			</fieldset>
+			
+			<fieldset>
+				<legend><?php esc_html_e("Marker data XML URL", "wp-google-maps"); ?></legend>
+				<input name="wpgmza_marker_xml_url" class="regular-text code"/>
+				<p>
+					<small>
+						<?php esc_html_e("You can use the following", "wp-google-maps"); ?>
+						: {wp_content_dir},{plugins_dir},{uploads_dir}
+					</small>
+				</p>
+				<p>
+					<small>
+						<?php esc_html_e("Currently using", "wp-google-maps"); ?>
+						<strong>
+							NB: Add $marker_url here
+						</strong>
+					</small>
+				</p>
+				<!-- NB: See wpgmza_file_perms_check in legacy-core.php -->
+			</fieldset>
+
+			<p>
+				<small>
+					<strong><?php _e("Note", "wp-google-maps"); ?>: </strong>
+					<?php
+						esc_html_e("We no longer recommend using the XML option, outside of special use cases. For most users the database method will be more reliable and efficient", "wp-google-maps");
+					?>
+				</small>
+			</p>
+			
+		</fieldset>
+
+
+	</div>
+
 	<div id="info-windows">
 
 	<fieldset class="wpgmza-pro-feature-hide">
@@ -803,6 +978,54 @@
 			?>
 			
 		</div>
+
+		<h4>
+			<?php 
+			esc_html_e("General Settings","wp-google-maps"); 
+			?> 
+		</h4>
+
+		<fieldset class="wpgmza-pro-feature">
+			<legend>
+				<?php 
+				esc_html_e("Show X items by default","wp-google-maps"); 
+				?>
+			</legend>
+			
+			<select id='wpgmza_default_items' name='wpgmza_default_items'>
+				<option value="1">1</option>
+				<option value="5">5</option>
+				<option value="10">10</option>
+				<option value="25">25</option>
+				<option value="50">50</option>
+				<option value="100">100</option>
+				<option value="-1">ALL</option>
+			</select>
+		</fieldset>
+
+		<fieldset class="wpgmza-pro-feature">
+			<legend>
+				<?php
+				_e("Disable Auto-Scroll", "wp-google-maps");
+				?>
+			</legend>
+			
+			<ul>
+				<li>
+					<div class='switch'>
+						<input name='disable_scroll_on_marker_listing_click' 
+							class='cmn-toggle cmn-toggle-round-flat' 
+							type='checkbox' 
+							id='disable_scroll_on_marker_listing_click' 
+							value='yes'/>
+						<label for='disable_scroll_on_marker_listing_click'></label>
+					</div>
+					<?php 
+					esc_html_e("Prevent the page from scrolling to the map element when a marker listing item is clicked","wp-google-maps"); 
+					?>
+				</li>
+			</ul>
+		</fieldset>
 		
 		<h4>
 			<?php 
@@ -936,23 +1159,30 @@
 				</li>
 			</ul>
 		</fieldset>
-		
+
 		<fieldset class="wpgmza-pro-feature">
+		
 			<legend>
-				<?php 
-				esc_html_e("Show X items by default","wp-google-maps"); 
+				<?php
+				_e("Advanced Options", "wp-google-maps");
 				?>
 			</legend>
 			
-			<select id='wpgmza_default_items' name='wpgmza_default_items'>
-				<option value="1">1</option>
-				<option value="5">5</option>
-				<option value="10">10</option>
-				<option value="25">25</option>
-				<option value="50">50</option>
-				<option value="100">100</option>
-				<option value="-1">ALL</option>
-			</select>
+			<ul>
+				<li>
+					<div class='switch'>
+						<input name='enable_datatables_enter_search' 
+							class='cmn-toggle cmn-toggle-round-flat' 
+							type='checkbox' 
+							id='enable_datatables_enter_search' 
+							value='yes'/>
+						<label for='enable_datatables_enter_search'></label>
+					</div>
+					<?php 
+					esc_html_e("Only trigger Datatable search on enter/return key (Reduce server load)","wp-google-maps"); 
+					?>
+				</li>
+			</ul>
 		</fieldset>
 		
 		<h4>
@@ -1235,87 +1465,6 @@
 			
 		
 		</fieldset>
-
-
-		
-		<h3>
-			<?php
-			esc_html_e("Marker Data Location", "wp-google-maps");
-			?>
-		</h3>
-		
-		<p>
-			<?php
-			esc_html_e("We suggest that you change the two fields below ONLY if you are experiencing issues when trying to save the marker XML files.", "wp-google-maps");
-			?>
-		</p>
-		
-		<fieldset>
-			<legend><?php esc_html_e("Pull marker data from", "wp-google-maps"); ?></legend>
-			
-			<ul>
-				<li>
-					<label>
-						<input name="wpgmza_settings_marker_pull" value="0" type="radio" checked="checked"/>
-						<?php
-						esc_html_e("Database", "wp-google-maps");
-						?>
-					</label>
-				</li>
-				<li>
-					<label>
-						<input name="wpgmza_settings_marker_pull" value="1" type="radio"/>
-						<?php
-						esc_html_e("XML File", "wp-google-maps");
-						?>
-					</label>
-				</li>
-			</ul>
-		</fieldset>
-		
-		<fieldset id="xml-cache-settings">
-		
-			<fieldset>
-				<legend><?php esc_html_e("Marker data XML directory", "wp-google-maps"); ?></legend>
-				<input name="wpgmza_marker_xml_location" class="regular-text code"/>
-				<p>
-					<small>
-						<?php esc_html_e("You can use the following", "wp-google-maps"); ?>
-						: {wp_content_dir},{plugins_dir},{uploads_dir}
-					</small>
-				</p>
-				<p>
-					<small>
-						<?php esc_html_e("Currently using", "wp-google-maps"); ?>
-						<strong>
-							NB: Add $marker_location here
-						</strong>
-					</small>
-				</p>
-				<!-- NB: See wpgmza_file_perms_check in legacy-core.php -->
-			</fieldset>
-			
-			<fieldset>
-				<legend><?php esc_html_e("Marker data XML URL", "wp-google-maps"); ?></legend>
-				<input name="wpgmza_marker_xml_url" class="regular-text code"/>
-				<p>
-					<small>
-						<?php esc_html_e("You can use the following", "wp-google-maps"); ?>
-						: {wp_content_dir},{plugins_dir},{uploads_dir}
-					</small>
-				</p>
-				<p>
-					<small>
-						<?php esc_html_e("Currently using", "wp-google-maps"); ?>
-						<strong>
-							NB: Add $marker_url here
-						</strong>
-					</small>
-				</p>
-				<!-- NB: See wpgmza_file_perms_check in legacy-core.php -->
-			</fieldset>
-			
-		</fieldset>
 		
 		<!--<fieldset id="library-script-panel-container"></fieldset>-->
 		
@@ -1413,6 +1562,16 @@
 					
 				</label>
 			</p>
+
+			<p>&nbsp;</p>
+			<p class="wpgmza-pro-feature-hide">
+				<button class="wpgmza_general_btn button button-secondary wpgmza-performance-tool-button" data-tool-type="add_db_indexing">Add Indexes</button>
+				<button class="wpgmza_general_btn button button-secondary wpgmza-performance-tool-button" data-tool-type="remove_db_indexing">Remove Indexes</button>
+				
+				<small class="wpgmza-button-hint-small">
+					<?php esc_html_e('Add/remove performance indexes from the database tables that may improve query times. Only do this if suggested by our support team', 'wp-google-maps'); ?>
+				</small>
+			</p>
 			
 		</fieldset>
 
@@ -1441,6 +1600,20 @@
 					<small>
 						<?php
 						esc_html_e("Use this setting if you are experiencing issues with Autoptimize's CSS aggregation. This may cause issues on setups with a large amount of marker data.", "wp-google-maps");
+						?>
+					</small>
+				
+			</label>
+		</fieldset>
+
+		<fieldset>
+			<legend><?php esc_html_e("Disable WP Engine Governor", "wp-google-maps"); ?></legend>
+			<label>
+				<input name="disable_wp_engine_governor" type="checkbox"/>
+				
+					<small>
+						<?php
+						esc_html_e("If you are using WP Engine and see 'KILLED QUERY' error logs, our database queries may not be running properly. Enabling this setting will set a constant in your site, which disabled the WP Engine Governor, which prevents long queries for performance.", "wp-google-maps");
 						?>
 					</small>
 				

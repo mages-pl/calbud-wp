@@ -708,7 +708,7 @@ function wpgmaps_tag_basic( $atts )
 
         $wpgmza_main_settings = get_option("WPGMZA_OTHER_SETTINGS");
         if (isset($wpgmza_main_settings['wpgmza_custom_css']) && $wpgmza_main_settings['wpgmza_custom_css'] != "") { 
-            wp_add_inline_style( 'wpgmaps-style', stripslashes( $wpgmza_main_settings['wpgmza_custom_css'] ) );
+            wp_add_inline_style( 'wpgmaps-style', wp_strip_all_tags( stripslashes( $wpgmza_main_settings['wpgmza_custom_css'] ) ) );
         }
 
     }
@@ -842,9 +842,11 @@ function wpgmaps_tag_basic( $atts )
 		
 		if($wpgmza->settings->engine == 'google-maps')
 		{
+            $scriptArgs = apply_filters('wpgmza-get-scripts-arguments', array());
+
 			// TODO: Why is this not handled by the API loader?
-			wp_enqueue_script('wpgmza_canvas_layer_options', plugin_dir_url(__FILE__) . 'lib/CanvasLayerOptions.js', array('wpgmza_api_call'));
-			wp_enqueue_script('wpgmza_canvas_layer', plugin_dir_url(__FILE__) . 'lib/CanvasLayer.js', array('wpgmza_api_call'));
+			wp_enqueue_script('wpgmza_canvas_layer_options', plugin_dir_url(__FILE__) . 'lib/CanvasLayerOptions.js', array('wpgmza_api_call'), false, $scriptArgs);
+			wp_enqueue_script('wpgmza_canvas_layer', plugin_dir_url(__FILE__) . 'lib/CanvasLayer.js', array('wpgmza_api_call'), false, $scriptArgs);
 		}
 	}
     
@@ -1314,8 +1316,6 @@ function wpgmaps_permission_warning() {
 function wpgmaps_update_db_check() {
     global $wpgmza_version;
     if (get_option('wpgmza_db_version') != $wpgmza_version) {
-        update_option("wpgmza_temp_api",'AIzaSyDo_fG7DXBOVvdhlrLa-PHREuFDpTklWhY');
-		
 		// NB: Moved to WPGMZA\Database
         //wpgmaps_handle_db();
     }
@@ -1739,17 +1739,8 @@ function wpgmza_caching_notice_changes($markers = false, $return = false){
 }
 
 function wpgm_pro_link($link) {
-    if (defined('wpgm_aff')) {
-        $id = sanitize_text_field(wpgm_aff);
-        if ($id && $id !== "") {
-            return esc_attr("http://affiliatetracker.io/?aff=".$id."&affuri=".base64_encode($link));    
-        } else {
-            return esc_attr($link);
-        }
-        
-    } else {
-        return esc_attr($link);
-    }
+    /* Updated 2024-04-02: Deprecated affiliate system, which was no longer in use */
+    return esc_attr($link);
 }
 
 /**

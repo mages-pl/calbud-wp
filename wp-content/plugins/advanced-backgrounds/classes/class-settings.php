@@ -163,8 +163,8 @@ class AWB_Settings {
 
         echo '</div>';
 
-        wp_enqueue_style( 'nk-awb-settings', nk_awb()->plugin_url . 'assets/admin/settings/style.min.css', array(), '1.12.1' );
-        wp_enqueue_script( 'nk-awb-settings', nk_awb()->plugin_url . 'assets/admin/settings/script.min.js', array( 'jquery' ), '1.12.1', true );
+        wp_enqueue_style( 'nk-awb-settings', nk_awb()->plugin_url . 'assets/admin/settings/style.min.css', array(), '1.12.3' );
+        wp_enqueue_script( 'nk-awb-settings', nk_awb()->plugin_url . 'assets/admin/settings/script.min.js', array( 'jquery' ), '1.12.3', true );
     }
 }
 new AWB_Settings();

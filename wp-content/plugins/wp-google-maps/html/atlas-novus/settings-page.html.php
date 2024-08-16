@@ -21,6 +21,12 @@
 				<?php esc_html_e('General Settings', 'wp-google-maps'); ?>
 			</a>
 		</li>
+
+		<li>
+			<a href="#markers">
+				<?php esc_html_e('Markers', 'wp-google-maps'); ?>
+			</a>
+		</li>
 		
 		<li>
 			<a href="#info-windows">
@@ -427,20 +433,15 @@
 			</select>
 		</div>
 
-		<!-- Retina width -->
-		<div class="tab-row wpgmza-pro-feature-hide">
-			<div class="title"><?php _e("Retina Icon Width","wp-google-maps"); ?></div>
-			<span class="settings-group">
-				<input name='wpgmza_settings_retina_width' type='text' size='4' maxlength='4' id='wpgmza_settings_retina_width'/> px
-			</span>
-		</div>
-
-		<!-- Retina height -->
-		<div class="tab-row wpgmza-pro-feature-hide">
-			<div class="title"><?php _e("Retina Icon Height","wp-google-maps"); ?></div>
-			<span class="settings-group">
-				<input name='wpgmza_settings_retina_height' type='text' size='4' maxlength='4' id='wpgmza_settings_retina_height'/> px
-			</span>
+		<!-- Access level hint -->
+		<div class="tab-row">
+			<div class="title"></div>
+			<small>
+				<strong><?php _e("Note:", "wp-google-maps"); ?></strong> 
+				<?php
+					_e("Granting lower level users access to the settings/editor will allow them to manage custom scripts (JavaScript), which could be abused, please exercise caution and consider this carefully.", "wp-google-maps");
+				?>
+			</small>
 		</div>
 
 		<!-- Gesture Handling -->
@@ -496,6 +497,146 @@
 				<?php _e("Only applies to new images, existing markers would need to be resaved, lightboxes will use full size", "wp-google-maps"); ?>
 			</small>
 		</div>
+	</div>
+
+	<!-- Marker Settings tab -->
+	<div id="markers">
+		<div class="heading">
+			<?php _e("Markers", "wp-google-maps"); ?>
+		</div>
+
+		<!-- Google Marker Render Engine -->
+		<div class="tab-row" data-required-maps-engine="google-maps">
+			<div class="title">
+				<?php esc_html_e('Marker Render Mode', 'wp-google-maps'); ?>
+			</div>
+			<select name="googleMarkerMode" id="googleMarkerMode">
+				<option value="marker"><?php esc_html_e('Marker (Default)', 'wp-google-maps'); ?></option>
+				<option value="advancedMarkerElement"><?php esc_html_e('Advanced Marker (Beta)', 'wp-google-maps'); ?></option>
+			</select>
+		</div>
+
+		<!-- Google Marker Render Engine hint -->
+		<div class="tab-row" data-required-maps-engine="google-maps">
+			<div class="title"></div>
+			<small>
+				<?php
+					_e("Google Maps has deprecated the default Marker module. They encourage using the Advanced Marker module instead, which allows CSS selection and minor performance improvements. We support this new render mode, which is considered beta for now, while we finalize our implementation.", "wp-google-maps");
+				?>
+			</small>
+		</div>
+
+		<!-- OpenLayers Marker Render Engine -->
+		<div class="tab-row" data-required-maps-engine="open-layers">
+			<div class="title">
+				<?php esc_html_e('Marker Render Mode', 'wp-google-maps'); ?>
+			</div>
+			<select name="olMarkerMode" id="olMarkerMode">
+				<option value="element"><?php esc_html_e('Element (Default)', 'wp-google-maps'); ?></option>
+				<option value="vector"><?php esc_html_e('Vector (Alpha)', 'wp-google-maps'); ?></option>
+			</select>
+		</div>
+
+		<!-- OpenLayers Marker Render Engine hint -->
+		<div class="tab-row" data-required-maps-engine="open-layers">
+			<div class="title"></div>
+			<small>
+				<?php
+					_e("OpenLayers supports two render modes, Element is the most well supported and reliable option (recommended for most users). Vector is available in alpha (early-preview) as an alternative which has some performance improvements. Vector mode does not support all of our features, for example, hover icons, animations and transitions will no longer function when this mode is enabled.", "wp-google-maps");
+				?>
+			</small>
+		</div>
+
+		<!-- Retina width -->
+		<div class="tab-row wpgmza-pro-feature-hide">
+			<div class="title"><?php _e("Retina Icon Width","wp-google-maps"); ?></div>
+			<span class="settings-group">
+				<input name='wpgmza_settings_retina_width' type='text' size='4' maxlength='4' id='wpgmza_settings_retina_width'/> px
+			</span>
+		</div>
+
+		<!-- Retina height -->
+		<div class="tab-row wpgmza-pro-feature-hide">
+			<div class="title"><?php _e("Retina Icon Height","wp-google-maps"); ?></div>
+			<span class="settings-group">
+				<input name='wpgmza_settings_retina_height' type='text' size='4' maxlength='4' id='wpgmza_settings_retina_height'/> px
+			</span>
+		</div>
+
+		<!-- Marker pull method -->
+		<div class="tab-row">
+			<div class="title"><?php esc_html_e("Pull marker data from", "wp-google-maps"); ?></div>
+			
+			<ul>
+				<li>
+					<label>
+						<input name="wpgmza_settings_marker_pull" value="0" type="radio" checked="checked"/>
+						<?php
+						esc_html_e("Database", "wp-google-maps");
+						?>
+					</label>
+				</li>
+				<li>
+					<label>
+						<input name="wpgmza_settings_marker_pull" value="1" type="radio"/>
+						<?php
+						esc_html_e("XML File", "wp-google-maps");
+						?>
+					</label>
+				</li>
+			</ul>
+		</div>
+		
+		<!-- XML hidden fields -->
+		<div id="xml-cache-settings">
+			<div class="tab-row has-hint">
+				<div class="title"><?php esc_html_e("Marker data XML directory", "wp-google-maps"); ?></div>
+				<input name="wpgmza_marker_xml_location" type='text' style="width: 40%;" />
+				
+			</div>
+
+			<div class="tab-row">
+				<div class="title"></div>
+				<div class="hint">
+					<p>
+						<small>
+							<?php esc_html_e("You can use the following", "wp-google-maps"); ?>
+							: {wp_content_dir},{plugins_dir},{uploads_dir}
+						</small>
+					</p>
+				</div>
+			</div>
+			
+			<div class="tab-row has-hint">
+				<div class="title"><?php esc_html_e("Marker data XML URL", "wp-google-maps"); ?></div>
+				<input name="wpgmza_marker_xml_url" type="text" style="width: 40%;" />
+			</div>
+
+			<div class="tab-row">
+				<div class="title"></div>
+				<div class="hint">
+					<p>
+						<small>
+							<?php esc_html_e("You can use the following", "wp-google-maps"); ?>
+							: {wp_content_url},{plugins_url},{uploads_url}
+						</small>
+					</p>
+				</div>
+			</div>
+
+			<div class="tab-row">
+				<div class="title"></div>
+				<div class="hint">
+					<p>
+						<small>
+							<strong><?php _e("Note", "wp-google-maps"); ?>: </strong>
+							<?php esc_html_e("We no longer recommend using the XML option, outside of special use cases. For most users the database method will be more reliable and efficient", "wp-google-maps"); ?>
+						</small>
+					</p>
+				</div>
+			</div>
+		</div>
+
 	</div>
 	
 	<!-- Info windows tab -->
@@ -740,6 +881,42 @@
 			</select>
 		</div>
 
+		<!-- Custom image placeholder -->
+		<div class="tab-row wpgmza-pro-feature">
+			<div class="title"><?php esc_html_e("Image Placeholder","wp-google-maps"); ?></div>
+			<input type="text" name="markerlist_image_placeholder" class="wpgmza-image-single-input" data-image-reset='true' />
+		</div>
+
+		<!-- Custom image placeholder hint -->
+		<div class="tab-row wpgmza-pro-feature">
+			<div class="title"></div>
+
+			<small class="hint">
+				<?php esc_html_e("Change the default marker listing image placeholder. Suggested a square image with a width/height of 275px", "wp-google-maps"); ?>
+			</small>
+		</div>
+
+		<!-- Prevent Marker Listing page scroll -->
+		<div class="tab-row wpgmza-pro-feature">
+			<div class="title"><?php esc_html_e("Disable Auto-Scroll", "wp-google-maps"); ?></div>
+
+			<div class="switch switch-inline">
+				<input name="disable_scroll_on_marker_listing_click"
+						id="disable_scroll_on_marker_listing_click" 
+						class="cmn-toggle cmn-toggle-round-flat" 
+						type="checkbox"/>
+
+				<label for="disable_scroll_on_marker_listing_click"></label>
+				<label for="disable_scroll_on_marker_listing_click">
+					<small>
+						<?php
+						esc_html_e('Prevent the page from scrolling to the map element when a marker listing item is clicked', 'wp-google-maps');
+						?>
+					</small>
+				</label>
+			</div>
+		</div>
+
 		<!-- Sub heading -->
 		<div class="tab-row">
 			<strong>
@@ -865,6 +1042,28 @@
 			</ul>
 		</div>
 		
+		<!-- Advanced -->
+		<div class="tab-row wpgmza-pro-feature">
+			<div class="title"><?php _e("Advanced Options", "wp-google-maps"); ?></div>
+			
+			<ul>
+				<li>
+					<div class='switch switch-inline'>
+						<input name='enable_datatables_enter_search' 
+							class='cmn-toggle cmn-toggle-round-flat' 
+							type='checkbox' 
+							id='enable_datatables_enter_search' 
+							value='yes'/>
+
+						<label for='enable_datatables_enter_search'></label>
+						<label for='enable_datatables_enter_search'>
+							<?php esc_html_e("Only trigger Datatable search on enter/return key (Reduce server load)","wp-google-maps"); ?>
+						</label>
+					</div>
+				</li>
+			</ul>
+		</div>
+
 		<!-- Sub heading -->
 		<div class="tab-row">
 			<strong>
@@ -1218,6 +1417,7 @@
 			<select name='categoryTreeSource'>
 				<option value="native">Native</option>
 				<option value="wordpress">WordPress (beta)</option>
+				<option value="woocommerce">WooCommerce (beta)</option>
 			</select>
 		</div>
 		
@@ -1480,6 +1680,19 @@
 			</select>
 		</div>
 
+		<!-- Google Maps API Async Param Support -->
+		<div class="tab-row" data-required-maps-engine="google-maps">
+			<div class="title"><?php _e('Enable async loading API parameter', 'wp-google-maps'); ?></div>
+			<div role="group">
+				<label>
+					<div>
+						<input name="enable_google_api_async_param" type="checkbox" class="wpgmza-fancy-toggle-switch" />
+						<?php _e("Aligns API loading with best-practice from Google. Considered beta for now, will become default later", "wp-google-maps"); ?>
+					</div>
+				</label>
+			</div>
+		</div>
+
 		<!-- Google Maps Prevent Load -->
 		<div class="tab-row" data-required-maps-engine="google-maps">
 			<div class="title"><?php _e('Prevent other plugins and theme loading API', 'wp-google-maps'); ?></div>
@@ -1534,83 +1747,8 @@
 			<div class="title"><?php _e('Always exclude engine API on pages', 'wp-google-maps'); ?></div>
 			<input name="wpgmza_always_exclude_engine_api_on_pages" placeholder="<?php _e('Page IDs'); ?>"/>
 		</div>
-			
-		<!-- Marker pull method -->
-		<div class="tab-row">
-			<div class="title"><?php esc_html_e("Pull marker data from", "wp-google-maps"); ?></div>
-			
-			<ul>
-				<li>
-					<label>
-						<input name="wpgmza_settings_marker_pull" value="0" type="radio" checked="checked"/>
-						<?php
-						esc_html_e("Database", "wp-google-maps");
-						?>
-					</label>
-				</li>
-				<li>
-					<label>
-						<input name="wpgmza_settings_marker_pull" value="1" type="radio"/>
-						<?php
-						esc_html_e("XML File", "wp-google-maps");
-						?>
-					</label>
-				</li>
-			</ul>
-		</div>
 		
-		<!-- XML hidden fields -->
-		<div id="xml-cache-settings">
-			<div class="tab-row has-hint">
-				<div class="title"><?php esc_html_e("Marker data XML directory", "wp-google-maps"); ?></div>
-				<input name="wpgmza_marker_xml_location" type='text' style="width: 40%;" />
-				
-			</div>
-
-			<div class="tab-row">
-				<div class="title"></div>
-				<div class="hint">
-					<p>
-						<small>
-							<?php esc_html_e("You can use the following", "wp-google-maps"); ?>
-							: {wp_content_dir},{plugins_dir},{uploads_dir}
-						</small>
-					</p>
-				</div>
-			</div>
-			
-			<div class="tab-row has-hint">
-				<div class="title"><?php esc_html_e("Marker data XML URL", "wp-google-maps"); ?></div>
-				<input name="wpgmza_marker_xml_url" type="text" style="width: 40%;" />
-			</div>
-
-			<div class="tab-row">
-				<div class="title"></div>
-				<div class="hint">
-					<p>
-						<small>
-							<?php esc_html_e("You can use the following", "wp-google-maps"); ?>
-							: {wp_content_url},{plugins_url},{uploads_url}
-						</small>
-					</p>
-				</div>
-			</div>
-
-			<div class="tab-row">
-				<div class="title"></div>
-				<div class="hint">
-					<p>
-						<small>
-							<strong><?php _e("Note", "wp-google-maps"); ?>: </strong>
-							<?php esc_html_e("We no longer recommend using the XML option, outside of special use cases. For most users the database method will be more reliable and efficient", "wp-google-maps"); ?>
-						</small>
-					</p>
-				</div>
-			</div>
-		</div>
-		
-		<!--<fieldset id="library-script-panel-container"></fieldset>-->
-		
+		<!-- Fluse Geocode Cache local -->
 		<div class="tab-row" data-required-maps-engine="open-layers">
 			<div class="title"><?php esc_html_e('Flush Geocode Cache', 'wp-google-maps'); ?></div>
 			<button id="wpgmza_flush_cache_btn" class="wpgmza-button wpgmza-button-primary">
@@ -1628,6 +1766,48 @@
 				<option value='5.*'>5.*</option>
 				<option value='none'><?php esc_html_e("None", "wp-google-maps"); ?></option>
 			</select>
+		</div>
+
+		<!-- Marker Field Query Mode -->
+		<div class="tab-row wpgmza-pro-feature">
+			<div class="title">
+				<?php esc_html_e('Marker Field Query Mode', 'wp-google-maps'); ?>
+			</div>
+
+			<select name='marker_field_query_mode'>
+				<option value=''><?php esc_html_e("Partial", "wp-google-maps"); ?></option>
+				<option value='strict'><?php esc_html_e("Exact", "wp-google-maps"); ?></option>
+			</select>
+
+			<small class="inline-hint">
+				<?php _e("By default, marker fields may return partial matches, in some cases you may prefer exact matches only", "wp-google-maps"); ?>
+			</small>
+		</div>
+
+		<!-- ACF Description Type -->
+		<div class="tab-row wpgmza-pro-feature">
+			<div class="title">
+				<?php esc_html_e('ACF Description Type', 'wp-google-maps'); ?>
+			</div>
+			<select name="acf_product_description_type" id="acf_product_description_type">
+				<option value="full"><?php esc_html_e('Full', 'wp-google-maps'); ?></option>
+				<option value="excerpt"><?php esc_html_e('Excerpt', 'wp-google-maps'); ?></option>
+			</select>
+		</div>
+
+		<!-- Map Editor Context Menu -->
+		<div class="tab-row" data-required-maps-engine="google-maps">
+			<div class="title">
+				<?php esc_html_e('Map Editor Quick Create', 'wp-google-maps'); ?>
+			</div>
+			<select name="mapEditorContextMenu" id="mapEditorContextMenu">
+				<option value="enabled"><?php esc_html_e('Enabled (Default)', 'wp-google-maps'); ?></option>
+				<option value="disabled"><?php esc_html_e('Disabled', 'wp-google-maps'); ?></option>
+			</select>
+
+			<small class="inline-hint">
+				<?php _e("Right-click in the map editor to access the quick create menu", "wp-google-maps"); ?>
+			</small>
 		</div>
 	</div>
 
@@ -1664,6 +1844,17 @@
 					</small>
 				</label>
 			</div>
+		</div>
+
+		<!-- Woo Product Description Type -->
+		<div class="tab-row wpgmza-pro-feature">
+			<div class="title">
+				<?php esc_html_e('Product Description Type', 'wp-google-maps'); ?>
+			</div>
+			<select name="woo_product_description_type" id="woo_product_description_type">
+				<option value="full"><?php esc_html_e('Full', 'wp-google-maps'); ?></option>
+				<option value="excerpt"><?php esc_html_e('Excerpt', 'wp-google-maps'); ?></option>
+			</select>
 		</div>
 
 		<!-- Woo Commerce Checkout Map -->
@@ -1742,6 +1933,48 @@
 				<input type="number" name="fetchMarkersBatchSize" min="0" max="10000" step="1" value="100">
 			</div>
 		</div>
+
+		<!-- Defer loader -->
+		<div class="tab-row">
+			<div class="title"><?php esc_html_e("Defer Loading", "wp-google-maps"); ?></div>
+
+			<div class="switch switch-inline">
+				<input name="enable_defer_loading"
+						id="enable_defer_loading" 
+						class="cmn-toggle cmn-toggle-round-flat" 
+						type="checkbox"/>
+
+				<label for="enable_defer_loading"></label>
+				<label for="enable_defer_loading">
+					<small>
+						<?php
+						esc_html_e('Defer all mapping script assets loaded on your site', 'wp-google-maps');
+						?>
+					</small>
+				</label>
+			</div>
+		</div>
+
+		<!-- Load ACF fields -->
+		<div class="tab-row wpgmza-pro-feature">
+			<div class="title"><?php esc_html_e("Load ACF in Info Windows", "wp-google-maps"); ?></div>
+
+			<div class="switch switch-inline">
+				<input name="enable_acf_additional_fields"
+						id="enable_acf_additional_fields" 
+						class="cmn-toggle cmn-toggle-round-flat" 
+						type="checkbox"/>
+
+				<label for="enable_acf_additional_fields"></label>
+				<label for="enable_acf_additional_fields">
+					<small>
+						<?php
+						esc_html_e('Load additional ACF fields as part of your marker description. Only simple fields are supported. Note: This requires additional database queries', 'wp-google-maps');
+						?>
+					</small>
+				</label>
+			</div>
+		</div>
 	</div>
 
 	<!-- Custom Scripts tab -->	
@@ -1783,6 +2016,22 @@
 
 					<small class="hint inline-hint">
 						<?php esc_html_e('Only use this if requested by our support team.', 'wp-google-maps'); ?>
+					</small>
+				</li>
+			</ul>
+		</div>
+
+		<!-- Performance Tools -->
+		<div class="tab-row wpgmza-integration-tools wpgmza-pro-feature-hide">
+			<div class="title"><?php esc_html_e("Performance", "wp-google-maps"); ?></div>
+
+			<ul>
+				<li>
+					<button class="wpgmza-button wpgmza-performance-tool-button" data-tool-type="add_db_indexing">Add Indexes</button>
+					<button class="wpgmza-button wpgmza-performance-tool-button" data-tool-type="remove_db_indexing">Remove Indexes</button>
+
+					<small class="hint inline-hint">
+						<?php esc_html_e('Add/remove performance indexes from the database tables that may improve query times. Only do this if suggested by our support team', 'wp-google-maps'); ?>
 					</small>
 				</li>
 			</ul>
@@ -1892,6 +2141,27 @@
 					<small>
 						<?php
 						esc_html_e("Use this setting if you are experiencing issues with Autoptimize's CSS aggregation. This may cause issues on setups with a large amount of marker data.", "wp-google-maps");
+						?>
+					</small>
+				</label>
+				
+			</div>
+		</div>
+
+		<!-- WP Engine Governor -->
+		<div class="tab-row has-hint">
+			<div class="title"><?php esc_html_e("Disable WP Engine Governor", "wp-google-maps"); ?></div>
+			<div class="switch switch-inline">
+				<input name="disable_wp_engine_governor"
+						id="disable_wp_engine_governor"
+						class="cmn-toggle cmn-toggle-round-flat" 
+						type="checkbox"/>
+				
+				<label for="disable_wp_engine_governor"></label>
+				<label for="disable_wp_engine_governor">
+					<small>
+						<?php
+						esc_html_e("If you are using WP Engine and see 'KILLED QUERY' error logs, our database queries may not be running properly. Enabling this setting will set a constant in your site, which disabled the WP Engine Governor, which prevents long queries for performance.", "wp-google-maps");
 						?>
 					</small>
 				</label>

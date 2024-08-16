@@ -10,6 +10,7 @@ wpgmza_require_once(WPGMZA_PLUGIN_DIR_PATH . 'includes/class.gdpr-compliance.php
 wpgmza_require_once(WPGMZA_PLUGIN_DIR_PATH . 'includes/3rd-party-integration/class.wp-migrate-db-integration.php');
 wpgmza_require_once(WPGMZA_PLUGIN_DIR_PATH . 'includes/open-layers/class.nominatim-geocode-cache.php');
 wpgmza_require_once(WPGMZA_PLUGIN_DIR_PATH . 'includes/class.maps-engine-dialog.php');
+wpgmza_require_once(WPGMZA_PLUGIN_DIR_PATH . 'includes/class.page.php');
 wpgmza_require_once(WPGMZA_PLUGIN_DIR_PATH . 'includes/class.installer-page.php');
 
 wpgmza_require_once(WPGMZA_PLUGIN_DIR_PATH . 'includes/class.settings-page.php');
@@ -73,6 +74,8 @@ class Plugin extends Factory
 	private $mysqlVersion = null;
 	private $cachedVersion = null;
 	private $legacySettings;
+
+	public $processingContext = false;
 	
 	/**
 	 * Constructor. Called when plugins_loaded fires.
@@ -177,6 +180,17 @@ class Plugin extends Factory
 					echo '<div class="error"><p>' . __('<strong>WP Go Maps:</strong> Allowed memory size was reached whilst generating XML cache. This has been switched back to the Database method in Maps -> Settings -> Advanced', 'wp-google-maps') . '</p></div>';
 				});
 			}
+
+			if(!wp_doing_ajax()){
+				if(empty(get_option('wpgmza_welcome_screen_done'))){
+					add_action('admin_init', function(){
+						/* In admin area, has not seen welcome page, and not doing ajax right now */
+						update_option('wpgmza_welcome_screen_done', true);
+						wp_redirect(admin_url('admin.php?page=wp-google-maps-menu&action=welcome_page'));
+						exit;
+					});
+				}
+			}
 		}
 
 		if(!empty($this->settings->enable_dynamic_sql_refac_filter)){
@@ -187,6 +201,13 @@ class Plugin extends Factory
 		if(!empty($this->settings->enable_google_csp_headers) && !empty($this->settings->wpgmza_maps_engine) && $this->settings->wpgmza_maps_engine === 'google-maps'){
 			/* Load the Google CSP headers to the site */
 			add_action('send_headers', array($this, 'loadGoogleCSPHeaders'), 1); 
+		}
+
+		if(!empty($this->settings->disable_wp_engine_governor)){
+			/* Set the WP Engine Governor constant */
+			if(!defined('WPE_GOVERNOR')){
+				define('WPE_GOVERNOR', false);
+			}
 		}
 	}
 	
@@ -242,8 +263,6 @@ class Plugin extends Factory
 	
 	public function onActivated()
 	{
-        update_option("wpgmza_temp_api",'AIzaSyDo_fG7DXBOVvdhlrLa-PHREuFDpTklWhY');
-
 	    /* Developer Hook (Action) - Add to plugin activation logic */     
 		do_action("wpgmza_plugin_core_on_activate");
 		
@@ -269,11 +288,13 @@ class Plugin extends Factory
 		if ($current_screen && $current_screen->id == "appearance_page_install-required-plugins" )
 			return; // Multiple plugins are being activated, don't show welcome screen
 		
-		update_option('wpgmza_welcome_screen_done', true);
-		
-		wp_redirect(admin_url('admin.php?page=wp-google-maps-menu&action=welcome_page'));
-		
-		exit;
+		if(!wp_doing_ajax()){
+			/* Plugin is being activated in the background, we can't redirect in this case */
+			/* We will pick this up when they refresh the page */
+			update_option('wpgmza_welcome_screen_done', true);
+			wp_redirect(admin_url('admin.php?page=wp-google-maps-menu&action=welcome_page'));
+			exit;
+		}
 	}
 	
 	public function onDeactivated()
@@ -324,7 +345,10 @@ class Plugin extends Factory
 			return;
 		}
 		
-		wp_redirect( admin_url( 'admin.php?page=wp-google-maps-menu&action=welcome_page' ) );
+		if(!wp_doing_ajax()){
+			/* Plugin is being activated in the background, we can't redirect in this case */
+			wp_redirect( admin_url( 'admin.php?page=wp-google-maps-menu&action=welcome_page' ) );
+		}
 	}
 	
 	/**
@@ -432,7 +456,7 @@ class Plugin extends Factory
 				$result['ignoreInstallerRedirect'] = 'true';
 			} 
 		}
-		
+	
 		if($post){
 			$result['postID'] = $post->ID;
 		}

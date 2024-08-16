@@ -37,6 +37,15 @@ class SettingsPage extends Page {
 			if($wooCheckoutMapSelectWrapper = $this->document->querySelector('.woo-checkout-map-select-wrapper')){
 				$wooCheckoutMapSelect = new MapSelect('woo_checkout_map_id');
 				$wooCheckoutMapSelectWrapper->import($wooCheckoutMapSelect);
+
+				if(!empty($wpgmza->settings->woo_checkout_map_id)){
+					/* Verify the option/map still exists */
+					$mapSelectOption = $wooCheckoutMapSelectWrapper->querySelector("option[value='{$wpgmza->settings->woo_checkout_map_id}']");
+					if(empty($mapSelectOption)){
+						/* Map has since been removed */
+						unset($wpgmza->settings->woo_checkout_map_id);
+					}
+				}
 			}
 		}
 
@@ -60,8 +69,12 @@ class SettingsPage extends Page {
 			// Improved KSES cleanup to support the custom scripts, while still cleaning text inputs like the GDPR overrides
 			foreach($data as $key => $value){
 				if(is_string($value)){
-					if($key === "wpgmza_custom_css" || $key === "wpgmza_custom_js"){
-						// Skip custom scripts, they should not be KSES cleaned
+					if($key === "wpgmza_custom_js"){
+						// Skip custom javascript, they should be used with user caution, we can't fully clean these
+						continue;
+					} else if($key === "wpgmza_custom_css"){
+						// Strip out tags using WP core functions
+						$data[$key] = wp_strip_all_tags($value);
 						continue;
 					}
 
@@ -84,6 +97,9 @@ class SettingsPage extends Page {
 			if($wpgmza->settings->wpgmza_settings_marker_pull == Plugin::MARKER_PULL_XML && $oldPullMethod != Plugin::MARKER_PULL_XML){
 				$wpgmza->updateAllMarkerXMLFiles();
 			}
+
+			/* Developer Hook (Action) - Take action before the final storage redirect completes */
+			do_action('wpgmza_global_settings_before_redirect', $wpgmza);
 			
 			wp_redirect($_SERVER['HTTP_REFERER']);
 			return;
