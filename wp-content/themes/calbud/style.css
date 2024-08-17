@@ -831,7 +831,7 @@ a.offer-box-test:hover:after{width:100%;height:100%;border-bottom-color:#EC6500;
 
 .progress-invest div.after{font-size:40px;line-height:49px;font-weight:300;float:none;position:absolute;left:0;top:14px;z-index:9;}
 
-.developer-bottom div.after{font-size:40px;line-height:49px;font-weight:300;float:none;position:absolute;left:0;/*top:28px;*/top:0;z-index:9;color:#fff;}
+.developer-bottom div.after{font-size:40px;line-height:49px;font-weight:300;float:none;position:absolute;left:0;transform: translateY(-50%);top:50%;z-index:9;color:#fff;}
 .developer-bottom .meter{height:108px;}
 .developer-bottom .meter > span{background-color:transparent;}
 .developer-bottom .orange > span{background-image:linear-gradient(90deg, transparent 0%, rgba(236,101,0,1) 100%);height:108px;}
@@ -1975,7 +1975,7 @@ iframe + div,iframe,iframe:focus,iframe:active {border:none!important;border:0!i
 	.developer-bottom div.wppb-progress > span{height:70px;}
 	.developer-bottom h6{font-size:19px;margin-top:10px;margin-right:0;margin-bottom:10px;}
 	.developer-bottom div.wppb-wrapper.after div.after{left:30px;top:11px;}
-	
+
 	.contractor-progress{margin-top:70px;margin-bottom:90px;}
 	.progress-invest{margin-bottom:90px;}
 	
@@ -2088,7 +2088,7 @@ iframe + div,iframe,iframe:focus,iframe:active {border:none!important;border:0!i
 	.developer-bottom div.wppb-progress > span{height:70px;}
 	.developer-bottom h6{font-size:19px;margin-top:10px;margin-right:0;}
 	.developer-bottom div.wppb-wrapper.after div.after{left:30px;top:15px;}
-	
+
 	.support-text{margin-top:90px;margin-bottom:40px;}
 	.support-middle p{max-width:none;}
 	.support{margin-top:90px;margin-bottom:90px;}
@@ -2558,7 +2558,45 @@ area[data-title]:hover::before {
 
 
 
+/**
+mobile calbud 
+*/
 
+@media(max-width:767px) { 
+	.table-responsive.mobile-arrows:before {
+			content: "\f053";
+			font-family: "Font Awesome 5 Free";
+			position: fixed;
+			left: 25px;
+			box-shadow: 0px 0px 50px 50px rgba(0, 0, 0, 0.2);
+			background: #ccc !important;
+			color: #ec6502 !important;
+			top: 50%;
+			font-size: 2rem;
+			font-weight: 900 !important; /* nie usuwac wywali sie fonta-awesome@5*/
+		}
+
+		.table-responsive.mobile-arrows:after {
+			content: "\f054";
+			font-family: "Font Awesome 5 Free";
+			position: fixed;
+			right: 25px;
+			box-shadow: 0px 0px 50px 50px rgba(0, 0, 0, 0.2);
+			background: #ccc !important;
+			color: #ec6502 !important;
+			top: 50%;
+			font-size: 2rem;
+			font-weight: 900 !important; /* nie usuwac wywali sie fonta-awesome@5*/
+		}
+		/* domyślnie na mobile widok wyboru kondygnacji niewidoczny, włączony ma być po wyboru którejś z kondygnacji */
+	.kondygnacje.interactive_view {
+		display: none;
+	}
+
+	.ui-widget-content, .ui-dialog-titlebar.ui-corner-all.ui-widget-header.ui-helper-clearfix.ui-draggable-handle { 
+		border-radius: 0px !important;
+	}
+}
 
 
 

@@ -190,6 +190,7 @@ $('#submit').on('click', function() {
 
 <script type="text/javascript">
 	window.onload = function() { 
+		if((document.querySelectorAll(".half.first").length > 0) && (document.querySelectorAll(".half.second").length > 0)) {
 		document.querySelector(".half.first").addEventListener('mouseover', function() {
 			document.querySelector(".half.second .inner").style.opacity = '0';
 		});
@@ -205,10 +206,32 @@ $('#submit').on('click', function() {
 			document.querySelector(".half.first .inner").style.opacity = '1';
 		});
 	}
+	}
 	 
 </script>
 
 	
+<script type="text/javascript">
+	$(window).scroll(function() {
+
+	if($(".table-responsive").length > 0) {
+	var windowHeight = $(window).innerHeight()/2;
+    var top_of_element = $(".table-responsive").offset().top + windowHeight;
+    var bottom_of_element = $(".table-responsive").offset().top + $(".table-responsive").outerHeight();
+    var bottom_of_screen = $(window).scrollTop() + $(window).innerHeight();
+    var top_of_screen = $(window).scrollTop();
+
+    if ((bottom_of_screen > top_of_element) && (top_of_screen < bottom_of_element)){
+        // element widoczny, pokaz strzalki na mobile
+		$(".table-responsive").addClass('mobile-arrows');
+    } else {
+        // element niewidoczny, ukrj strzalki na mobile
+		$(".table-responsive").removeClass('mobile-arrows');
+    }
+}
+});
+
+</script>
 <script type="text/javascript" >
 
 
@@ -217,6 +240,7 @@ $('#submit').on('click', function() {
  const monkey = document.getElementById('monkey');
 
 
+ if (typeof(monkey) != 'undefined' && monkey != null) {
   checkVisibility = () => {
 
  // Check if the div element is scrolled into view.
@@ -240,12 +264,12 @@ $('#submit').on('click', function() {
    window.removeEventListener('scroll', checkVisibility )
    
  }
-}
+} 
 
 
 // Set a listener for the "scroll" event below the function.
 window.addEventListener('scroll', checkVisibility );
-
+}
 	</script>
 	
 	

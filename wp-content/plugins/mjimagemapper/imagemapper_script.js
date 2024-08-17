@@ -72,7 +72,17 @@ jQuery(function ($) {
   * Po kliknięciu w obszar ukryj poprzedni segmenti pokaz kolejny
   */
 	$('.imgmap-frontend-image map area').click(function () {
-
+		
+		// if($( window ).width() < 768) {
+		// 	// Jesli główny widok inwestycji nie jest widoczny	
+		// 	if($('.mjmapperarea.interactive_view .block-group:nth-child(1)').is(":visible")) {
+		// 		// Pokaz mozliwosc wyboru kondygnacji 
+		// 		$(".kondygnacje.interactive_view").css('display', 'none');
+		// 	} else {
+		// 		// Ukryj mozliwosc wyboru kondygnacji 
+		// 		$(".kondygnacje.interactive_view").css('display', 'block');
+		// 	}	
+		// }
 		var propertyTypes = ["Mieszkanie", "Miejsce postojowe", "Lokal usługowy", "Apartament", "Komórka lokatorska"];
 
 		if ($(this).attr('data-object') != 'Mieszkanie') {
@@ -122,6 +132,7 @@ jQuery(function ($) {
 			// } else { 
 			// 	$(".blockBackToFirst").css("display","block");
 			// }
+			detectAndHiddenFloorsSelect();
 	});
  
 	/**
@@ -593,6 +604,8 @@ function switchDisplayMode(display, obj) {
 		});
 		// document.querySelector('.interactive_view').style.display='block';
 		document.querySelector('.table_view').style.display='none';
+		
+		detectAndHiddenFloorsSelect();
 	} else { 
 		// Wyswietlanie tabeli
 		getAllInteractiveView.forEach(function(item) {
@@ -808,6 +821,7 @@ function switchInteractiveLayer(obj) {
 	if(obj.value != null) {
 	document.querySelector("#numberFloor").value = obj.value;
 	}
+	detectAndHiddenFloorsSelect();
 }
 
 
@@ -906,3 +920,23 @@ $('#numberFloor').each(function () {
 
 
 }); 
+
+	/**
+	 * Sprawdz i ukryj widok kondygnacji na mobile jesli jest widoczna pierwsza warstwa z widokiem inwestycji
+	 */
+
+	 function detectAndHiddenFloorsSelect() {
+		
+		if(window.innerWidth < 768) {
+			
+			// Jesli główny widok inwestycji nie jest widoczny	
+			if(document.querySelector('.mjmapperarea .interactive_view .block-group:nth-child(1)').checkVisibility()) {
+				// Pokaz mozliwosc wyboru kondygnacji		 
+				document.querySelector(".kondygnacje.interactive_view").style.display = 'none';
+			} else {
+				// Ukryj mozliwosc wyboru kondygnacji
+				document.querySelector(".kondygnacje.interactive_view").style.display = 'block';
+			}	
+		}
+		
+	}

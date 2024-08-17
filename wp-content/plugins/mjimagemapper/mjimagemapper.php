@@ -1550,7 +1550,7 @@ $output .= '<!-- Modal -->
 
             $output .= '<td>';
             if (!empty(get_field("rzut", $post->ID)['url'])) {
-                $output .= '<a target="_blank" href="'.get_field("rzut", $post->ID)['url'].'" class="more more-reverse" style="min-width: 50%;padding: 0px 10px;font-size: 20px !important;"><em style="font-size: 14px;line-height: 44px;">Pobierz rzut</em></a>';
+                $output .= '<a target="_blank" href="'.get_field("rzut", $post->ID)['url'].'" class="more more-reverse" style="min-width: 50%;padding: 0px 10px;font-size: 20px !important;" download="Rzut '.get_field("numerlokalu", $post->ID).' - Inwestycja - '.get_field("inwestycja", $post->ID).'"><em style="font-size: 14px;line-height: 44px;">Pobierz rzut</em></a>';
             }
             //$output .= print_r();
             $output .= '</td>';

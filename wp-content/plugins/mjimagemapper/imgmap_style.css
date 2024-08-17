@@ -482,6 +482,14 @@ input[name=imagemapper_search]  {
 .imgmap-frontend-image > div {
   max-width: 100%;
 }
+@media(max-width:767px) { 
+  .mjmapperarea {
+    width: calc(100% + 30px) !important;
+    max-width: calc(100% + 30px) !important;
+    margin-left: -15px !important;
+    margin-right: -15px !important;
+  }
+}
 .backToFirst {
   cursor: pointer;
 }
@@ -553,6 +561,23 @@ body.is-modal-open:before {
     position: fixed !important;
     top: 50% !important;
     transform: translateY(-50%) translateX(-50%);
+}
+@media(max-width:767px) {
+  .imgmap-dialog { 
+    max-width: 100% !important;
+    width: 100% !important;
+    top: 0% !important;
+    transform:none;
+    left: 0px !important;
+  }
+  .modal-bar { 
+    position: relative !important;
+    top: 0px !important;
+  }
+  .imgmap-dialog .imgmap-dialog-wrapper {
+    padding: 0px !important;
+    justify-content: flex-start !important;
+  }
 }
 /* .invest-search {
   opacity:0;

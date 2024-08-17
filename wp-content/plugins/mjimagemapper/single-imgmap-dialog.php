@@ -17,7 +17,7 @@
     } else {
         ?>
     <a target="_blank" href="<?php echo get_field("rzut", $post->ID)['url']; ?>" class="inwestycja more more-reverse btn btn-primary" style="display: block;border: 0px;max-width: 225px;
-    margin: 10px auto;">Pobierz rzut</a>
+    margin: 10px auto;" download="Rzut <?= get_field("numerlokalu", $post->ID) ?> - Inwestycja - <?= get_field("inwestycja", $post->ID) ?>">Pobierz rzut</a>
         <?php
     }
         ?>
