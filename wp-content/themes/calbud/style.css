@@ -2564,29 +2564,52 @@ mobile calbud
 
 @media(max-width:767px) { 
 	.table-responsive.mobile-arrows:before {
-			content: "\f053";
+			display: none !important;
+			/* content: "\f053"; */
+			content: " ";
+			background-image: url(../../plugins/mjimagemapper/images/cal_cur.svg) !important;
 			font-family: "Font Awesome 5 Free";
 			position: fixed;
 			left: 25px;
-			box-shadow: 0px 0px 50px 50px rgba(0, 0, 0, 0.2);
-			background: #ccc !important;
+			width:50px;
+			height: 50px;
+			box-shadow: 0px 0px 50px 50px rgba(0, 0, 0, 0.2), inset 0px 0px 20px 20px rgba(0, 0, 0, 0.2);
+			/* background-color: #ccc !important; */
 			color: #ec6502 !important;
 			top: 50%;
 			font-size: 2rem;
-			font-weight: 900 !important; /* nie usuwac wywali sie fonta-awesome@5*/
+			font-weight: 900 !important;
+			animation-name: slideLeft;
+			animation-duration: 1s;
+			animation-delay: 0s;
+			animation-iteration-count: infinite;
+			animation-direction: alternate;
 		}
 
 		.table-responsive.mobile-arrows:after {
-			content: "\f054";
+			/* content: "\f054"; */
+			display: none !important;
+			content: " ";
+			background-image: url(../../plugins/mjimagemapper/images/cal_cur.svg) !important;
 			font-family: "Font Awesome 5 Free";
 			position: fixed;
 			right: 25px;
-			box-shadow: 0px 0px 50px 50px rgba(0, 0, 0, 0.2);
-			background: #ccc !important;
+			width:50px;
+			height: 50px;
+			box-shadow: 0px 0px 50px 50px rgba(0, 0, 0, 0.2), inset 0px 0px 20px 20px rgba(0, 0, 0, 0.2);
+			/* background-color: #ccc !important; */
 			color: #ec6502 !important;
 			top: 50%;
 			font-size: 2rem;
 			font-weight: 900 !important; /* nie usuwac wywali sie fonta-awesome@5*/
+
+
+			 
+			animation-name: slideRight;
+			animation-duration: 1s;
+			animation-delay: 0s;
+			animation-iteration-count: infinite;
+			animation-direction: alternate;
 		}
 		/* domyślnie na mobile widok wyboru kondygnacji niewidoczny, włączony ma być po wyboru którejś z kondygnacji */
 	.kondygnacje.interactive_view {
@@ -2596,7 +2619,34 @@ mobile calbud
 	.ui-widget-content, .ui-dialog-titlebar.ui-corner-all.ui-widget-header.ui-helper-clearfix.ui-draggable-handle { 
 		border-radius: 0px !important;
 	}
+	
+	.mjimagemapper_section {
+		display: flex;
+    	flex-flow: column-reverse;
+	}
+	.mjmapperarea .invest-search.extendfull{
+		padding-top: 0 !important;
+        padding-bottom: 50px !important;
+        margin-top: 0 !important;
+	}
+	.kondygnacje.interactive_view {
+		margin-top: 0;
+    	padding-top: 0;
+	}
+
 }
+/**
+Animation 
+
+*/
+@keyframes slideLeft {
+	0%   {left:0%; }
+	100% {left:10%; }
+  }
+  @keyframes slideRight {
+	0%   {right:0%; }
+	100% {right:10%; }
+  }
 
 
 

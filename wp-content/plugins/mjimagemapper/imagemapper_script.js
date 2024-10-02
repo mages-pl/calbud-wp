@@ -802,6 +802,11 @@ function switchInteractiveLayer(obj) {
 	var getAllViews = document.querySelectorAll(".interactive_view .block-group");
 	var getAllKondygnacjeBtn = document.querySelectorAll(".kondygnacje--container button");
 
+	//pills-01
+	document.getElementById('scrollToView').scrollIntoView({
+		behavior: 'smooth'
+	});
+
 	for(var dt=0;dt<getAllKondygnacjeBtn.length;dt++) {
 		getAllKondygnacjeBtn[dt].classList.remove("active");
 	}

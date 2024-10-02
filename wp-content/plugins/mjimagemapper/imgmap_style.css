@@ -1019,12 +1019,27 @@ border:2px solid #707070;
 .single-post .row-full.only-dev h3 { 
   color: #000;
 }
-.single-post .image_search_form
+/* .single-post  */
+.current-invest-search .image_search_form
 button.nav-link.gold-button.active,
-.more.gold-button.active {
-  /* border-color: #3e3d3d !important;
+.current-invest-search .more.gold-button.active {
+  border-color: #3e3d3d !important;
   border-width: 3px !important;
-  color: #3e3d3d !important; */
+  color: #3e3d3d !important; 
+}
+.developer-search  .image_search_form
+button.nav-link.gold-button.active, 
+
+.developer-search  + .current-invest-search .image_search_form
+button.nav-link.gold-button.active,
+
+.developer-search .current-invest-search .more.gold-button.active,
+
+.developer-search + .current-invest-search .current-invest-search .more.gold-button.active 
+{
+  border-color: #fff !important;
+  border-width: 3px !important;
+  color: #fff !important; 
 }
 .dataTables_empty { 
   display: none !important;
@@ -1182,3 +1197,44 @@ toltip
   z-index: 1;
 }
 
+@media(min-width:768px) {
+.table_icon_arrow {
+  display: none;
+}
+}
+@media(max-width:767px) {
+  .table_icon_arrow { 
+    background-image: url(../../plugins/mjimagemapper/images/cal_cur.svg) !important;
+
+    position: relative;
+    animation-name: slideLeftFull;
+    animation-duration: 4s;
+    animation-delay: 0s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+
+    display: block;
+    background-size: contain;
+    height: 48px;
+    width: 48px;
+    background-repeat: no-repeat;
+
+
+  }
+  }
+
+  @keyframes slideLeftFull {
+    0%   {left:0%; }
+    100% {left:90%; }
+  }
+
+/*
+.slideLeft-animation {
+  position: relative;
+  animation-name: slideLeft;
+  animation-duration: 5s;
+  animation-delay: 2s;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+*/

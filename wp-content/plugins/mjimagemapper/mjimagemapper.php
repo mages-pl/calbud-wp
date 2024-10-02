@@ -747,9 +747,10 @@ function media_imgmap_media_upload_tab_inside() {
 	$output .= '<div class="mjmapperarea mt-5">';
 	//$output .= '<p class="blockBackToFirst"><span class="backToFirst">Powrót</span></p>';
 
-	$outputKondygnacje .=  '<button class="more gold-button small-margin-top  m-auto d-inline-block active" onclick=\'switchDisplayMode("interactive_view", this)\'>Widok interaktywny</button>';
+	$outputKondygnacje .=  '<button class="more gold-button small-margin-top  m-auto d-inline-block active" id="scrollToView" onclick=\'switchDisplayMode("interactive_view", this)\'>Widok interaktywny</button>';
 	$outputKondygnacje .=  '<button class="more gold-button small-margin-top  ml-5 d-inline-block" onclick=\'switchDisplayMode("table_view", this)\'>Tabela mieszkań</button>';
 
+	$outputKondygnacje .= '<section class="mjimagemapper_section">';
 	$output .= '<div class="invest-search extendfull">';
 
 	// Widok interaktywny
@@ -823,6 +824,7 @@ function media_imgmap_media_upload_tab_inside() {
 	$output .= '</div>';
 
 	$output .= '</div>';
+	$output .= '</section>';
 	return $outputKondygnacje.$output;
 
 
@@ -1379,6 +1381,9 @@ function imgmap_frontend_table($atts, $filters, $type) {
 		if($type != 'ajax')	{
 
 		}
+
+		// Strzalka/ikona left -> right 
+		$output .= '<div class="row"><div class="slideLeft table_icon_arrow"></div></div>';
 		#$output .= '<div class="table-responsive">';
 		//$output .= "typ wyszukiwarki: ".$typWyszukiwarki;
         $output .= '<table id="tabela_mieszkania" class="table-responsive dataTable no-footer table">';
