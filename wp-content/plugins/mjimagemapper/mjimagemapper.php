@@ -436,6 +436,7 @@ function imgmap_create_post_type() {
 	wp_register_style('imgmap_style', plugins_url().'/mjimagemapper/imgmap_style.css?v='.time());
 
         wp_register_style('imgmap_style_datatable', plugins_url().'/mjimagemapper/datatables.css?v='.time());
+		// nowa wersja - wp_register_style('imgmap_style_datatable', plugins_url().'/mjimagemapper/datatables2.css?v='.time());
 
 		wp_register_style('imgmap_style_jquery-ui', plugins_url().'/mjimagemapper/jquery-ui.css?v='.time());
 
@@ -488,8 +489,10 @@ function imgmap_create_post_type() {
 		}
 	}
 	else {
+		// -  nowa wersja - wp_register_script('imgmap_script_datatable', plugins_url() . '/mjimagemapper/datatables2.js?v='.time());
 		wp_register_script('imgmap_script', plugins_url() . '/mjimagemapper/imagemapper_script.js?v='.time());
 		wp_register_script('imgmap_script_datatable', plugins_url() . '/mjimagemapper/datatables.js?v='.time());
+
 		wp_enqueue_script('imgmap_script');
 		wp_enqueue_script('imgmap_script_datatable');
 	}
@@ -1373,17 +1376,19 @@ function imgmap_frontend_table($atts, $filters, $type) {
 		}
 		
 		$output .= '<h2 class="title-section">Tabela mieszkań</h2>';
+		// Strzalka/ikona left -> right 
+		$output .= '<div class="row slideLeftIcon"><div class="slideLeft table_icon_arrow"></div></div>';
 		$output .= '</div>';
 	}
 	
 
     if (($mode != 'hidden') || (count($_POST) == 0)){
-		if($type != 'ajax')	{
+		// if($type != 'ajax')	{
+	// Strzalka/ikona left -> right 
+	$output .= '<div class="row slideLeftIcon"><div class="slideLeft table_icon_arrow"></div></div>';
+		
+		// }
 
-		}
-
-		// Strzalka/ikona left -> right 
-		$output .= '<div class="row"><div class="slideLeft table_icon_arrow"></div></div>';
 		#$output .= '<div class="table-responsive">';
 		//$output .= "typ wyszukiwarki: ".$typWyszukiwarki;
         $output .= '<table id="tabela_mieszkania" class="table-responsive dataTable no-footer table">';
