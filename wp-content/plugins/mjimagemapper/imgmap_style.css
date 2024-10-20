@@ -1203,7 +1203,7 @@ toltip
 }
 
 @media(min-width:768px) {
-.table_icon_arrow {
+.table_icon_arrow, .animateTooltip {
   display: none;
 }
 }
@@ -1223,9 +1223,12 @@ toltip
     height: 48px;
     width: 48px;
     background-repeat: no-repeat;
-display: none;
+    display: none;
   }
-  #tabela_mieszkania_wrapper .table_icon_arrow, #firstAjaxSearchResult .table_icon_arrow {
+  .only-dev + .animateTooltip, #firstAjaxSearchResult + .animateTooltip {
+    display: none;
+  } 
+  #tabela_mieszkania_wrapper .table_icon_arrow, #firstAjaxSearchResult .table_icon_arrow, #tabela_mieszkania_wrapper .animateTooltip, #firstAjaxSearchResult .animateTooltip {
     display: block;
   }
   }
@@ -1245,7 +1248,11 @@ display: none;
     right: 0;
 
   }
-
+.animateTooltip {
+  text-align: center;
+  font-size: 0.75rem;
+  line-height: auto;
+}
 
 /*
 .slideLeft-animation {

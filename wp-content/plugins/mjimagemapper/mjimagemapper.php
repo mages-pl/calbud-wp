@@ -1377,6 +1377,7 @@ function imgmap_frontend_table($atts, $filters, $type) {
 		
 		$output .= '<h2 class="title-section">Tabela mieszkań</h2>';
 		// Strzalka/ikona left -> right 
+		$output .= '<p class="animateTooltip">Przesuń lub obróć ekran, żeby zobaczyć więcej</p>';
 		$output .= '<div class="row slideLeftIcon"><div class="slideLeft table_icon_arrow"></div></div>';
 		$output .= '</div>';
 	}
@@ -1385,6 +1386,7 @@ function imgmap_frontend_table($atts, $filters, $type) {
     if (($mode != 'hidden') || (count($_POST) == 0)){
 		// if($type != 'ajax')	{
 	// Strzalka/ikona left -> right 
+	$output .= '<p class="animateTooltip">Przesuń lub obróć ekran, żeby zobaczyć więcej</p>';
 	$output .= '<div class="row slideLeftIcon"><div class="slideLeft table_icon_arrow"></div></div>';
 		
 		// }

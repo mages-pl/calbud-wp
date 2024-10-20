@@ -2635,6 +2635,12 @@ mobile calbud
 	}
 
 }
+
+@media(max-width:767px) { 
+	.container { 
+		min-width: 100%;
+	}
+}
 /**
 Animation 
 
