@@ -122,8 +122,13 @@
 						
 							<div class="additional">
 							
+							
+							<?php if( get_field('tekst_dodatkowy_pierwszej_sekcji') || get_field('tekst_dodatkowy_pierwszej_sekcji_mob')  ): ?>
+
 								<a class="more-open more-invest" role="button" href="#collapse02" data-toggle="collapse" aria-expanded="false" aria-controls="collapse02">czytaj więcej</a>
-								
+							
+							<?php endif; ?>	
+							
 								<div id="collapse02" class="collapse">
 								
 									<p class="xs-hidden"><?php the_field('tekst_dodatkowy_pierwszej_sekcji'); ?></p>
@@ -151,7 +156,14 @@
 		
 		</div>
 		
+		<?php /*
 		<div class="current-movie-mob row-full xs-up-hidden">
+			<div class="container-fluid">
+				<?php the_field('film_mobile'); ?>
+			</div>
+		</div>
+		*/?>
+		<div class="current-movie-mob row-full">
 			<div class="container-fluid">
 				<?php the_field('film_mobile'); ?>
 			</div>
@@ -361,6 +373,7 @@
 							
 						</div>
 						
+						<?php /*
 						<div class="col-md-12">
 						
 							<div class="additional">
@@ -378,7 +391,7 @@
 							</div>
 						
 						</div>
-						
+						*/?>
 						<?php /*
 						<div class="co-md-12 xs-up-hidden">
 						
@@ -393,9 +406,18 @@
 		
 		</div>
 		
-		<div class="row-full current-invest-standard-image-bottom xs-up-hidden" style="background-image:url('<?php echo get_template_directory_uri(); ?>/img/pod-mob.webp');">
 		
-		</div>
+		<?php if (is_single('sand-dunes')){ ?>
+			<div class="row-full current-invest-standard-image-bottom xs-up-hidden" style="background-image:url('<?php echo get_template_directory_uri(); ?>/img/pod-mob.webp');">
+			
+			</div>
+		<?php } ?>
+		<?php if (is_single('dannevang')){ ?>
+			<div class="row-full current-invest-standard-image-bottom xs-up-hidden" style="background-image:url('<?php echo get_template_directory_uri(); ?>/img/pod-mob-dannevag.webp');">
+			
+			</div>
+		<?php } ?>
+
 		
 
 		<?php /* sekcja opcjonalna */ ?>
@@ -480,11 +502,7 @@
 		<?php } ?>
 		
 		
-		<div class="current-movie-mob row-full xs-hidden">
-			<div class="container-fluid">
-				<?php the_field('film_mobile'); ?>
-			</div>
-		</div>
+
 		
 		<div class="current-invest-gallery row-full">
 			<div class="container-fluid">
@@ -586,7 +604,7 @@
 						
 						
 						<?php if( get_field('dodatkowa_rozwijana_tresc') ) { ?>
-						
+
 							<a class="more-open more-invest" role="button" href="#collapse03" data-toggle="collapse" aria-expanded="false" aria-controls="collapse03">czytaj więcej</a>
 								
 							<div id="collapse03" class="collapse">

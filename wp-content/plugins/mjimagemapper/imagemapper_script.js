@@ -491,11 +491,10 @@ function ajaxImagemapperSearch(obj) {
 function buildDatatableForProprety() { 
 	jQuery(function ($) {
 
-	var tableProperties =	$('#tabela_mieszkania').DataTable({
+		$('#tabela_mieszkania').DataTable({
 			"dom": '<"top"l>rt<"bottom"p><"clear">',
-			"responsive": false,
+			"responsive": true,
 			"paging": false,
-			 "fixedHeader": true,
 			"language": {
 				"lengthMenu": "Wyświetl _MENU_ wyników na stronie",
 				"zeroRecords": "Nic nie znaleziono",
@@ -513,7 +512,6 @@ function buildDatatableForProprety() {
 				},
 			}
 		});
-
 	});
 }
 

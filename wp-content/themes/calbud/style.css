@@ -150,15 +150,17 @@ a.white:hover{background:#EC6500;color:#fff;}
 
 #mega-menu-wrap-primary,#mega-menu-wrap-secondary{float:right;margin-top:5px;}
 #mega-menu-wrap-primary .mega-menu-toggle + #mega-menu-primary,
-#mega-menu-wrap-secondary .mega-menu-toggle + #mega-menu-secondary{background:url('./img/apla-menu.png')repeat;z-index:9999!important;height:100vh;position:absolute;top:79px!important;padding-top:30px;padding-left:760px;padding-left:39.583vw;}
+#mega-menu-wrap-secondary .mega-menu-toggle + #mega-menu-secondary{background:url('./img/apla-menu.png')repeat;z-index:9999!important;height:100vh;position:absolute;top:72px!important;padding-top:30px;padding-bottom:30px;padding-left:760px;padding-left:39.583vw;}
 #mega-menu-wrap-primary #mega-menu-primary > li.mega-menu-item::before,
 #mega-menu-wrap-secondary #mega-menu-secondary > li.mega-menu-item::before{position:absolute;top:12px;z-index:999;content: "0" counter(counter);counter-increment:counter;color:#EC6500;display:inline-flex;width:40px;height:62px;align-items:center;justify-content:center;margin-right:16px;font-size:18px;line-height:62px;}
 #mega-menu-wrap-primary #mega-menu-primary > li.mega-menu-item,
 #mega-menu-wrap-secondary #mega-menu-secondary > li.mega-menu-item{margin-bottom:25px;}
 #mega-menu-wrap-primary #mega-menu-primary > li.mega-menu-item > a.mega-menu-link,
-#mega-menu-wrap-secondary #mega-menu-secondary > li.mega-menu-item > a.mega-menu-link{line-height:64px;font-weight:300!important;padding:0 10px 0 66px;transition:all .2s ease-in;}
+#mega-menu-wrap-secondary #mega-menu-secondary > li.mega-menu-item > a.mega-menu-link{display:inline;line-height:64px;font-weight:300!important;padding:0 10px 0 66px;transition:all .2s ease-in;}
 #mega-menu-wrap-primary #mega-menu-primary > li.mega-menu-item > a.mega-menu-link:hover,
 #mega-menu-wrap-secondary #mega-menu-secondary > li.mega-menu-item > a.mega-menu-link:hover{color:#EC6500;transition:all .2s ease-out;}
+
+#mega-menu-wrap-secondary #mega-menu-secondary > li.mega-menu-flyout ul.mega-sub-menu li.mega-menu-item a.mega-menu-link{display:inline;}
 
 ul.mega-sub-menu{margin-left:55px!important;}
 li.mega-menu-item-has-children > a.mega-menu-link > span.mega-indicator{float:none!important;}
@@ -177,9 +179,9 @@ li.mega-menu-flyout ul.mega-sub-menu li.mega-menu-item a.mega-menu-link{font-siz
 .page-id-849 #main-nav-third,.page-id-796 #main-nav-third,.page-id-809 #main-nav-third,.page-id-816 #main-nav-third,.page-id-828 #main-nav-third,.page-id-824 #main-nav-third{display:none!important;}
 
 .page-id-1439 .hidden-services,.page-id-863 .hidden-services,.page-id-1140 .hidden-services{display:none;}
-
-
 .page-id-917 .hidden-realizations,.page-id-900 .hidden-realizations,.page-id-878 .hidden-realizations,.page-id-933 .hidden-realizations,.page-id-939 .hidden-realizations,.page-id-941 .hidden-realizations,.page-id-943 .hidden-realizations{display:none;}
+
+.wrapfixed #mega-menu-wrap-secondary .mega-menu-toggle + #mega-menu-secondary{top:54px!important;}
 
 body.home .hp-hidden{display:none!important;}
 
@@ -384,7 +386,7 @@ body.home .hp-hidden{display:none!important;}
 .hp-bottom img{display:none;margin-bottom:50px;}
 
 
-.hp-bottom-under{/*margin-top:320px;*/margin-top:16.083vw;}
+.hp-bottom-under{display: none;margin-top:16.083vw;}
 .hp-bottom-under p{margin-bottom:3px;}
 .hp-bottom-under a{margin-left:0;margin-bottom:0;opacity:0.5;}
 
@@ -625,7 +627,8 @@ body.page-id-636{background:#090909;}
 .jobs .modal-button{background:#EC6500;color:#fff;text-align:center;text-transform:uppercase;font-size:14px;line-height:18px;letter-spacing:2.8px;padding:14px 65px;display:inline-block;border:0;}
 .jobs .modal-button:hover{background:#313131;}
 */
-.jobs button.wpcf7-field-group-add{padding:15px;background:#FAFAFA;color:#EC6500;text-transform:uppercase;text-align:center;border-radius:0;border:3px solid #EC6500;font-weight:500;display:inline-block;}
+.jobs button.wpcf7-field-group-remove{width:60px;height:60px;padding:0;}
+.jobs button.wpcf7-field-group-add{width:60px;height:60px;padding:0;background:#FAFAFA;color:#EC6500;text-transform:uppercase;text-align:center;border-radius:0;border:3px solid #EC6500;font-weight:500;display:inline-block;}
 .jobs button.wpcf7-field-group-add:hover{border:3px solid #000;color:#000;}
 
 .jobs .wpcf7-submit{font-size:14px;line-height:18px;padding:28px 48px;letter-spacing:2.8px;background:#FAFAFA;color:#EC6500;text-transform:uppercase;text-align:center;border-radius:0;border:3px solid #EC6500;font-weight:500;display:inline-block;}
@@ -700,7 +703,12 @@ button.wpcf7-field-group-remove:hover, button.wpcf7-field-group-add:hover{backgr
 .contact-form textarea.form-control{max-height:340px;}
 .contact-form .accept{margin-top:10px;margin-bottom:48px;}
 .contact-form .accept p{margin-bottom:8px;}
-.contact-form .wpcf7-acceptance{font-size:12px;line-height:16px;color:#C4C4C4;}
+.contact-form .wpcf7-acceptance,.contact-form small, .accept small{font-size:12px;line-height:16px;color:#C4C4C4;display:block;}
+.contact-form small{display:block;margin-left:12px;}
+.contact-form small a, .accept small a,.accept label a{color:#EC6500;}
+
+.jobs .accept small{color:#000;}
+
 .contact-form .wpcf7-acceptance label{cursor:pointer;}
 .contact-form p{color:#C4C4C4;}
 .wpcf7-submit{border:3px solid #EC6500;background:url('./img/apla60.png');font-size:14px;line-height:18px;letter-spacing:2.8px;text-transform:uppercase;text-align:center;border-radius:0;padding:28px 70px;font-weight:500;}
@@ -722,7 +730,7 @@ button.wpcf7-field-group-remove:hover, button.wpcf7-field-group-add:hover{backgr
 .contact-photos .box{max-width:525px;background:#fff;margin:0 auto 128px;}
 .contact-photos .inner{padding:22px 15px 26px 65px;}
 .contact-photos h5{font-size:28px;line-height:34px;font-weight:400;}
-.contact-photos h6{font-size:18px;line-height:22px;color:#EC6500;font-weight:400;text-transform:uppercase;margin-top:13px;margin-bottom:18px;}
+.contact-photos h6{font-size:18px;line-height:22px;color:#000;font-weight:400;text-transform:uppercase;margin-top:13px;margin-bottom:18px;}
 .contact-photos a{color:#EC6500;}
 .contact-photos a:hover{color:#000;}
 
@@ -946,7 +954,7 @@ a.offer-box-test:hover:after{width:100%;height:100%;border-bottom-color:#EC6500;
 
 /*inwestycje w sprzedazy*/
 .current-invest-single{background-repeat:repeat, no-repeat;background-size:contain, cover;background-position:left center, top center;min-height:50vw;padding-top:3.490vw;padding-bottom:60px;}
-.current-invest-single img.logo{padding-left:6.2vw;max-height:173px;}
+.current-invest-single img.logo{padding-left:6.2vw;max-height:173px;max-width:600px;}
 .current-invest-single h6{padding-left:6.2vw;color:#fff;font-size:48px;line-height:1;font-weight:500;text-align:center;max-width:600px;margin-top:130px;}
 .postid-3094 .current-invest-single h6{font-family:'Josefin Sans',sans-serif;}
 .current-invest-single h1{margin-bottom:3.98vw;font-size:64px;line-height:1;text-transform:uppercase;color:#f5f5f5;max-width:800px;}
@@ -958,7 +966,7 @@ a.offer-box-test:hover:after{width:100%;height:100%;border-bottom-color:#EC6500;
 .current-invest-single .apla{padding-left:6.2vw;padding-top:25px;padding-bottom:53px;margin-top:12.500vw;background:rgba(9, 9, 9, .5);width:50%;}
 
 .current-invest-first{background-repeat:repeat-y, no-repeat;background-size:50%, cover;background-position:left center, top center;min-height:50.938vw;padding-top:6.771vw;padding-bottom:60px;color:#fff;}
-.postid-3094 .current-invest-first{min-height:67vw;}
+.postid-3094 .current-invest-first{/*min-height:67vw;*/min-height:64vw;}
 .current-invest-first h2{font-size:42px;line-height:52px;font-weight:500;max-width:570px;margin-bottom:4.167vw;}
 .current-invest-first .inner{background-position:left center;background-repeat:no-repeat;padding-left:94px;min-height:64px;display:flex;align-items:center;margin-bottom:34px;}
 .current-invest-first .inner p{margin:0;}
@@ -1296,7 +1304,7 @@ a.mj-invest-title:hover{color:#EC6500;}
 .site-footer p{margin-bottom:0;}
 .site-footer a{color:#313131;}
 .site-footer a:hover{color:#EC6500;text-decoration:underline;}
-.site-footer .links a{display:block;}
+.site-footer .links a{float:left;clear:both;}
 
 
 .wpcf7-not-valid-tip{font-size:14px;margin-bottom:0;}
@@ -1666,7 +1674,7 @@ iframe + div,iframe,iframe:focus,iframe:active {border:none!important;border:0!i
 	
 	
 	.row-full-sliders h6{margin-top:0;font-size:22px;max-width:300px;/*margin-top:60px;height:68px;*/}
-	.row-full-sliders a{line-height:42px;line-height:30px;background: url('./img/arrow-check.svg')no-repeat right center / contain;}
+	.row-full-sliders a{padding:10px 62px 10px 10px;background-size:30px!important;line-height:42px;line-height:30px;background:rgba(0, 0, 0, .5) url('./img/arrow-check.svg')no-repeat right 10px center / contain;}
 	
 	.top-developer-slider .sa_owl_theme .owl-dots{display:none!important;}
 	
@@ -1696,13 +1704,13 @@ iframe + div,iframe,iframe:focus,iframe:active {border:none!important;border:0!i
 	
 	.contractor-progress{margin-top:40px;}
 	.contractor-progress h3{font-size:28px;line-height:38px;font-weight:500;}
-	.progress-invest{margin-top:30px;margin-bottom:60px;}
+	.progress-invest{margin-top:30px;margin-bottom:60px;padding-left:15px;padding-right:15px;}
 	.progress-invest h6{float:none;margin-top:0;margin-right:0;margin-bottom:20px;}
 	
+	.current-movie-mob .nk-awb{min-height:100vw;}
 	
 	.current-invest-single .col-lg-12 {padding-left:15px;padding-right:15px;}
-	
-	.current-invest-single img.logo{max-height:66px;}
+	.current-invest-single img.logo{max-height:66px;max-width:190px;padding-left:0;}
 	
 	.current-invest-single img.logos{max-height:100px;}
 	.current-invest-single{/*padding-top:30px;padding-bottom:30px;*/padding-top:7vw;padding-bottom:50vw;background-repeat:no-repeat!important;background-size:cover;background-position:top center;}
@@ -1720,7 +1728,6 @@ iframe + div,iframe,iframe:focus,iframe:active {border:none!important;border:0!i
 	.current-invest-interior .nav-tabs li a{display:block;width:100%;padding:25px 5px;}
 	
 	.current-invest-gallery h3{margin:0 auto 40px;font-size:28px;line-height:42px;font-weight:500;}
-	
 	.current-invest-contact p{font-size:25px;}
 	
 	.current-invest-first{background:#090909;background-image:none!important;}
@@ -1829,6 +1836,7 @@ iframe + div,iframe,iframe:focus,iframe:active {border:none!important;border:0!i
 	.hp-numbers p{font-size:15px;}
 	
 	.hp-init{padding-bottom:60px;}
+	.hp-init h3{margin-top:28px;margin-bottom:30px;font-size:44px;line-height:55px;}
 	.hp-init .sa_hover_container{min-height:auto!important;}
 	.hp-init .sa_hover_container a{position:static;margin-top:30px;}
 	
@@ -1936,7 +1944,7 @@ iframe + div,iframe,iframe:focus,iframe:active {border:none!important;border:0!i
 	
 	.invest-single{background-size:100%, cover;}
 	.invest-single h1{font-size:45px;line-height:60px;}
-	.invest-gallery img{width:32.92vw;}
+	.invest-gallery img{/*width:32.92vw;*/width:auto;}
 	
 	.current-invest-single .apla{width:100%;}
 	
@@ -1944,7 +1952,7 @@ iframe + div,iframe,iframe:focus,iframe:active {border:none!important;border:0!i
 	.current-invest-single a.trans-frame{margin-right:20px;}
 	.current-invest-interior p.big{margin-bottom:80px;}
 	.current-invest-interior p.desc{margin:0 auto 60px;}
-	.current-invest-interior .nav-tabs li a{display:block;width:100%;padding:25px 5px;}
+	.current-invest-interior .nav-tabs li a{display:block;width:100%;padding:25px 5px!important;}
 	
 	.current-invest-first{background-repeat:repeat, no-repeat;}
 	.current-invest-first .inner{padding-left:75px;}
@@ -1959,9 +1967,11 @@ iframe + div,iframe,iframe:focus,iframe:active {border:none!important;border:0!i
 	.current-invest-gallery h3{margin:0 auto 60px;}
 	
 	.current-invest-search .col-md-4{width:100%;float:none;max-width:100%;}
-	.current-invest-search .d-block{background:transparent;padding:8px 0 28px;}
-	.current-invest-search .d-block label{margin-top:20px;}
+	.current-invest-search .d-block{background:transparent;padding:0 0 28px;margin-top:0!important;}
+	/*.current-invest-search .d-block label{margin-top:20px;}*/
+	.current-invest-search .image_search_form .row.panel label{margin-top:10px;}
 	.current-invest-search .col-md-2{width:50%;max-width:50%;}
+	.current-invest-search ul.nav li{margin-bottom:15px;}
 	
 	.simple-page{margin:90px auto 80px;}
 	.prize-gallery{margin-top:90px;margin-bottom:90px;}
@@ -1978,6 +1988,9 @@ iframe + div,iframe,iframe:focus,iframe:active {border:none!important;border:0!i
 
 	.contractor-progress{margin-top:70px;margin-bottom:90px;}
 	.progress-invest{margin-bottom:90px;}
+	
+	.backToModel{text-align:right!important;padding:10px 55px!important;}
+	.backToModel button::after{top:7px!important;rotate:180deg!important;}
 	
 	.site-footer .links{margin-top:40px;}
 
@@ -2103,6 +2116,13 @@ iframe + div,iframe,iframe:focus,iframe:active {border:none!important;border:0!i
 	table.dataTable thead th, table.dataTable thead td{font-size:13px;}
 	
 }
+
+@media (min-width: 1201px) and (max-width:1600px) {
+	
+	a.trans-frame{padding:20px 20px;letter-spacing:1px;}
+	
+}
+
 @media (min-width: 1201px) and (max-width:1769px) {
 	.container-inwestycje{padding-left:0;padding-right:0;}
 

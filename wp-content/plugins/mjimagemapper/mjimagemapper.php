@@ -1520,10 +1520,9 @@ $output .= '<!-- Modal -->
 				<textarea name="tresc" class="form-control" required style="min-height:300px">Proszę o kontakt w sprawie '.get_field("numerlokalu", $post->ID).' lokalu w inwestycji '.get_field("inwestycja", $post->ID).'</textarea>
 			</div>
 			<div class="col-md-12 accept">
-					<label><input type="checkbox" name="rule1" value="1" required>
-					Administratorem Państwa danych osobowych jest Przedsiębiorstwo Budowalne "Calbud" Sp. z o.o z siedzibą w Szczecinie. Wysyłając wiadomość zgadzasz się z naszą Polityką Prywatności
+					<label><!--<input type="checkbox" name="rule1" value="1" required>-->
+					Administratorem Państwa danych osobowych jest Przedsiębiorstwo Budowalne "Calbud" Sp. z o.o z siedzibą w Szczecinie. Wysyłając wiadomość zgadzasz się z naszą <a href="/polityka-prywatnosci/">Polityką Prywatności</a>
 					</label>
-
 					<label><input type="checkbox" name="rule2" value="1" required>
 					Wyrażam zgodę Administratorowi Przedsiębiorstwo Budowlane "Calbud" sp. z o.o w Szczecinie oraz spółkom powiązanym z grupy kapitałowej Administratora na przesłanie informacji handlowych związanych ze sprzedazą lokali za pomocą środków komunikacji elektronicznej i/lub telefonu oraz wyrazam tym podmiotom zgodę na przetwarzanie moich danych osobowych w postaci emaila, teleofnu oraz innych udostępnionych danych dla realizacji tego celu.
 					</label>

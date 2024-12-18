@@ -22,7 +22,7 @@
 		</style>
 	<?php } ?>
 
-	<?php if (is_page('kontakt-deweloper') || is_page('deweloper') || is_category('inwestycje') || is_category('realizacje-deweloper') || in_category('inwestycje') || in_category('realizacje-deweloper')){ ?>
+	<?php if (is_page('realizacje') || is_page('kontakt-deweloper') || is_page('deweloper') || is_category('inwestycje') || is_category('realizacje-deweloper') || in_category('inwestycje') || in_category('realizacje-deweloper')){ ?>
 		<style>
 			.hidden-services,.simple-hidden{display:none!important;}
 		</style>
@@ -36,7 +36,7 @@
 		</style>
 	<?php } ?>	
 	
-	<?php if (is_front_page() || is_page('oferty-pracy') || is_page('dla-studenta') || is_page('kariera-w-calbud') || is_page('dlaczego-calbud') || is_page('kontakt') || is_page('kariera') || is_category('aktualnosci') || in_category('aktualnosci') || is_page('oferta') || is_page('o-firmie') || is_page('zarzad') || is_page('nagrody') || is_page('referencje') || is_page('wspierane-inicjatywy') || is_page('kodeks-postepowania')){ ?>
+	<?php if (is_front_page() || is_page('rodo') || is_page('oferty-pracy') || is_page('dla-studenta') || is_page('kariera-w-calbud') || is_page('dlaczego-calbud') || is_page('kontakt') || is_page('kariera') || is_category('aktualnosci') || in_category('aktualnosci') || is_page('oferta') || is_page('o-firmie') || is_page('zarzad') || is_page('nagrody') || is_page('referencje') || is_page('wspierane-inicjatywy') || is_page('kodeks-postepowania')){ ?>
 		<style>
 			.hidden-services{display:none!important;}
 			.hidden-realizations{display:none!important;}
@@ -47,6 +47,27 @@
 			
 		</style>
 	<?php } ?>
+	
+	<?php if (is_page('rodo')){ ?>
+		<style>
+			#main-nav-third{display:none!important;}
+		</style>
+	<?php } ?>
+	
+	<?php if (is_page('realizacje')){ ?>
+		<style>
+			#mega-menu-item-1426,#mega-menu-item-3303{display:none!important;}
+		</style>
+	<?php } ?>
+	
+	<?php if (is_page('o-firmie') || is_page('zarzad') || is_page('nagrody') || is_page('referencje') || is_page('wspierane-inicjatywy') || is_page('kodeks-postepowania') 
+		|| is_category('aktualnosci') || in_category('aktualnosci') || is_page('oferta') || is_page('kariera') || is_page('dlaczego-calbud') 
+		|| is_page('kariera-w-calbud') || is_page('oferty-pracy') || is_page('dla-studenta') || is_page('kontakt')){ ?>
+		<style>
+			#mega-menu-item-1425{display:block!important;}
+		</style>
+	<?php } ?>
+	
 	
 	<?php if (is_front_page()){ ?>
 		<style>

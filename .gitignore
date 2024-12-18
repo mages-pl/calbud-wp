@@ -20,3 +20,5 @@ xmlrpc.php
 /wp-content/uploads-temp-backup
 /wp-content/ai1wm-backups
 /wp-content/languages
+*.sql.gz
+*.sql

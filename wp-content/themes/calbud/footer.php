@@ -122,6 +122,7 @@
 					<h6>Oferta</h6>
 
 						<a href="/sand-dunes/">Sand Dunes</a>
+						<a href="/sw-ducha-apartamenty/">Dannevang</a>
 						<a href="/deweloper/">Deweloper</a>
 						<a href="/generalny-wykonawca/">Generalny Wykonawca</a>
 						<a href="/kariera/">Kariera w Calbud</a>
