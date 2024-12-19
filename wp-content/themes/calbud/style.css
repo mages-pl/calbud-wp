@@ -182,6 +182,12 @@ li.mega-menu-flyout ul.mega-sub-menu li.mega-menu-item a.mega-menu-link{font-siz
 .page-id-917 .hidden-realizations,.page-id-900 .hidden-realizations,.page-id-878 .hidden-realizations,.page-id-933 .hidden-realizations,.page-id-939 .hidden-realizations,.page-id-941 .hidden-realizations,.page-id-943 .hidden-realizations{display:none;}
 
 .wrapfixed #mega-menu-wrap-secondary .mega-menu-toggle + #mega-menu-secondary{top:54px!important;}
+#mysticky-nav.wrapfixed{min-height:82px;}
+#mysticky-nav.wrapfixed .myfixed{padding-top:10px !important;padding-bottom:10px !important;}
+#mysticky-nav.wrapfixed .myfixed #mega-menu-wrap-secondary{margin-top:10px;}
+
+
+
 
 body.home .hp-hidden{display:none!important;}
 
@@ -1537,6 +1543,11 @@ iframe + div,iframe,iframe:focus,iframe:active {border:none!important;border:0!i
 	#mega-menu-wrap-primary #mega-menu-primary > li.mega-menu-item::before,
 	#mega-menu-wrap-secondary #mega-menu-secondary > li.mega-menu-item::before{height:auto;font-size:18px;line-height:1;}
 	li.mega-menu-item-has-children > a.mega-menu-link > span.mega-indicator::after{top:-3px;}
+	.home #mysticky-nav.wrapfixed .myfixed #mega-menu-wrap-secondary {margin-top:12px;}
+	.home #mysticky-nav.wrapfixed .navbar-brand{margin-top: 12px;}
+	
+	#mega-menu-wrap-secondary #mega-menu-secondary > li.mega-menu-item > a.mega-menu-link{padding:0 10px 0 50px;font-size:25px;}
+	
 	
 	.hp-top-acc{height:auto;}
 	.hp-top-acc .first{background-image: url('./img/apla40.png'),url('./img/hp-top-deweloper-full.jpg');background-repeat:repeat,no-repeat;background-position:center right,center right;background-size:contain,cover;}
@@ -2343,15 +2354,15 @@ transition: all 1s ease-out;}
 #two-sides img{opacity:0}
 #two-sides .first,#two-sides .second{height:968px;background-repeat:no-repeat;transition:all .5s ease-in-out}
 #two-sides .first .wrapper{width:100%;overflow:hidden;position:absolute;top:0;left:0;bottom:0;height:100%}
-#two-sides .first{position:relative;background-image:url('./img/hp-top-deweloper-full.jpg');background-position:left top;}
-#two-sides .first:hover{background-image:url('./img/hp-top-deweloper-full.jpg');}
+#two-sides .first{position:relative;background-image:url('./img/hp-top-deweloper.jpg');background-position:left top;}
+#two-sides .first:hover{background-image:url('./img/hp-top-deweloper.jpg');}
 #two-sides .first img{position:absolute;top:0;left:0}
 #two-sides .first .arrows{/*display:block;*/display:none;position:absolute;top:50%;left:100%;font-size:0;width:60px;height:60px;margin-top:-30px;margin-left:-30px;box-shadow:0 0 10px rgba(0,0,0,.3);}
 #two-sides .first .arrows img{position:static;opacity:1;}
 #two-sides .first .arrows .arrow-right, #two-sides .first .arrows .arrow-left{background:url('./img/apla.png')repeat;}
 #two-sides .first .arrows .arrow-right{position:relative;left:3px;}
 #two-sides .first .arrows span{width:50%;display:inline-block;vertical-align:middle;height:60px;line-height:60px;color:#fff;font-size:30px;text-align:center}
-#two-sides .second{position:absolute;background-image:url('./img/hp-top-gw-full.jpg');background-position:right top;}
+#two-sides .second{position:absolute;background-image:url('./img/hp-top-gw.jpg');background-position:right top;}
 #two-sides .first,#two-sides .second{top:0;left:0;z-index:1;}
 #two-sides .first{width:50%;z-index:2;/*border-right:3px solid #EC6500;*/}
 #two-sides .first.active{width:100%;}
@@ -2675,6 +2686,16 @@ mobile calbud
     	padding-top: 0;
 	}
 
+}
+@media(min-width:1770px) {
+	#post-6 .entry-content .ivycat-post .inner {
+		min-height: 550px;
+	}
+}
+@media(min-width:1433px) and (max-width:1769px) {
+	.post.hentry.ivycat-post.col-md-6 .inner {
+		min-height: 725px;
+	}
 }
 
 @media(max-width:767px) { 
