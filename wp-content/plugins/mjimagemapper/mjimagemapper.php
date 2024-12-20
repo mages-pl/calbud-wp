@@ -1526,10 +1526,10 @@ $output .= '<!-- Modal -->
 					<label><input type="checkbox" name="rule2" value="1" required>
 					Wyrażam zgodę Administratorowi Przedsiębiorstwo Budowlane "Calbud" sp. z o.o w Szczecinie oraz spółkom powiązanym z grupy kapitałowej Administratora na przesłanie informacji handlowych związanych ze sprzedazą lokali za pomocą środków komunikacji elektronicznej i/lub telefonu oraz wyrazam tym podmiotom zgodę na przetwarzanie moich danych osobowych w postaci emaila, teleofnu oraz innych udostępnionych danych dla realizacji tego celu.
 					</label>
-					<label><input type="checkbox" required>
+					<label><input type="checkbox" name="rule1" value="1" required>
 					Wyrażam zgodę Administratorowi Przedsiębiorstwo Budowlane "Calbud" sp. z o.o w Szczecinie oraz spółkom powiązanym z grupy kapitałowej Administratora na marketing dotyczący lokali oferowanych przez Administratora i podmioty powiązane za pomocą środków komunikacji elektornicznej i/lub telefonu oraz wyrazam tym podmiotom zogdę na przetwarzanie moich danych osobowych w postaci emaila, telefonu oraz innych udostępnionych danych dla realizacji tego celu.
 					</label>
-					<button name="send_question" type="button" onclick="ajaxSendQuestion(this)" class="orange">Wyślij zapytanie</button>
+					<button name="send_question" type="button" onclick="ajaxSendQuestion(this)" data-modal-target="Modal'.$post->ID.'" class="orange">Wyślij zapytanie</button>
 					<p>* pozycje obowiązkowe</p>
 			</div>
 			

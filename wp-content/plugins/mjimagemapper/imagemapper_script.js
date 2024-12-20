@@ -518,10 +518,11 @@ function buildDatatableForProprety() {
 function ajaxSendQuestion(obj) { 
 	console.log("send question...");
 	console.log(obj);
+	var getModalId = (obj.getAttribute('data-modal-target'));
 
-	document.querySelector(".formFlashMessage").classList.remove("error");
-	document.querySelector(".formFlashMessage").classList.remove("success");
-	document.querySelector(".formFlashMessage").innerHTML = "Wysyłam zapytanie";
+	document.querySelector("#"+getModalId+" .formFlashMessage").classList.remove("error");
+	document.querySelector("#"+getModalId+" .formFlashMessage").classList.remove("success");
+	document.querySelector("#"+getModalId+" .formFlashMessage").innerHTML = "Wysyłam zapytanie";
 
 	var xhttp = new XMLHttpRequest();
 	xhttp.open("POST", document.getElementById("filter_site_url").value+"/wp-content/plugins/mjimagemapper/ajaxSendQuestion.php");
@@ -533,24 +534,24 @@ function ajaxSendQuestion(obj) {
 	xhttp.onreadystatechange = function() {
 	
 		if((xhttp.readyState == 4 && xhttp.status == 200) && (xhttp.responseText == '1')) {
-			document.querySelector(".formFlashMessage").classList.remove("error");
-			document.querySelector(".formFlashMessage").classList.remove("success");
+			document.querySelector("#"+getModalId+" .sendQuestionForm input[name='email']").value+"&tresc="+document.querySelector("#"+getModalId+" .formFlashMessage").classList.remove("error");
+			document.querySelector("#"+getModalId+" .sendQuestionForm input[name='email']").value+"&tresc="+document.querySelector("#"+getModalId+" .formFlashMessage").classList.remove("success");
 
-			document.querySelector(".formFlashMessage").classList.add("success");
-			document.querySelector(".formFlashMessage").innerHTML = "Wiadomość wysłana pomyślnie";
+			document.querySelector("#"+getModalId+" .formFlashMessage").classList.add("success");
+			document.querySelector("#"+getModalId+" .formFlashMessage").innerHTML = "Wiadomość wysłana pomyślnie";
 
-			document.querySelector(".sendQuestionForm").reset();
+			document.querySelector("#"+getModalId+" .sendQuestionForm input[name='email']").value+"&tresc="+document.querySelector("#"+getModalId+" .sendQuestionForm").reset();
 		}  else { 
 			
-			document.querySelector(".formFlashMessage").classList.remove("error");
-			document.querySelector(".formFlashMessage").classList.remove("success");
+			document.querySelector("#"+getModalId+" .sendQuestionForm input[name='email']").value+"&tresc="+document.querySelector("#"+getModalId+" .formFlashMessage").classList.remove("error");
+			document.querySelector("#"+getModalId+" .sendQuestionForm input[name='email']").value+"&tresc="+document.querySelector("#"+getModalId+" .formFlashMessage").classList.remove("success");
 
-			document.querySelector(".formFlashMessage").classList.add("error");
-			document.querySelector(".formFlashMessage").innerHTML = "Błąd wysyłania wiadomości";
+			document.querySelector("#"+getModalId+" .formFlashMessage").classList.add("error");
+			document.querySelector("#"+getModalId+" .formFlashMessage").innerHTML = "Błąd wysyłania wiadomości";
 		}
 	}
 	
-		var params = "imie_nazwisko="+document.querySelector(".sendQuestionForm input[name='imie_nazwisko']").value+"&telefon="+document.querySelector(".sendQuestionForm input[name='telefon']").value+"&email="+document.querySelector(".sendQuestionForm input[name='email']").value+"&tresc="+document.querySelector(".sendQuestionForm textarea[name='tresc']").value+"&rule1="+Number(document.querySelector(".sendQuestionForm input[name='rule1']").checked)+"&rule2="+Number(document.querySelector(".sendQuestionForm input[name='rule2']").checked)+"&lokal="+document.querySelector(".sendQuestionForm input[name='lokal']").value+"&inwestycja="+document.querySelector(".sendQuestionForm input[name='inwestycja']").value;
+		var params = "imie_nazwisko="+document.querySelector("#"+getModalId+" .sendQuestionForm input[name='imie_nazwisko']").value+"&telefon="+document.querySelector("#"+getModalId+" .sendQuestionForm input[name='telefon']").value+"&email="+document.querySelector("#"+getModalId+" .sendQuestionForm input[name='email']").value+"&tresc="+document.querySelector("#"+getModalId+" .sendQuestionForm textarea[name='tresc']").value+"&rule1="+Number(document.querySelector("#"+getModalId+" .sendQuestionForm input[name='rule1']").checked)+"&rule2="+Number(document.querySelector("#"+getModalId+" .sendQuestionForm input[name='rule2']").checked)+"&lokal="+document.querySelector("#"+getModalId+" .sendQuestionForm input[name='lokal']").value+"&inwestycja="+document.querySelector("#"+getModalId+" .sendQuestionForm input[name='inwestycja']").value;
 
 		xhttp.send(params);
 

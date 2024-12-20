@@ -130,6 +130,12 @@
 				</div>
 
 			</div>
+			<div class="row">
+				<div class="col-md-12 mt-5 text-center">
+				&copy <?= date('Y') ?> P.B. CALBUD Sp. z o.o.. Wszelkie prawa zastrzeżone. Projekt i wykonanie <a href="https://virtualpeople.pl/" target="_blank">VirtualPeople</a>. 
+				<a href="https://calbud.com.pl/polityka-prywatnosci/">Polityka prywatności</a>
+				</div>
+			</div>
 			
 		</div>
 	</footer><!-- #colophon -->

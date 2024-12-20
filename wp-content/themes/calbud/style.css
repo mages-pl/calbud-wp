@@ -266,7 +266,8 @@ body.home .hp-hidden{display:none!important;}
 
 .hp-top-acc{height:968px;}
 .hp-top-acc:hover .half{
-	cursor:pointer;width:5%;
+	cursor: inherit;
+	width:5%;
 	/* 10% */
 
 }
@@ -308,7 +309,23 @@ body.home .hp-hidden{display:none!important;}
 		background-image: url('./img/apla.png'), url('./img/hp-top-gw.jpg');
 	}
 }
-@media(min-width:1921px) {
+@media(min-width:1921px) and (max-width:2048px) {
+	.hp-top-acc .half:first-child {
+		background-image: url('./img/apla.png'), url('./img/hp-top-deweloper2k.jpg');
+	}
+	.hp-top-acc .half:nth-child(2) {
+		background-image: url('./img/apla.png'), url('./img/hp-top-gw2k.jpg');
+	}
+}
+@media(min-width:2049px) and (max-width:3840px) {
+	.hp-top-acc .half:first-child {
+		background-image: url('./img/apla.png'), url('./img/hp-top-deweloper4k.jpg');
+	}
+	.hp-top-acc .half:nth-child(2) {
+		background-image: url('./img/apla.png'), url('./img/hp-top-gw4k.jpg');
+	}
+}
+@media(min-width:3841px) {
 	.hp-top-acc .half:first-child {
 		background-image: url('./img/apla.png'), url('./img/hp-top-deweloper-full.jpg');
 	}

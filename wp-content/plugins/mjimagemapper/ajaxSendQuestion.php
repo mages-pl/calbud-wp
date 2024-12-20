@@ -58,15 +58,18 @@ try {
     //Content
     $mail->isHTML(true);                                  
     
-    $mail->Subject = "Zapytanie o lokal ".$_POST['lokal']." w inwestycji ".$_POST['inwestycja'];
+    $subject =  "Zapytanie o lokal ".$_POST['lokal']." w inwestycji ".$_POST['inwestycja'];
+    $mail->Subject = $subject;
     $mail->Body = $tresc;
     $mail->AltBody = $tresc;
 
-    $mail->send();
+    mail(get_option('mjimagemapper_smtp_user'),$subject,$tresc);
+    //$mail->send();
     echo '1';
 } catch (Exception $e) {
     //echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
-    echo "0";
+   echo "0";
+    // echo $e->getMessage();
 }
 } else {
     echo "0";
